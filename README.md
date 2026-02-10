@@ -1,1 +1,1237 @@
-# Vitalite.Plus
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalité+ | Transformez Votre Fatigue en Énergie Durable</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #C9A96E;
+            --deep-green: #2C5F4F;
+            --soft-cream: #FAF7F2;
+            --warm-white: #FFFFFF;
+            --charcoal: #2B2B2B;
+            --sage: #8BA888;
+            --terracotta: #D4816B;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--soft-cream);
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--deep-green) 0%, #1a3d32 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(201, 169, 110, 0.15) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, -50px); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        h1 .highlight {
+            color: var(--primary-gold);
+            display: block;
+            font-style: italic;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.85; }
+        }
+
+        .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.3rem, 2vw, 1.8rem);
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 22px 50px;
+            background: linear-gradient(135deg, var(--primary-gold), #b39358);
+            color: var(--charcoal);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(201, 169, 110, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(201, 169, 110, 0.5);
+        }
+
+        .profile-badge {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            border: 6px solid var(--primary-gold);
+            box-shadow: 0 30px 80px rgba(201, 169, 110, 0.5);
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section {
+            padding: 60px 60px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 3.8rem);
+            color: var(--deep-green);
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            margin-top: 60px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 30px;
+            padding: 50px 40px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s;
+            color: var(--charcoal);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 35px 100px rgba(201, 169, 110, 0.3);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid var(--primary-gold);
+            transform: scale(1.05);
+        }
+
+        .pricing-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--deep-green);
+            font-weight: 900;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .promo-banner {
+            background: linear-gradient(135deg, var(--primary-gold), #b39358);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .promo-code {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .promo-code code {
+            background: var(--deep-green);
+            color: var(--primary-gold);
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+/* === OPTIMISATIONS MOBILE === */
+        
+        /* Tablettes et petits écrans */
+        @media (max-width: 968px) {
+            .hero-grid, .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .container {
+                padding: 40px 25px;
+            }
+            .section {
+                padding: 35px 20px;
+            }
+            .pricing-card.featured {
+                transform: scale(1);
+                margin: 15px 0;
+            }
+        }
+
+        /* Smartphones */
+        @media (max-width: 768px) {
+            /* Typography mobile */
+            h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+                margin-bottom: 20px;
+            }
+
+            .section-title {
+                font-size: 1.9rem;
+                line-height: 1.3;
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+
+            .subtitle {
+                font-size: 1.15rem;
+                margin-bottom: 25px;
+            }
+
+            /* Containers et espaces */
+            .container {
+                padding: 35px 20px;
+            }
+
+            .section {
+                padding: 30px 15px;
+            }
+
+            .hero {
+                padding: 30px 15px;
+                min-height: auto;
+            }
+
+            /* Cards */
+            .card {
+                padding: 20px 16px;
+                margin-bottom: 18px;
+                border-radius: 18px;
+            }
+
+            /* Profile */
+            .profile-badge {
+                padding: 25px 18px;
+            }
+
+            .profile-image {
+                width: 160px;
+                height: 160px;
+                border: 4px solid var(--primary-gold);
+            }
+
+            .profile-name {
+                font-size: 1.5rem;
+            }
+
+            .profile-title {
+                font-size: 0.95rem;
+            }
+
+            /* Buttons */
+            .btn {
+                padding: 16px 32px;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 100%;
+                display: block;
+                margin: 0 auto;
+            }
+
+            /* Pricing */
+            .pricing-card {
+                padding: 28px 18px;
+            }
+
+            .pricing-price {
+                font-size: 2.8rem;
+                margin: 20px 0;
+            }
+
+            .pricing-grid {
+                gap: 25px;
+            }
+
+            /* Promo banner */
+            .promo-banner {
+                padding: 22px 18px;
+            }
+
+            .promo-code {
+                padding: 14px 16px;
+                margin: 8px 0;
+            }
+
+            .promo-code code {
+                font-size: 1.05rem;
+                padding: 7px 14px;
+            }
+
+            /* Text readability */
+            p {
+                font-size: 1rem;
+                line-height: 1.7;
+            }
+
+            li {
+                font-size: 1rem;
+                line-height: 1.7;
+                padding: 12px 0;
+            }
+
+            /* Spacing improvements */
+            .section + .section {
+                margin-top: 15px;
+            }
+        }
+
+        /* Très petits smartphones */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.85rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .container {
+                padding: 25px 15px;
+            }
+
+            .section {
+                padding: 25px 12px;
+            }
+
+            .card {
+                padding: 16px 14px;
+            }
+
+            .btn {
+                padding: 14px 28px;
+                font-size: 0.95rem;
+            }
+
+            .profile-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .pricing-price {
+                font-size: 2.4rem;
+            }
+
+            .promo-code code {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Landscape mode sur mobile */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 40px 20px;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-grid">
+            <div>
+                <h1>
+                    Transformez Votre
+                    <span class="highlight">Fatigue Chronique</span>
+                    en Énergie Durable
+                </h1>
+                <p class="subtitle">
+                    Le programme qui reconstruit votre vitalité de l'intérieur, pas à pas, avec une méthode naturelle, humaine et profondément efficace.
+                </p>
+                <a href="#pricing" class="btn">Oui, je veux retrouver mon énergie !</a>
+            </div>
+            <div class="profile-badge">
+                <img src="https://d1yei2z3i6k35z.cloudfront.net/14434660/697a75252e5ce_Gemini_Generated_Image_moioudmoioudmoio.png" alt="Stéphane Amourda" class="profile-image">
+                <div class="profile-name">Stéphane Amourda</div>
+                <div class="profile-title">Naturopathe Certifié</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INTRODUCTION -->
+<section class="section" style="padding: 40px 60px; background: white; text-align: center;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; line-height: 1.9; font-style: italic;">
+            Un chemin simple, humain, profondément aligné avec votre corps. Ce chemin n'est pas pour tout le monde, mais si vous êtes ici, ce n'est sans doute pas un hasard.
+        </p>
+    </div>
+</section>
+
+<!-- QUIZ PROFILS -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">"Vous avez découvert votre profil dans le Check-up Vitalité ?"</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 60px;">
+            <div class="card" style="transition: all 0.4s; border-left: 5px solid var(--primary-gold);">
+                <div style="font-size: 3.5rem; margin-bottom: 20px;">🔋</div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-green); margin-bottom: 20px;">Batterie Pleine Mal Gérée ?</h3>
+                <p style="line-height: 1.8; margin-bottom: 20px;">Vous allez commencer par les modules 1-3 qui vont vous structurer...</p>
+                <p style="color: var(--terracotta); font-style: italic; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
+                    mais vous allez vite découvrir que gérer l'énergie ne suffit pas si vous continuez à vous épuiser émotionnellement (module 4-6) ou si votre système nerveux reste en alerte (module 7-9).
+                </p>
+            </div>
+            
+            <div class="card" style="transition: all 0.4s; border-left: 5px solid var(--sage);">
+                <div style="font-size: 3.5rem; margin-bottom: 20px;">💧</div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-green); margin-bottom: 20px;">Réservoir Percé ?</h3>
+                <p style="line-height: 1.8; margin-bottom: 20px;">Vous allez voir des résultats dès les modules 4-6 qui colmatent vos fuites...</p>
+                <p style="color: var(--terracotta); font-style: italic; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
+                    mais pour que ça tienne dans le temps, vous aurez besoin des fondations des modules 1-3 ET de la reconstruction profonde des modules 7-9.
+                </p>
+            </div>
+            
+            <div class="card" style="transition: all 0.4s; border-left: 5px solid var(--terracotta);">
+                <div style="font-size: 3.5rem; margin-bottom: 20px;">🔥</div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-green); margin-bottom: 20px;">Feu Intérieur Faible ?</h3>
+                <p style="line-height: 1.8; margin-bottom: 20px;">Vous avez besoin du programme COMPLET dans l'ordre...</p>
+                <p style="color: var(--terracotta); font-style: italic; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px;">
+                    et vous découvrirez comment chaque module s'articule avec le précédent pour vous reconstruire de l'intérieur.
+                </p>
+            </div>
+        </div>
+        <p style="font-size: 1.3rem; margin-top: 50px; text-align: center; color: var(--deep-green); font-weight: 600;">
+            Quel que soit votre profil, <strong>les 9 modules travaillent ensemble</strong>. Vous découvrirez rapidement que tout est lié.
+        </p>
+    </div>
+</section>
+
+<!-- PAIN POINTS 1 -->
+<section class="section" style="background: linear-gradient(to bottom, rgba(44, 95, 79, 0.05), rgba(44, 95, 79, 0.02));">
+    <div class="container">
+        <h2 class="section-title">Avez-vous déjà senti que malgré vos efforts,<br>votre énergie s'échappe sans prévenir ?</h2>
+        <div style="max-width: 900px; margin: 60px auto;">
+            <div class="card" style="border-left: 5px solid var(--terracotta); margin-bottom: 30px;">
+                <p style="font-size: 1.2rem; line-height: 1.8;">
+                    Vous arrive-t-il de vous lever fatigué(e), comme si la nuit n'avait rien réparé ?
+                </p>
+            </div>
+            <div class="card" style="border-left: 5px solid var(--sage); margin-bottom: 30px;">
+                <p style="font-size: 1.2rem; line-height: 1.8;">
+                    Avez-vous déjà eu l'impression que vos journées se résumaient à tenir... plutôt qu'à vivre ?
+                </p>
+            </div>
+            <div style="text-align: center; margin: 60px 0 40px;">
+                <p style="font-size: 1.3rem; font-weight: 700; color: var(--deep-green); line-height: 1.8;">
+                    Si oui → vous êtes exactement au bon endroit.
+                </p>
+            </div>
+            <div class="card" style="background: linear-gradient(135deg, rgba(201, 169, 110, 0.15), rgba(44, 95, 79, 0.1)); border: 2px solid var(--primary-gold); text-align: center;">
+                <p style="font-size: 1.25rem; line-height: 1.8; font-weight: 600; color: var(--deep-green);">
+                    Et si, derrière chacun de ces signaux, il existait une explication simple...<br>
+                    <span style="color: var(--terracotta);">mais que personne ne vous avait jamais révélée ?</span>
+                </p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="#pricing" class="btn">Je veux mettre fin à cette fatigue et retrouver mon énergie</a>
+        </div>
+    </div>
+</section>
+
+<!-- PAIN POINTS 2 -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Ce n'est pas vous qui êtes en faute...<br>c'est le chemin que vous avez emprunté.</h2>
+        <p style="font-size: 1.2rem; text-align: center; max-width: 800px; margin: 0 auto 50px; line-height: 1.8;">
+            On vous a sûrement déjà dit :<br>
+            <strong>"Il faut dormir plus." "Il faut bouger davantage." "Il faut juste être positif."</strong><br><br>
+            Et pourtant, malgré tous vos efforts, la fatigue revient. Pire : elle s'installe.
+        </p>
+        <p style="font-size: 1.15rem; text-align: center; max-width: 900px; margin: 0 auto 50px; line-height: 1.8;">
+            Le problème n'est pas que vous ne faites pas assez.<br>
+            Le problème, c'est que vous luttez contre un ennemi invisible :
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 80px;">
+            <div class="card" style="border-left: 4px solid var(--terracotta);">
+                <p>✅ Des <strong>fuites d'énergie</strong> que vous ne voyez pas (digestion lourde, respiration courte, surcharge mentale...)</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--terracotta);">
+                <p>✅ Des <strong>habitudes installées</strong> depuis des années qui sabotent votre vitalité sans que vous vous en rendiez compte</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--terracotta);">
+                <p>✅ Une <strong>absence de méthode</strong> claire qui transforme vos bonnes intentions en frustration</p>
+            </div>
+        </div>
+        <p style="font-size: 1.25rem; text-align: center; max-width: 800px; margin: 60px auto; line-height: 1.8;">
+            <strong>Résultat ?</strong> Vous vivez dans une spirale où chaque journée ressemble à la précédente : 
+            <strong style="color: var(--terracotta);">lever difficile, journées en pilotage automatique, soirées sans énergie...</strong>
+        </p>
+        <p style="font-size: 1.15rem; text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+            Et petit à petit, vous vous habituez à survivre au lieu de vivre.
+        </p>
+    </div>
+</section>
+
+<!-- FAUSSES SOLUTIONS -->
+<section class="section" style="background: linear-gradient(135deg, var(--deep-green), #1a3d32); color: white;">
+    <div class="container">
+        <h2 class="section-title" style="color: white;">Et si ce n'était pas vous le problème...<br>mais les fausses pistes qu'on vous a données ?</h2>
+        <p style="font-size: 1.2rem; text-align: center; margin-bottom: 50px; line-height: 1.8;">
+            Si vous êtes encore fatigué(e), ce n'est pas par manque d'efforts.
+        </p>
+        <p style="font-size: 1.15rem; text-align: center; margin-bottom: 50px; line-height: 1.8;">
+            C'est parce que vous avez probablement été piégé(e) par des <strong>fausses solutions</strong>.
+        </p>
+        <p style="font-size: 1.2rem; text-align: center; margin-bottom: 40px; line-height: 1.8; color: var(--primary-gold); font-weight: 600;">
+            On vous a vendu...
+        </p>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2; margin-bottom: 15px;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Le <strong>café</strong> comme carburant → un coup de fouet artificiel qui vous laisse encore plus vidé quelques heures après.
+            </div>
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2; margin-bottom: 15px;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Les <strong>compléments "miracles"</strong> → chers, souvent mal adaptés, et incapables de compenser un mode de vie déséquilibré.
+            </div>
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2; margin-bottom: 15px;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Les <strong>cures détox express</strong> → trop radicales, qui épuisent plus qu'elles ne régénèrent.
+            </div>
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2; margin-bottom: 15px;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                La <strong>volonté seule</strong> → comme si vous pouviez, par magie, lutter contre la biologie de votre corps et l'usure de vos cellules.
+            </div>
+        </div>
+        <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; margin-top: 60px; border: 1px solid rgba(255, 255, 255, 0.2); max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 60px;">
+            <p style="font-size: 1.2rem; text-align: center; line-height: 1.8; margin-bottom: 20px;">
+                Et la vérité, c'est que ces "solutions rapides" ne font que masquer les symptômes...
+            </p>
+            <p style="font-size: 1.15rem; text-align: center; line-height: 1.8; margin-bottom: 30px;">
+                ... pendant que les <strong>vraies causes</strong> de votre fatigue continuent de s'installer en profondeur.
+            </p>
+            <p style="font-size: 1.2rem; text-align: center; line-height: 1.8; font-style: italic; color: var(--primary-gold);">
+                C'est un peu comme <strong>vider un seau percé avec une petite cuillère</strong> : vous vous épuisez, mais le niveau d'énergie ne remonte jamais vraiment.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- VISION -->
+<section class="section" style="background: linear-gradient(to bottom, var(--soft-cream), rgba(139, 168, 136, 0.1));">
+    <div class="container">
+        <h2 class="section-title">Et si votre vie ressemblait à ça dans quelques semaines ?</h2>
+        <p style="font-size: 1.2rem; text-align: center; margin-bottom: 50px; line-height: 1.8;">
+            Imaginez...
+        </p>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Vous vous réveillez le matin <strong>avec un vrai sourire</strong>, sans avoir besoin d'appuyer dix fois sur "snooze"
+            </div>
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Vous traversez la journée <strong>sans ce coup de barre écrasant</strong> qui vous oblige à chercher café, sucre ou grignotages
+            </div>
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Votre esprit devient <strong>plus clair, plus créatif, plus concentré</strong>... vous avez de nouveau les idées qui fusent
+            </div>
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Votre corps retrouve sa <strong>légèreté, sa fluidité</strong>, vous sentez que chaque mouvement vous redonne de l'énergie au lieu de vous en voler
+            </div>
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Et le soir, vous retrouvez <strong>un sommeil réparateur</strong>, celui qui recharge vraiment vos batteries au lieu de simplement vous laisser flotter dans une semi-fatigue permanente
+            </div>
+            <div style="padding: 20px 0; padding-left: 40px; position: relative; font-size: 1.2rem; line-height: 2;">
+                <span style="position: absolute; left: 0; font-size: 1.5rem;">✨</span>
+                Vous redevenez cette personne que vous pensiez avoir perdue : pleine d'élan, d'envie, capable de dire <strong>OUI</strong> à la vie sans redouter de "payer la facture" après
+            </div>
+        </div>
+        <div class="card" style="margin-top: 60px; max-width: 900px; margin-left: auto; margin-right: auto; text-align: center; border: 2px solid var(--primary-gold);">
+            <p style="font-size: 1.3rem; line-height: 1.8; color: var(--deep-green); font-weight: 600;">
+                Et le plus beau ?<br>
+                Tout cela n'est pas réservé à quelques chanceux...
+            </p>
+        </div>
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="#pricing" class="btn">Oui, je veux retrouver mon énergie !</a>
+        </div>
+    </div>
+</section>
+
+<!-- TRANSFORMATION -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">La vraie transformation commence quand on arrête de chercher des raccourcis</h2>
+        <p style="font-size: 1.2rem; text-align: center; max-width: 900px; margin: 0 auto 50px; line-height: 1.8;">
+            Soyons pragmatiques
+        </p>
+        <p style="font-size: 1.15rem; text-align: center; max-width: 900px; margin: 0 auto 40px; line-height: 1.8;">
+            Quand on cherche à sortir de la fatigue chronique, on se perd souvent dans un labyrinthe de solutions partielles :
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-bottom: 60px;">
+            <div class="card" style="border-left: 4px solid var(--terracotta);">
+                <p>❌ Les compléments alimentaires pris au hasard n'apportent qu'un soulagement temporaire.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--terracotta);">
+                <p>❌ Les consultations ponctuelles, sans suivi ni vision globale, laissent toujours un vide.</p>
+            </div>
+            <div class="card" style="border-left: 4px solid var(--terracotta);">
+                <p>❌ Les méthodes "miracles" vues sur internet promettent beaucoup mais n'apportent pas de transformation durable.</p>
+            </div>
+        </div>
+        <p style="font-size: 1.25rem; text-align: center; max-width: 800px; margin: 60px auto 40px; line-height: 1.8;">
+            Au final, beaucoup dépensent <strong>des milliers d'euros</strong>...<br>
+            ... sans jamais obtenir une stratégie claire, cohérente et durable.
+        </p>
+        <div class="card" style="max-width: 900px; margin: 60px auto; border-left: 6px solid var(--primary-gold);">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--deep-green); margin-bottom: 25px;">Ce que j'ai créé est différent.</h3>
+            <p style="font-size: 1.15rem; line-height: 1.9; margin-bottom: 20px;">
+                Un parcours pensé dans sa globalité, qui ne traite pas seulement un symptôme mais qui reconstruit votre énergie à la racine.
+            </p>
+            <div style="padding-left: 0;">
+                <div style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 1.1rem;">
+                    <span style="position: absolute; left: 0; color: var(--primary-gold); font-size: 1.5rem;">👉</span>
+                    Chaque module répond à un pilier essentiel de votre vitalité : le corps, l'alimentation, le mental, les émotions, le rythme de vie.
+                </div>
+                <div style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 1.1rem;">
+                    <span style="position: absolute; left: 0; color: var(--primary-gold); font-size: 1.5rem;">👉</span>
+                    Chaque étape est progressive, claire, et surtout… <strong>adaptable à votre réalité personnelle</strong>.
+                </div>
+                <div style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 1.1rem;">
+                    <span style="position: absolute; left: 0; color: var(--primary-gold); font-size: 1.5rem;">👉</span>
+                    Vous n'avancez plus au hasard : vous suivez un chemin précis, éprouvé, qui vous évite les erreurs et vous donne enfin des résultats durables.
+                </div>
+            </div>
+        </div>
+        <p style="font-size: 1.15rem; text-align: center; max-width: 900px; margin: 50px auto 30px; line-height: 1.8;">
+            Rien n'a été laissé au hasard : ce programme représente <strong>plusieurs centaines d'heures de conception</strong> et une véritable mine d'or de savoir-faire condensé pour vous.
+        </p>
+        <div class="card" style="background: linear-gradient(135deg, rgba(201, 169, 110, 0.15), rgba(44, 95, 79, 0.1)); max-width: 1000px; margin: 60px auto; border: 2px solid var(--primary-gold);">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--deep-green); margin-bottom: 30px; text-align: center;">Si vous deviez reconstituer par vous-même tout ce que contient ce programme...</h3>
+            <p style="font-size: 1.2rem; text-align: center; margin-bottom: 30px; line-height: 1.8;">
+                Cela vous coûterait facilement <strong style="color: var(--terracotta); font-size: 1.4rem;">plus de 3 000 €</strong> en consultations, stages, formations et lectures spécialisées.
+            </p>
+            <p style="font-size: 1.15rem; margin-bottom: 20px; line-height: 1.8;"><strong>Avec ce programme, vous bénéficiez de :</strong></p>
+            <div>
+                <div style="padding: 12px 0; padding-left: 35px; position: relative; font-size: 1.1rem;">
+                    <span style="position: absolute; left: 0;">✅</span>
+                    Une méthode complète et structurée pas à pas.
+                </div>
+                <div style="padding: 12px 0; padding-left: 35px; position: relative; font-size: 1.1rem;">
+                    <span style="position: absolute; left: 0;">✅</span>
+                    Des outils premium (PDF, audios, visualisations, rituels).
+                </div>
+                <div style="padding: 12px 0; padding-left: 35px; position: relative; font-size: 1.1rem;">
+                    <span style="position: absolute; left: 0;">✅</span>
+                    L'équivalent d'un accompagnement de plusieurs mois... pour <strong>une fraction de ce prix</strong>.
+                </div>
+            </div>
+            <p style="font-size: 1.2rem; text-align: center; margin-top: 30px; line-height: 1.8; color: var(--deep-green); font-weight: 600;">
+                👉 Résultat : vous économisez <strong>plusieurs centaines d'euros en essais infructueux</strong>, et vous gagnez surtout... <strong>du temps, de l'énergie et de la clarté</strong>.
+            </p>
+        </div>
+        <p style="font-size: 1.25rem; text-align: center; max-width: 900px; margin: 50px auto 0; line-height: 1.9; font-style: italic; color: var(--deep-green);">
+            Et combien vaut le fait de retrouver vos matins avec entrain, vos journées pleines d'élan, vos soirées dans la sérénité...<br>
+            Et surtout, de sentir que vous redevenez maître de votre vie ?<br>
+            <strong>Pour beaucoup de mes clients, c'est inestimable.</strong>
+        </p>
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="#pricing" class="btn">Je veux enfin une solution claire et durable</a>
+        </div>
+    </div>
+</section>
+
+<!-- LES 9 MODULES -->
+<section class="section" style="background: var(--soft-cream);">
+    <div class="container">
+        <h2 class="section-title">Le Chemin Vers Votre Nouvelle Vitalité</h2>
+        <p style="font-size: 1.2rem; text-align: center; max-width: 900px; margin: 0 auto 30px; line-height: 1.8;">
+            Imaginez un parcours pensé comme une <strong>renaissance énergétique</strong>. Un chemin structuré, pas à pas, qui vous évite les erreurs, vous donne de la clarté et surtout... des résultats durables.
+        </p>
+        <p style="font-size: 1.15rem; text-align: center; max-width: 900px; margin: 0 auto 60px; line-height: 1.8;">
+            Ce programme n'est pas une suite de vidéos ou de PDF que vous laissez dormir dans un dossier.<br>
+            C'est une <strong>expérience guidée</strong>, conçue pour transformer votre énergie semaine après semaine.
+        </p>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">1</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Les Fondations Vitalité</h3>
+                <p style="line-height: 1.8;">Vous comprenez enfin <strong>pourquoi vous êtes fatigué</strong>. Pas d'explications superficielles, mais les vraies causes : physiologiques, digestives, émotionnelles. Résultat : vous arrêtez de gaspiller votre énergie et vous voyez déjà les premiers changements en 7 jours.</p>
+            </div>
+        </div>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">2</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Le Carburant Énergie</h3>
+                <p style="line-height: 1.8;">Votre alimentation devient votre alliée. Vous apprenez à manger pour <strong>stabiliser votre énergie toute la journée</strong>, sans coup de barre ni lourdeur. Menus types, super-aliments, boissons revitalisantes : tout est pensé pour être simple, pratique et efficace.</p>
+            </div>
+        </div>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">3</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Corps & Esprit en Mouvement</h3>
+                <p style="line-height: 1.8;">Vous réactivez votre circulation, oxygénation et sérénité mentale. <strong>Respiration, micro-exercices, relaxation</strong>... même avec un emploi du temps chargé, vous disposez d'outils puissants. Votre corps reprend vie, votre esprit s'apaise.</p>
+            </div>
+        </div>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">4</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Sommeil & Équilibre Émotionnel</h3>
+                <p style="line-height: 1.8;">Vous découvrez les <strong>rituels du soir anti-fatigue</strong>, les techniques pour calmer les réveils nocturnes et les outils pour retrouver un sommeil profond. Grâce à la visualisation et la reprogrammation, votre mental se libère, votre énergie se recharge la nuit.</p>
+            </div>
+        </div>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">5</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Huiles Essentielles au Quotidien</h3>
+                <p style="line-height: 1.8;">Pas besoin d'une bibliothèque d'huiles. Vous apprenez à utiliser les plus efficaces, simplement et en toute sécurité, pour <strong>booster vitalité</strong>, concentration et gestion du stress. Des recettes premium, claires et testées.</p>
+            </div>
+        </div>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">6</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Fleurs de Bach & Émotions</h3>
+                <p style="line-height: 1.8;">Vous découvrez comment <strong>les élixirs floraux soutiennent vos émotions</strong>. De la fatigue à la lassitude, du stress au manque de confiance... vous apprenez à choisir les bonnes fleurs pour accompagner vos journées avec équilibre.</p>
+            </div>
+        </div>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">7</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Phytothérapie & Tisanes Énergétiques</h3>
+                <p style="line-height: 1.8;">Vous intégrez le <strong>pouvoir des plantes</strong> dans votre quotidien. Digestives, relaxantes, adaptogènes : chaque tisane devient un rituel qui nourrit votre énergie et apaise votre système nerveux.</p>
+            </div>
+        </div>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">8</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Hydrologie & Vitalité</h3>
+                <p style="line-height: 1.8;"><strong>L'eau</strong> devient votre <strong>outil de santé</strong>. Douches écossaises, bains drainants, rituels d'hydratation... vous découvrez comment l'eau peut stimuler votre circulation, vos défenses et votre sérénité.</p>
+            </div>
+        </div>
+
+        <div class="card" style="display: grid; grid-template-columns: 80px 1fr; gap: 30px; margin-bottom: 30px; border-left: 5px solid var(--primary-gold);">
+            <div style="font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; background: linear-gradient(135deg, var(--primary-gold), var(--terracotta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">9</div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 15px;">Mindset & Reconnexion Profonde</h3>
+                <p style="line-height: 1.8;">Le mental devient votre allié, plus jamais votre saboteur. Visualisations guidées, affirmations puissantes, journaling premium : vous installez un <strong>état d'esprit durable</strong>, qui soutient vos choix et vos transformations.</p>
+            </div>
+        </div>
+
+        <div class="card" style="background: linear-gradient(135deg, var(--primary-gold), #b39358); text-align: center; margin-top: 60px;">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--charcoal); margin-bottom: 20px;">🎁 Bonus Elite Vitalité</h3>
+            <p style="font-size: 1.15rem; color: var(--charcoal); line-height: 1.8;">
+                Un <strong>guide récapitulatif premium</strong> : routines, menus, super-aliments<br>
+                Un <strong>audio quotidien de 10 minutes</strong> pour booster énergie et confiance<br>
+                Une <strong>checklist hebdomadaire</strong> pour suivre vos progrès sans effort
+            </p>
+        </div>
+
+        <div style="margin-top: 80px; text-align: center; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 20px;">
+                Ce programme, c'est un <strong>chemin clair et structuré</strong> pour transformer votre énergie. Pas besoin de tout retenir d'un coup : chaque étape est progressive, guidée, et surtout <strong>adaptable à votre vie réelle</strong>.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 40px 0;">
+                <div class="card" style="text-align: center;">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">👉</span>
+                    <strong>Vous n'avancez plus au hasard.</strong>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">👉</span>
+                    <strong>Vous avez une méthode.</strong>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">👉</span>
+                    <strong>Vous retrouvez le pouvoir sur votre vitalité.</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- COACHING PROGRESSIF -->
+<section class="section" style="background: linear-gradient(135deg, var(--deep-green), #1a3d32); color: white;">
+    <div class="container">
+        <h2 class="section-title" style="color: white;">Comme un coaching en présentiel...</h2>
+        <p style="font-size: 1.2rem; text-align: center; margin-bottom: 50px; line-height: 1.8;">
+            Et parce qu'une vraie transformation ne se fait pas en un jour, <strong>vous n'aurez pas accès à tout le contenu d'un coup</strong>.
+        </p>
+        <p style="font-size: 1.15rem; text-align: center; margin-bottom: 50px; line-height: 1.8;">
+            Comme dans un accompagnement en présentiel, chaque module s'ouvre <strong>au fil des semaines</strong>.
+        </p>
+        <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; margin: 40px auto; border: 1px solid rgba(255, 255, 255, 0.2); max-width: 1000px;">
+            <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.8; text-align: center; color: var(--primary-gold); font-weight: 600;">
+                Pourquoi ? Parce que votre énergie se reconstruit pas à pas.
+            </p>
+            <p style="font-size: 1.1rem; margin-bottom: 30px; line-height: 1.8; text-align: center;">
+                Si vous aviez tout en une fois, ce serait comme vouloir courir un marathon sans entraînement.
+            </p>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; line-height: 1.8; font-weight: 600; text-align: center;">
+                Ici, c'est différent :
+            </p>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 1.1rem; line-height: 2;">
+                    <span style="position: absolute; left: 0; color: var(--primary-gold); font-size: 1.5rem;">✅</span>
+                    Chaque semaine, vous recevez <strong>un nouveau module</strong> avec ses outils pratiques.
+                </div>
+                <div style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 1.1rem; line-height: 2;">
+                    <span style="position: absolute; left: 0; color: var(--primary-gold); font-size: 1.5rem;">✅</span>
+                    Vous avez le temps d'intégrer, d'expérimenter et de sentir vos premiers résultats.
+                </div>
+                <div style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 1.1rem; line-height: 2;">
+                    <span style="position: absolute; left: 0; color: var(--primary-gold); font-size: 1.5rem;">✅</span>
+                    Le rythme est volontairement pensé pour être <strong>réaliste, doux et durable</strong>.
+                </div>
+            </div>
+            <p style="font-size: 1.2rem; margin-top: 40px; line-height: 1.8; text-align: center; color: var(--primary-gold); font-weight: 600;">
+                👉 Résultat : vous ne subissez pas un flot d'informations.
+            </p>
+            <p style="font-size: 1.15rem; margin-top: 20px; line-height: 1.8; text-align: center;">
+                Vous vivez une <strong>expérience guidée</strong>, où chaque étape nourrit la suivante, jusqu'à bâtir une vitalité solide et durable.
+            </p>
+        </div>
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="#pricing" class="btn">Oui, j'avance pas à pas dans ce parcours premium</a>
+        </div>
+    </div>
+</section>
+
+<!-- VALEUR -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Le vrai coût n'est pas ce programme...<br>mais de continuer à vivre épuisé.</h2>
+        <p style="font-size: 1.15rem; text-align: center; max-width: 900px; margin: 0 auto 40px; line-height: 1.8;">
+            Après avoir accompagné plusieurs dizaines de personnes dans ce chemin de transformation, une remarque revient souvent:
+        </p>
+        <div class="card" style="max-width: 800px; margin: 40px auto; border-left: 5px solid var(--primary-gold);">
+            <p style="font-size: 1.3rem; font-style: italic; color: var(--deep-green); line-height: 1.7;">
+                "Ton programme, Stéphane, tu pourrais le proposer à 2 000 ou 3 000 €... et il les vaudrait largement."
+            </p>
+        </div>
+        <p style="font-size: 1.2rem; text-align: center; max-width: 800px; margin: 40px auto; line-height: 1.8; font-weight: 600;">
+            Et c'est vrai.
+        </p>
+        <p style="font-size: 1.15rem; text-align: center; max-width: 900px; margin: 0 auto 30px; line-height: 1.8;">
+            Mais j'ai fait un autre choix.
+        </p>
+        <div class="card" style="max-width: 900px; margin: 50px auto;">
+            <p style="font-size: 1.15rem; margin-bottom: 25px; line-height: 1.8;">
+                Je ne voulais pas créer une offre réservée à une poignée de privilégiés.<br>
+                Je voulais une solution <strong>accessible, mais exigeante</strong>.
+            </p>
+            <p style="font-size: 1.15rem; margin-bottom: 25px; line-height: 1.8;">
+                J'ai conçu ce programme pour ceux qui sont vraiment motivés, qui veulent agir dès maintenant, et qui comprennent la valeur d'une stratégie claire.
+            </p>
+            <div>
+                <div style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 1.1rem;">
+                    <span style="position: absolute; left: 0; color: var(--primary-gold); font-size: 1.5rem;">👉</span>
+                    Ce programme n'est <strong>pas "pas cher"</strong> — car quand c'est trop bon marché, on repousse, on oublie, on ne s'engage pas.
+                </div>
+                <div style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 1.1rem;">
+                    <span style="position: absolute; left: 0; color: var(--primary-gold); font-size: 1.5rem;">👉</span>
+                    Ce programme n'est <strong>pas inaccessible</strong> non plus — car la vitalité n'est pas un luxe, c'est un droit naturel.
+                </div>
+            </div>
+        </div>
+        <p style="font-size: 1.2rem; text-align: center; max-width: 900px; margin: 50px auto; line-height: 1.8; color: var(--deep-green); font-weight: 600;">
+            C'est pourquoi j'ai fixé un prix juste, qui reflète toute <strong>la valeur de ce programme</strong>.
+        </p>
+        <div class="card" style="background: linear-gradient(135deg, rgba(201, 169, 110, 0.2), rgba(44, 95, 79, 0.15)); max-width: 1000px; margin: 60px auto; border: 2px solid var(--primary-gold);">
+            <p style="font-size: 1.15rem; text-align: center; margin-bottom: 20px; line-height: 1.8;">
+                Et surtout, ce n'est pas une dépense.<br>
+                C'est une <strong>économie immense</strong> en énergie, en temps, en argent gaspillé dans de fausses solutions.
+            </p>
+            <div style="max-width: 700px; margin: 30px auto;">
+                <div style="padding: 15px 0; font-size: 1.2rem; text-align: center; line-height: 1.7;">
+                    👉 Parce qu'au fond... <strong>combien vaut une journée sans fatigue ?</strong>
+                </div>
+                <div style="padding: 15px 0; font-size: 1.2rem; text-align: center; line-height: 1.7;">
+                    👉 Combien vaut une <strong>nuit réparatrice</strong>, un réveil léger, une vie où votre énergie soutient enfin vos projets ?
+                </div>
+                <div style="padding: 15px 0; font-size: 1.2rem; text-align: center; line-height: 1.7;">
+                    👉 Pour beaucoup de mes clients, <strong style="color: var(--deep-green);">c'est inestimable</strong>.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING SECTION -->
+<section class="section" id="pricing" style="background: linear-gradient(135deg, #1a3d32, var(--deep-green)); color: white;">
+    <div class="container">
+        <h2 class="section-title" style="color: white;">Choisissez Votre Offre Maintenant</h2>
+        
+        <div class="promo-banner">
+            <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--charcoal); margin-bottom: 20px;">
+                🎉 OFFRE EXCEPTIONNELLE EN COURS 🎉
+            </h3>
+            <p style="color: var(--charcoal); font-size: 1.2rem; margin-bottom: 20px;">
+                Profitez de réductions exclusives avec vos codes promo :
+            </p>
+            <div>
+                <div class="promo-code">
+                    <strong style="display: block; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 10px;">Pack Premium</strong>
+                    <code>VITALITE10</code>
+                    <div style="font-size: 1.5rem; color: var(--terracotta); font-weight: 700; margin-top: 10px;">
+                        717€ <span style="text-decoration: line-through; opacity: 0.6; font-size: 1.1rem;">797€</span>
+                    </div>
+                    <div style="color: var(--deep-green); font-weight: 600; margin-top: 5px;">-10% d'économie !</div>
+                </div>
+                
+                <div class="promo-code">
+                    <strong style="display: block; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 10px;">Pack Deluxe</strong>
+                    <code>VITALITE15</code>
+                    <div style="font-size: 1.5rem; color: var(--terracotta); font-weight: 700; margin-top: 10px;">
+                        847€ <span style="text-decoration: line-through; opacity: 0.6; font-size: 1.1rem;">997€</span>
+                    </div>
+                    <div style="color: var(--deep-green); font-weight: 600; margin-top: 5px;">-15% d'économie !</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--deep-green); margin-bottom: 20px;">Programme Premium</h3>
+                <img src="https://d1yei2z3i6k35z.cloudfront.net/14434660/68dc38daaddf4_pexels-tara-winstead-8386718.jpg" alt="Programme Premium" style="width: 100%; height: 250px; object-fit: cover; border-radius: 20px; margin-bottom: 30px;">
+                <ul style="list-style: none; padding: 0; margin: 30px 0;">
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Accès aux 9 modules au fil des jours</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Tous les PDF téléchargeables</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Audios, vidéos et outils premium</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Bonus Elite Vitalité inclus</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Échange illimité par mail ou téléphone</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Accès à vie</li>
+                </ul>
+                <div class="pricing-price">€797</div>
+                <p style="text-align: center; margin-bottom: 20px;">👉 Pour les personnes autonomes</p>
+                <a href="https://stephaneamourda-naturopathe.systeme.io/f5775d2e" class="btn" style="width: 100%; text-align: center; display: block;">Je prends ma place</a>
+                <p style="text-align: center; margin-top: 15px; color: var(--terracotta); font-weight: 600;">💰 Avec VITALITE10 : 717€</p>
+            </div>
+
+            <div class="pricing-card featured">
+                <div style="background: linear-gradient(135deg, var(--primary-gold), #b39358); color: var(--charcoal); padding: 10px 25px; border-radius: 25px; display: inline-block; margin-bottom: 20px; font-weight: 700;">⭐ LE PLUS POPULAIRE</div>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--deep-green); margin-bottom: 20px;">Programme Deluxe</h3>
+                <img src="https://d1yei2z3i6k35z.cloudfront.net/14434660/68dc390598cf7_pexels-karolina-grabowska-7272596.jpg" alt="Programme Deluxe" style="width: 100%; height: 250px; object-fit: cover; border-radius: 20px; margin-bottom: 30px;">
+                <ul style="list-style: none; padding: 0; margin: 30px 0;">
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Accès aux 9 modules au fil des jours</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Tous les PDF téléchargeables</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Audios, vidéos et outils premium</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Bonus Elite Vitalité inclus</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Échange illimité par mail ou téléphone</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);">✅ Accès à vie</li>
+                    <li style="padding: 15px 0; border-bottom: 1px solid rgba(0,0,0,0.08);"><strong>✅ 3 séances de coaching personnalisées</strong></li>
+                </ul>
+                <div class="pricing-price">€997</div>
+                <p style="text-align: center; margin-bottom: 20px;">👉 Accompagnement sur-mesure</p>
+                <a href="https://stephaneamourda-naturopathe.systeme.io/f5775d2e-63fae9d8" class="btn" style="width: 100%; text-align: center; display: block;">Je prends ma place (avec coaching)</a>
+                <p style="text-align: center; margin-top: 15px; color: var(--terracotta); font-weight: 600;">💰 Avec VITALITE15 : 847€</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GARANTIE -->
+<section class="section" style="background: var(--soft-cream);">
+    <div class="container">
+        <div class="card" style="max-width: 900px; margin: 0 auto; text-align: center; border: 3px solid var(--primary-gold);">
+            <div style="font-size: 5rem; margin-bottom: 30px;">🔒</div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--deep-green); margin-bottom: 30px;">Garantie Sérénité 14 jours</h2>
+            <p style="font-size: 1.15rem; line-height: 1.9; margin-bottom: 20px;">
+                Vous avez <strong>14 jours complets</strong> pour découvrir le programme. Si vous estimez qu'il ne correspond pas à vos attentes, vous êtes <strong>remboursé intégralement, sans conditions</strong>.
+            </p>
+            <p style="font-size: 1.25rem; margin-top: 30px; color: var(--deep-green); font-weight: 600;">
+                Vous n'avez donc rien à perdre... et potentiellement une vie pleine d'énergie à retrouver.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- TRANSITION TEMOIGNAGES -->
+<section class="section">
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 60px; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <p style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 30px;">
+                Vous avez vu :<br>
+                <strong>✅</strong> Le chemin clair que vous allez suivre, pas à pas.<br>
+                <strong>✅</strong> Les transformations que vous pouvez attendre.<br>
+                <strong>✅</strong> La valeur réelle que ce programme représente.
+            </p>
+            <p style="font-size: 1.2rem; line-height: 1.8; margin: 40px auto; color: var(--deep-green); font-weight: 600;">
+                La seule étape qu'il vous reste à franchir, c'est de vous dire :<br>
+                <em style="color: var(--terracotta);">« Est-ce que je suis prêt(e) à redevenir acteur de mon énergie et de ma vitalité ? »</em>
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.8; margin: 30px auto 40px;">
+                Ce programme a été conçu pour les personnes motivées, prêtes à agir avec sérieux, mais aussi avec douceur et respect de leur corps.
+            </p>
+            <p style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 50px; font-weight: 600;">
+                Si vous sentez que ce chemin est pour vous, alors c'est le moment de cliquer et de démarrer.
+            </p>
+            <a href="#pricing" class="btn">Je veux vivre ma propre transformation</a>
+        </div>
+    </div>
+</section>
+
+<!-- TEMOIGNAGES -->
+<section class="section" style="background: linear-gradient(to bottom, rgba(44, 95, 79, 0.03), transparent);">
+    <div class="container">
+        <h2 class="section-title">Leur expérience vaut plus que mes promesses</h2>
+        <p style="font-size: 1.15rem; text-align: center; max-width: 900px; margin: 0 auto 60px; line-height: 1.8;">
+            Au-delà des méthodes et des explications, ce sont les expériences humaines qui parlent le plus fort.<br>
+            Laissez ces témoignages vous inspirer : ils reflètent ce qui devient possible quand on décide de prendre soin de soi.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+            <div class="card" style="position: relative; border-left: 4px solid var(--primary-gold);">
+                <div style="font-family: 'Playfair Display', serif; font-size: 6rem; color: var(--primary-gold); opacity: 0.2; position: absolute; top: -10px; left: 20px; line-height: 1;">"</div>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 2;">
+                    Excellent programme de soins en naturopathie et de remise en forme proposé par Stéphane. Tout en respectant mon rythme, Stéphane m'a accompagnée avec douceur et grande implication personnelle vers une prise de conscience de ma résistance au changement. Il m'a permis d'évoluer sur la durée par des exercices adaptés à mes besoins et m'a fourni tous les outils pour me prendre en mains. J'ai particulièrement apprécié les séances de relaxation et d'exercices physiques. Je le remercie et ne peux que le recommander aux personnes qui veulent mettre en place le changement dans leur vie.
+                </p>
+                <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Catherine</div>
+            </div>
+
+            <div class="card" style="position: relative; border-left: 4px solid var(--primary-gold);">
+                <div style="font-family: 'Playfair Display', serif; font-size: 6rem; color: var(--primary-gold); opacity: 0.2; position: absolute; top: -10px; left: 20px; line-height: 1;">"</div>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 2;">
+                    Stéphane est un très bon naturopathe. Il est impliqué, passionné, prend le temps d'écouter et de partager avec pertinence. Je suis ressortie du rendez-vous avec une multitude de conseils à mettre en place et à réajuster. Ces conseils étaient accompagnés d'explications qui m'ont permis de comprendre et/ou de me faire prendre conscience de l'importance de leur mise en place. Je pense continuer de le consulter afin d'approfondir ce qui a été amorcé. Je recommande vivement ce professionnel!
+                </p>
+                <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Sophie</div>
+            </div>
+
+            <div class="card" style="position: relative; border-left: 4px solid var(--primary-gold);">
+                <div style="font-family: 'Playfair Display', serif; font-size: 6rem; color: var(--primary-gold); opacity: 0.2; position: absolute; top: -10px; left: 20px; line-height: 1;">"</div>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 2;">
+                    Stéphane est un naturopathe professionnel, impliqué et très à l'écoute. Ses conseils ainsi que son accompagnement ont grandement amélioré mon bien-être ainsi que mes habitudes alimentaires. Il propose des solutions sur-mesure selon nos besoins. Je ne peux que le recommander !
+                </p>
+                <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Caroline</div>
+            </div>
+
+            <div class="card" style="position: relative; border-left: 4px solid var(--primary-gold);">
+                <div style="font-family: 'Playfair Display', serif; font-size: 6rem; color: var(--primary-gold); opacity: 0.2; position: absolute; top: -10px; left: 20px; line-height: 1;">"</div>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 2;">
+                    J'ai suivi un accompagnement de 3 mois avec Stéphane Amourda, naturopathe à Châtenay-Malabry, pour réapprendre à respirer et remettre de l'apaisement dans un deuxième chapitre de vie plutôt tumultueux. Ce que j'ai le plus apprécié : son écoute, sa capacité à adapter le programme à mes besoins, et des outils concrets faciles à intégrer au quotidien. Les effets se sont installés progressivement : moins de stress, des nuits plus sereines et une énergie plus stable. Un vrai chemin solide et humain, pas à pas.
+                </p>
+                <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Oya</div>
+            </div>
+
+            <div class="card" style="position: relative; border-left: 4px solid var(--primary-gold);">
+                <div style="font-family: 'Playfair Display', serif; font-size: 6rem; color: var(--primary-gold); opacity: 0.2; position: absolute; top: -10px; left: 20px; line-height: 1;">"</div>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 2;">
+                    Très bon contact et d'excellents conseils de la part de Stéphane en naturopathie et accompagnement personnalisé. Je le recommande vivement pour son accueil chaleureux et son professionnalisme.
+                </p>
+                <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Nathalie</div>
+            </div>
+
+            <div class="card" style="position: relative; border-left: 4px solid var(--primary-gold);">
+                <div style="font-family: 'Playfair Display', serif; font-size: 6rem; color: var(--primary-gold); opacity: 0.2; position: absolute; top: -10px; left: 20px; line-height: 1;">"</div>
+                <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 2;">
+                    Super naturopathe. A l'écoute des besoins de ses clients. Je suis venue pour préparer ma Pré ménopause et rebooster mon corps qui était fatigué. Stéphane m'a fait un bilan très complet et a apporté des solutions qui se sont révélées très efficaces dès les premiers jours. J'ai pu aussi assister à quelques ateliers afin d'enrichir mes connaissances sur l'alimentation. Je ne peux que vous le recommander !
+                </p>
+                <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Weiss</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" style="background: var(--soft-cream);">
+    <div class="container">
+        <h2 class="section-title">Foire aux Questions</h2>
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">1. Combien de temps faut-il pour voir les premiers résultats ?</h3>
+                <p style="line-height: 1.8;">Dès la première semaine, certains ressentent déjà plus de clarté d'esprit, un meilleur sommeil ou une digestion plus légère. Mais le vrai changement se construit pas à pas : ce programme est conçu pour <strong>ancrer une transformation durable</strong>, pas pour donner un "coup de boost" éphémère.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">2. Est-ce que ce programme convient si j'ai déjà essayé plein de choses sans succès ?</h3>
+                <p style="line-height: 1.8;">Justement. La plupart des solutions que vous avez testées étaient <strong>fragmentées</strong> (une cure, une méthode isolée, une astuce). Ici, vous suivez <strong>un chemin structuré, progressif et global</strong>, qui prend en compte le corps, le mental, l'émotionnel et le rythme de vie.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">3. Faut-il beaucoup de temps chaque jour ?</h3>
+                <p style="line-height: 1.8;">Non. La majorité des pratiques demandent <strong>20 à 45 minutes par jour maximum</strong>. Vous n'avez pas besoin de changer votre vie pour transformer votre énergie, seulement d'intégrer des rituels intelligents et réalistes.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">4. Est-ce que je dois arrêter mes traitements médicaux ?</h3>
+                <p style="line-height: 1.8;">Absolument pas. Ce programme n'est <strong>pas un substitut médical</strong>, mais un <strong>accompagnement naturel complémentaire</strong>. Vous continuez vos traitements et, en cas de doute, vous consultez votre médecin.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">5. Je ne suis pas sûr(e) d'avoir la discipline nécessaire...</h3>
+                <p style="line-height: 1.8;">Ce programme est fait pour les <strong>vies réelles</strong> : imprévus, fatigue, manque de temps. Chaque module est <strong>progressif</strong> et adaptable. Même si vous appliquez seulement 50%, vous en ressentirez déjà les bénéfices.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">6. Et si je n'ai pas de problème de fatigue chronique ?</h3>
+                <p style="line-height: 1.8;">La vitalité ne concerne pas seulement la fatigue extrême. Beaucoup rejoignent ce programme pour : retrouver plus de concentration, améliorer leur sommeil, alléger leur digestion, ou simplement <strong>optimiser leur énergie quotidienne</strong>.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">7. Pendant combien de temps ai-je accès au programme ?</h3>
+                <p style="line-height: 1.8;">Vous bénéficiez d'un <strong>accès illimité</strong>. Vous pouvez avancer à votre rythme, revenir sur les modules, réécouter les audios ou refaire les exercices quand vous en avez besoin.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">8. Est-ce que ça marche si j'ai un emploi du temps chargé ?</h3>
+                <p style="line-height: 1.8;">Oui, car les outils sont <strong>courts, ciblés et flexibles</strong>. Vous pouvez pratiquer le matin, le soir, ou même en déplacement. Le programme s'adapte à vous, pas l'inverse.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">9. Puis-je payer en plusieurs fois ?</h3>
+                <p style="line-height: 1.8;">La réponse est non. Et ce n'est pas un hasard. Je crois profondément que <strong>l'engagement crée la transformation</strong>. Payer en une seule fois, c'est envoyer un signal fort à votre cerveau : "Je choisis vraiment de changer". De plus, ce programme est déjà proposé à un tarif juste — calibré pour qu'il reste accessible tout en reflétant sa valeur premium. Je préfère offrir <strong>la transparence et la simplicité</strong> plutôt qu'éparpiller le paiement et diluer votre engagement. Si vous ressentez l'appel de ce programme, je veux que votre "oui" soit entier, sans compromis.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">10. Et si je ne suis pas satisfait(e) ?</h3>
+                <p style="line-height: 1.8;">Vous êtes protégé(e) par une <strong>garantie de remboursement de 14 jours</strong>. Si vous sentez que ce programme n'est pas pour vous, il vous suffit d'envoyer un message. Vous êtes remboursé(e), sans conditions.</p>
+            </div>
+
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">11. Pourquoi investir dans ce programme plutôt que chercher des infos gratuites sur internet ?</h3>
+                <p style="line-height: 1.8;">Parce que ce que vous trouvez gratuitement est <strong>éparpillé, contradictoire et non structuré</strong>. Ici, vous recevez un <strong>chemin clair</strong>, testé, qui vous évite des années de recherche et d'essais infructueux. Et surtout, vous gagnez <strong>le plus précieux : du temps, de l'énergie et une stratégie fiable</strong>.</p>
+            </div>
+        </div>
+
+        <div class="card" style="background: linear-gradient(135deg, var(--deep-green), #1a3d32); text-align: center; margin-top: 80px; max-width: 1000px; margin-left: auto; margin-right: auto; color: white;">
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; line-height: 1.9; font-style: italic; margin-bottom: 40px;">
+                ✨ "Votre fatigue n'est pas une fatalité... c'est un signal.<br>
+                Aujourd'hui, vous pouvez choisir de l'ignorer encore... ou de transformer ce signal en votre plus grande force.<br><br>
+                Je vous ouvre un chemin clair, progressif et humain. Pas de promesses miracles, mais une méthode éprouvée, à votre rythme." ✨
+            </p>
+            <a href="#pricing" class="btn">Je prends ma place maintenant et je choisis ma vitalité</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background: var(--deep-green); color: white; padding: 80px 60px 40px;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 50px;">
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-gold); margin-bottom: 20px;">Contact</h3>
+                <p>Stéphane AMOURDA</p>
+                <p><a href="mailto:contact@stephaneamourda.com" style="color: white; text-decoration: none;">contact@stephaneamourda.com</a></p>
+                <p>Tél: +6 85 80 14 26</p>
+            </div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-gold); margin-bottom: 20px;">Horaires</h3>
+                <p>Lun-Ven: 9h00 – 17h30</p>
+                <p>Sam-Dim: Fermé</p>
+            </div>
+            <div>
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-gold); margin-bottom: 20px;">Adresse</h3>
+                <p>1, allée des romantiques</p>
+                <p>92290 Châtenay Malabry</p>
+                <p>France</p>
+            </div>
+        </div>
+        <div style="text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.2);">
+            <p style="color: rgba(255,255,255,0.6);">© 2025 Stéphane Amourda - Naturopathe. Tous droits réservés.</p>
+        </div>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventLis
