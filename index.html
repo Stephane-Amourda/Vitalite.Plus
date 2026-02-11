@@ -1232,112 +1232,165 @@
 </footer>
     </footer>
 
-<!-- SCRIPT SMOOTH SCROLL -->
-<script>
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-</script>
-
-<!-- CTA FLOTTANT ULTRA-SCALER -->
-<div id="floating-cta" class="floating-cta">
+<div id="floating-cta" class="floating-cta" style="display: none;">
     <div class="floating-cta-content">
         <div class="floating-cta-close" onclick="closeFloatingCTA()">✕</div>
-        <div class="floating-cta-icon">🔥</div>
-        <div class="floating-cta-text">
-            <strong>Dernière chance !</strong>
-            <span>-10% avec VITALITE10</span>
+        
+        <!-- OFFRE QUI CHANGE -->
+        <div class="floating-cta-body">
+            <div class="floating-cta-icon">🔥</div>
+            <div class="floating-cta-text">
+                <div class="offer-badge" id="offerBadge">OFFRE PREMIUM</div>
+                <strong id="offerTitle">-10% sur le Pack Premium</strong>
+                <div class="code-box" id="codeBox">
+                    Code: <span class="code-highlight" id="codeText">VITALITE10</span>
+                </div>
+                <div class="price-info" id="priceInfo">717€ au lieu de 797€</div>
+            </div>
+            <a href="#pricing" class="floating-cta-btn" onclick="trackCTAClick()">
+                Je profite !
+            </a>
         </div>
-        <a href="#pricing" class="floating-cta-btn" onclick="trackCTAClick()">
-            Je profite de l'offre
-        </a>
+        
+        <!-- COMPTE À REBOURS -->
+        <div class="countdown-bar">
+            <div class="countdown-icon">⏰</div>
+            <div class="countdown-text">
+                <span style="font-weight: 700;">Expire le 15 mars</span> • 
+                <span id="countdown">Chargement...</span>
+            </div>
+        </div>
+        
+        <!-- INDICATEUR D'OFFRE -->
+        <div class="offer-dots">
+            <span class="dot active" id="dot1"></span>
+            <span class="dot" id="dot2"></span>
+        </div>
     </div>
 </div>
 
 <style>
-/* === CTA FLOTTANT ULTRA-SCALER === */
+/* === CTA FLOTTANT ULTRA-PREMIUM === */
 .floating-cta {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 10000;
-    animation: slideInUp 0.6s ease-out, pulse-glow 2s ease-in-out infinite;
-    max-width: 380px;
+    animation: slideInUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    max-width: 420px;
 }
 
 @keyframes slideInUp {
     from {
-        transform: translateY(100px);
+        transform: translateY(150px) scale(0.8);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
-    }
-}
-
-@keyframes pulse-glow {
-    0%, 100% {
-        box-shadow: 0 15px 60px rgba(201, 169, 110, 0.4);
-    }
-    50% {
-        box-shadow: 0 15px 80px rgba(201, 169, 110, 0.7);
     }
 }
 
 .floating-cta-content {
     background: linear-gradient(135deg, #C9A96E 0%, #b39358 100%);
-    padding: 20px 25px;
-    border-radius: 20px;
-    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.3);
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 80px rgba(201, 169, 110, 0.5),
+        0 0 0 4px rgba(255, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
     position: relative;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 
+            0 20px 80px rgba(201, 169, 110, 0.5),
+            0 0 0 4px rgba(255, 255, 255, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        box-shadow: 
+            0 20px 100px rgba(201, 169, 110, 0.7),
+            0 0 0 4px rgba(255, 255, 255, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+}
+
+/* Effet de shine qui traverse */
+.floating-cta-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 70%
+    );
+    animation: shine 4s infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
 }
 
 .floating-cta-close {
     position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 28px;
-    height: 28px;
-    background: #2B2B2B;
+    top: -10px;
+    right: -10px;
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #2B2B2B, #1a1a1a);
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
-    transition: all 0.3s;
-    border: 2px solid white;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    border: 3px solid white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
 .floating-cta-close:hover {
-    background: #D4816B;
-    transform: rotate(90deg);
+    background: linear-gradient(135deg, #D4816B, #c0715a);
+    transform: rotate(90deg) scale(1.1);
+}
+
+.floating-cta-body {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+    z-index: 2;
 }
 
 .floating-cta-icon {
-    font-size: 40px;
-    animation: bounce 1s ease-in-out infinite;
+    font-size: 50px;
+    animation: bounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes bounce {
     0%, 100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
     50% {
-        transform: translateY(-8px);
+        transform: translateY(-12px) scale(1.1);
     }
 }
 
@@ -1346,39 +1399,142 @@
     color: #2B2B2B;
 }
 
-.floating-cta-text strong {
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 3px;
+.offer-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.9);
+    color: #2C5F4F;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.floating-cta-text span {
-    font-size: 14px;
+.floating-cta-text strong {
+    display: block;
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    line-height: 1.2;
+}
+
+.code-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 12px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 6px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    font-size: 13px;
     font-weight: 600;
+    color: #2B2B2B;
+}
+
+.code-highlight {
+    font-family: 'Courier New', monospace;
+    font-weight: 900;
+    font-size: 16px;
+    color: #2C5F4F;
+    letter-spacing: 1px;
+}
+
+.price-info {
+    font-size: 15px;
+    font-weight: 700;
     color: #1a3d32;
 }
 
 .floating-cta-btn {
-    background: #2C5F4F;
+    background: linear-gradient(135deg, #2C5F4F, #1a3d32);
     color: white;
-    padding: 12px 24px;
+    padding: 14px 26px;
     border-radius: 50px;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
+    font-weight: 800;
+    font-size: 15px;
     white-space: nowrap;
-    transition: all 0.3s;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .floating-cta-btn:hover {
-    background: #1a3d32;
-    transform: scale(1.05);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #1a3d32, #0f2620);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
 }
 
-/* Mobile responsive */
+/* COMPTE À REBOURS */
+.countdown-bar {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.countdown-icon {
+    font-size: 20px;
+    animation: tick 1s infinite;
+}
+
+@keyframes tick {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+.countdown-text {
+    flex: 1;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* INDICATEURS D'OFFRE */
+.offer-dots {
+    position: absolute;
+    bottom: 8px;
+    right: 15px;
+    display: flex;
+    gap: 6px;
+    z-index: 3;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+.dot.active {
+    background: white;
+    width: 20px;
+    border-radius: 4px;
+}
+
+/* ANIMATION DE CHANGEMENT D'OFFRE */
+@keyframes fadeSwitch {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0; transform: translateY(-10px); }
+}
+
+.switching .floating-cta-text strong,
+.switching .code-box,
+.switching .price-info,
+.switching .offer-badge {
+    animation: fadeSwitch 0.6s ease-in-out;
+}
+
+/* MOBILE RESPONSIVE */
 @media (max-width: 768px) {
     .floating-cta {
         bottom: 10px;
@@ -1387,44 +1543,147 @@
         max-width: none;
     }
     
-    .floating-cta-content {
-        padding: 15px 18px;
-        flex-wrap: wrap;
-        justify-content: center;
+    .floating-cta-body {
+        padding: 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
     }
     
     .floating-cta-icon {
-        font-size: 32px;
+        font-size: 40px;
     }
     
     .floating-cta-text {
         text-align: center;
-        flex: 1 1 100%;
-        margin: 8px 0;
+        width: 100%;
+    }
+    
+    .floating-cta-text strong {
+        font-size: 16px;
     }
     
     .floating-cta-btn {
-        flex: 1 1 100%;
-        text-align: center;
-        padding: 14px 20px;
+        width: 100%;
+        padding: 16px 20px;
+    }
+    
+    .countdown-bar {
+        padding: 10px 15px;
+    }
+    
+    .countdown-text {
+        font-size: 12px;
+    }
+    
+    .offer-dots {
+        bottom: 5px;
+        right: 10px;
     }
 }
 
+/* CACHE LE CTA */
 .floating-cta.hidden {
-    display: none;
+    animation: slideOutDown 0.4s ease-in forwards;
+}
+
+@keyframes slideOutDown {
+    to {
+        transform: translateY(150px) scale(0.8);
+        opacity: 0;
+    }
 }
 </style>
 
 <script>
-// Afficher le CTA après 3 secondes
+// === CONFIGURATION ===
+const offers = [
+    {
+        badge: "OFFRE PREMIUM",
+        title: "-10% sur le Pack Premium",
+        code: "VITALITE10",
+        price: "717€ au lieu de 797€"
+    },
+    {
+        badge: "OFFRE DELUXE",
+        title: "-15% sur le Pack Deluxe",
+        code: "VITALITE15",
+        price: "847€ au lieu de 997€"
+    }
+];
+
+let currentOffer = 0;
+
+// === ALTERNANCE DES OFFRES ===
+function switchOffer() {
+    const content = document.querySelector('.floating-cta-content');
+    content.classList.add('switching');
+    
+    setTimeout(() => {
+        currentOffer = (currentOffer + 1) % 2;
+        const offer = offers[currentOffer];
+        
+        document.getElementById('offerBadge').textContent = offer.badge;
+        document.getElementById('offerTitle').textContent = offer.title;
+        document.getElementById('codeText').textContent = offer.code;
+        document.getElementById('priceInfo').textContent = offer.price;
+        
+        // Mettre à jour les dots
+        document.getElementById('dot1').classList.toggle('active', currentOffer === 0);
+        document.getElementById('dot2').classList.toggle('active', currentOffer === 1);
+        
+        content.classList.remove('switching');
+    }, 300);
+}
+
+// Changer d'offre toutes les 6 secondes
+setInterval(switchOffer, 6000);
+
+// === COMPTE À REBOURS ===
+function updateCountdown() {
+    const endDate = new Date('2025-03-15T23:59:59');
+    const now = new Date();
+    const diff = endDate - now;
+    
+    if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        
+        let countdownText = '';
+        if (days > 0) {
+            countdownText = `${days}j ${hours}h ${minutes}min restantes`;
+        } else if (hours > 0) {
+            countdownText = `${hours}h ${minutes}min restantes`;
+        } else {
+            countdownText = `${minutes}min restantes`;
+        }
+        
+        document.getElementById('countdown').textContent = countdownText;
+    } else {
+        document.getElementById('countdown').textContent = 'Offre expirée';
+    }
+}
+
+// Mettre à jour le compte à rebours toutes les minutes
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+// === AFFICHAGE DU CTA ===
 setTimeout(function() {
-    document.getElementById('floating-cta').style.display = 'block';
+    const cta = document.getElementById('floating-cta');
+    cta.style.display = 'block';
 }, 3000);
 
-// Fermer le CTA
+// === FERMETURE DU CTA ===
 function closeFloatingCTA() {
-    document.getElementById('floating-cta').classList.add('hidden');
+    const cta = document.getElementById('floating-cta');
+    cta.classList.add('hidden');
     sessionStorage.setItem('ctaClosed', 'true');
+    
+    setTimeout(() => {
+        cta.style.display = 'none';
+    }, 400);
 }
 
 // Ne pas réafficher si déjà fermé
@@ -1432,21 +1691,46 @@ if (sessionStorage.getItem('ctaClosed') === 'true') {
     document.getElementById('floating-cta').style.display = 'none';
 }
 
-// Tracking
+// === TRACKING ===
 function trackCTAClick() {
-    console.log('CTA Flottant cliqué !');
+    console.log('CTA Flottant cliqué - Offre:', offers[currentOffer].code);
+    // Ajoute ton code de tracking ici (Google Analytics, Facebook Pixel, etc.)
 }
 
-// Réafficher au scroll vers le haut
+// === RÉAFFICHAGE AU SCROLL VERS LE HAUT ===
 let lastScrollTop = 0;
+let scrollTimeout;
+
 window.addEventListener('scroll', function() {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    if (scrollTop < lastScrollTop - 100) {
-        if (sessionStorage.getItem('ctaClosed') !== 'true') {
-            document.getElementById('floating-cta').style.display = 'block';
+    clearTimeout(scrollTimeout);
+    
+    scrollTimeout = setTimeout(() => {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Si scroll vers le haut de plus de 200px
+        if (scrollTop < lastScrollTop - 200) {
+            if (sessionStorage.getItem('ctaClosed') !== 'true') {
+                const cta = document.getElementById('floating-cta');
+                cta.classList.remove('hidden');
+                cta.style.display = 'block';
+            }
         }
-    }
-    lastScrollTop = scrollTop;
+        
+        lastScrollTop = scrollTop;
+    }, 100);
+});
+
+// === CLICK SUR LES DOTS POUR CHANGER D'OFFRE ===
+document.addEventListener('DOMContentLoaded', function() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+            if (index !== currentOffer) {
+                switchOffer();
+            }
+        });
+        dot.style.cursor = 'pointer';
+    });
 });
 </script>
 
