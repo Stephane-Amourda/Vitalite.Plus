@@ -1230,6 +1230,228 @@
         </div>
     </div>
 </footer>
+    </footer>
+
+<!-- SCRIPT SMOOTH SCROLL -->
+<script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+<!-- CTA FLOTTANT ULTRA-SCALER -->
+<div id="floating-cta" class="floating-cta">
+    <div class="floating-cta-content">
+        <div class="floating-cta-close" onclick="closeFloatingCTA()">✕</div>
+        <div class="floating-cta-icon">🔥</div>
+        <div class="floating-cta-text">
+            <strong>Dernière chance !</strong>
+            <span>-10% avec VITALITE10</span>
+        </div>
+        <a href="#pricing" class="floating-cta-btn" onclick="trackCTAClick()">
+            Je profite de l'offre
+        </a>
+    </div>
+</div>
+
+<style>
+/* === CTA FLOTTANT ULTRA-SCALER === */
+.floating-cta {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    animation: slideInUp 0.6s ease-out, pulse-glow 2s ease-in-out infinite;
+    max-width: 380px;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 15px 60px rgba(201, 169, 110, 0.4);
+    }
+    50% {
+        box-shadow: 0 15px 80px rgba(201, 169, 110, 0.7);
+    }
+}
+
+.floating-cta-content {
+    background: linear-gradient(135deg, #C9A96E 0%, #b39358 100%);
+    padding: 20px 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.floating-cta-close {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 28px;
+    height: 28px;
+    background: #2B2B2B;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: all 0.3s;
+    border: 2px solid white;
+}
+
+.floating-cta-close:hover {
+    background: #D4816B;
+    transform: rotate(90deg);
+}
+
+.floating-cta-icon {
+    font-size: 40px;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.floating-cta-text {
+    flex: 1;
+    color: #2B2B2B;
+}
+
+.floating-cta-text strong {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.floating-cta-text span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a3d32;
+}
+
+.floating-cta-btn {
+    background: #2C5F4F;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: all 0.3s;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.floating-cta-btn:hover {
+    background: #1a3d32;
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .floating-cta {
+        bottom: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .floating-cta-content {
+        padding: 15px 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .floating-cta-icon {
+        font-size: 32px;
+    }
+    
+    .floating-cta-text {
+        text-align: center;
+        flex: 1 1 100%;
+        margin: 8px 0;
+    }
+    
+    .floating-cta-btn {
+        flex: 1 1 100%;
+        text-align: center;
+        padding: 14px 20px;
+    }
+}
+
+.floating-cta.hidden {
+    display: none;
+}
+</style>
+
+<script>
+// Afficher le CTA après 3 secondes
+setTimeout(function() {
+    document.getElementById('floating-cta').style.display = 'block';
+}, 3000);
+
+// Fermer le CTA
+function closeFloatingCTA() {
+    document.getElementById('floating-cta').classList.add('hidden');
+    sessionStorage.setItem('ctaClosed', 'true');
+}
+
+// Ne pas réafficher si déjà fermé
+if (sessionStorage.getItem('ctaClosed') === 'true') {
+    document.getElementById('floating-cta').style.display = 'none';
+}
+
+// Tracking
+function trackCTAClick() {
+    console.log('CTA Flottant cliqué !');
+}
+
+// Réafficher au scroll vers le haut
+let lastScrollTop = 0;
+window.addEventListener('scroll', function() {
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (scrollTop < lastScrollTop - 100) {
+        if (sessionStorage.getItem('ctaClosed') !== 'true') {
+            document.getElementById('floating-cta').style.display = 'block';
+        }
+    }
+    lastScrollTop = scrollTop;
+});
+</script>
+
+</body>
+</html>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Smooth scroll
