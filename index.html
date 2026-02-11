@@ -1256,7 +1256,7 @@
         <div class="countdown-bar">
             <div class="countdown-icon">⏰</div>
             <div class="countdown-text">
-                <span style="font-weight: 700;">Expire le 15 mars 2026</span> • 
+                <span style="font-weight: 700;">Expire le 15 mars</span> • 
                 <span id="countdown">Chargement...</span>
             </div>
         </div>
@@ -1639,9 +1639,10 @@ function switchOffer() {
 // Changer d'offre toutes les 6 secondes
 setInterval(switchOffer, 6000);
 
-// === COMPTE À REBOURS ===
+// === COMPTE À REBOURS CORRIGÉ ===
 function updateCountdown() {
-    const endDate = new Date('2025-03-15T23:59:59');
+    // DATE CORRIGÉE : 15 mars 2026
+    const endDate = new Date('2026-03-15T23:59:59');
     const now = new Date();
     const diff = endDate - now;
     
@@ -1649,14 +1650,17 @@ function updateCountdown() {
         const days = Math.floor(diff / (1000 * 60 * 60 * 24));
         const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
         let countdownText = '';
         if (days > 0) {
             countdownText = `${days}j ${hours}h ${minutes}min restantes`;
         } else if (hours > 0) {
-            countdownText = `${hours}h ${minutes}min restantes`;
+            countdownText = `${hours}h ${minutes}min ${seconds}s restantes`;
+        } else if (minutes > 0) {
+            countdownText = `${minutes}min ${seconds}s restantes`;
         } else {
-            countdownText = `${minutes}min restantes`;
+            countdownText = `${seconds}s restantes`;
         }
         
         document.getElementById('countdown').textContent = countdownText;
@@ -1665,9 +1669,9 @@ function updateCountdown() {
     }
 }
 
-// Mettre à jour le compte à rebours toutes les minutes
+// Mettre à jour le compte à rebours chaque seconde pour plus de précision
 updateCountdown();
-setInterval(updateCountdown, 60000);
+setInterval(updateCountdown, 1000);
 
 // === AFFICHAGE DU CTA ===
 setTimeout(function() {
