@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vitalité+ : Le programme naturopathie de Stéphane Amourda pour transformer votre fatigue chronique en énergie durable. 9 modules progressifs, méthode naturelle et humaine.">
+    <meta property="og:title" content="Vitalité+ | Transformez Votre Fatigue en Énergie Durable">
+    <meta property="og:description" content="Transformez votre fatigue chronique en énergie durable avec le programme Vitalité+ de Stéphane Amourda, Naturopathe Certifié.">
+    <meta property="og:image" content="https://d1yei2z3i6k35z.cloudfront.net/14434660/697a75252e5ce_Gemini_Generated_Image_moioudmoioudmoio.png">
+    <meta property="og:type" content="website">
     <title>Vitalité+ | Transformez Votre Fatigue en Énergie Durable</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -229,8 +234,8 @@
             font-weight: 700;
         }
 
-/* === OPTIMISATIONS MOBILE === */
-        
+        /* === OPTIMISATIONS MOBILE === */
+
         /* Tablettes et petits écrans */
         @media (max-width: 968px) {
             .hero-grid, .pricing-grid {
@@ -251,7 +256,6 @@
 
         /* Smartphones */
         @media (max-width: 768px) {
-            /* Typography mobile */
             h1 {
                 font-size: 2.2rem;
                 line-height: 1.2;
@@ -270,7 +274,6 @@
                 margin-bottom: 25px;
             }
 
-            /* Containers et espaces */
             .container {
                 padding: 35px 20px;
             }
@@ -284,14 +287,12 @@
                 min-height: auto;
             }
 
-            /* Cards */
             .card {
                 padding: 20px 16px;
                 margin-bottom: 18px;
                 border-radius: 18px;
             }
 
-            /* Profile */
             .profile-badge {
                 padding: 25px 18px;
             }
@@ -310,7 +311,6 @@
                 font-size: 0.95rem;
             }
 
-            /* Buttons */
             .btn {
                 padding: 16px 32px;
                 font-size: 1rem;
@@ -320,7 +320,6 @@
                 margin: 0 auto;
             }
 
-            /* Pricing */
             .pricing-card {
                 padding: 28px 18px;
             }
@@ -334,7 +333,6 @@
                 gap: 25px;
             }
 
-            /* Promo banner */
             .promo-banner {
                 padding: 22px 18px;
             }
@@ -349,7 +347,6 @@
                 padding: 7px 14px;
             }
 
-            /* Text readability */
             p {
                 font-size: 1rem;
                 line-height: 1.7;
@@ -361,7 +358,6 @@
                 padding: 12px 0;
             }
 
-            /* Spacing improvements */
             .section + .section {
                 margin-top: 15px;
             }
@@ -420,6 +416,101 @@
                 height: 120px;
             }
         }
+
+        /* Barre de preuve sociale */
+        .social-proof-bar {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: linear-gradient(135deg, #8BA888 0%, #6b8c7a 100%);
+            color: white;
+            padding: 18px 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 380px;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: slideUp 0.6s ease-out 1s forwards;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-proof-bar .icon {
+            font-size: 28px;
+            flex-shrink: 0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .social-proof-bar .content {
+            flex: 1;
+        }
+
+        .social-proof-bar .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .social-proof-bar .text {
+            font-size: 13px;
+            line-height: 1.4;
+            opacity: 0.95;
+        }
+
+        .social-proof-bar .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+            padding: 5px;
+            line-height: 1;
+        }
+
+        .social-proof-bar .close-btn:hover {
+            opacity: 1;
+        }
+
+        .social-proof-bar.hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .social-proof-bar {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                padding: 15px 20px;
+            }
+
+            .social-proof-bar .number {
+                font-size: 20px;
+            }
+
+            .social-proof-bar .text {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -470,7 +561,7 @@
                     mais vous allez vite découvrir que gérer l'énergie ne suffit pas si vous continuez à vous épuiser émotionnellement (module 4-6) ou si votre système nerveux reste en alerte (module 7-9).
                 </p>
             </div>
-            
+
             <div class="card" style="transition: all 0.4s; border-left: 5px solid var(--sage);">
                 <div style="font-size: 3.5rem; margin-bottom: 20px;">💧</div>
                 <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-green); margin-bottom: 20px;">Réservoir Percé ?</h3>
@@ -479,7 +570,7 @@
                     mais pour que ça tienne dans le temps, vous aurez besoin des fondations des modules 1-3 ET de la reconstruction profonde des modules 7-9.
                 </p>
             </div>
-            
+
             <div class="card" style="transition: all 0.4s; border-left: 5px solid var(--terracotta);">
                 <div style="font-size: 3.5rem; margin-bottom: 20px;">🔥</div>
                 <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-green); margin-bottom: 20px;">Feu Intérieur Faible ?</h3>
@@ -553,7 +644,7 @@
             </div>
         </div>
         <p style="font-size: 1.25rem; text-align: center; max-width: 800px; margin: 60px auto; line-height: 1.8;">
-            <strong>Résultat ?</strong> Vous vivez dans une spirale où chaque journée ressemble à la précédente : 
+            <strong>Résultat ?</strong> Vous vivez dans une spirale où chaque journée ressemble à la précédente :
             <strong style="color: var(--terracotta);">lever difficile, journées en pilotage automatique, soirées sans énergie...</strong>
         </p>
         <p style="font-size: 1.15rem; text-align: center; max-width: 800px; margin: 0 auto; line-height: 1.8;">
@@ -593,7 +684,7 @@
                 La <strong>volonté seule</strong> → comme si vous pouviez, par magie, lutter contre la biologie de votre corps et l'usure de vos cellules.
             </div>
         </div>
-        <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; margin-top: 60px; border: 1px solid rgba(255, 255, 255, 0.2); max-width: 1000px; margin-left: auto; margin-right: auto; margin-top: 60px;">
+        <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; margin-top: 60px; border: 1px solid rgba(255, 255, 255, 0.2); max-width: 1000px; margin-left: auto; margin-right: auto;">
             <p style="font-size: 1.2rem; text-align: center; line-height: 1.8; margin-bottom: 20px;">
                 Et la vérité, c'est que ces "solutions rapides" ne font que masquer les symptômes...
             </p>
@@ -961,7 +1052,7 @@
 <section class="section" id="pricing" style="background: linear-gradient(135deg, #1a3d32, var(--deep-green)); color: white;">
     <div class="container">
         <h2 class="section-title" style="color: white;">Choisissez Votre Offre Maintenant</h2>
-        
+
         <div class="promo-banner">
             <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--charcoal); margin-bottom: 20px;">
                 🎉 OFFRE EXCEPTIONNELLE EN COURS 🎉
@@ -978,7 +1069,7 @@
                     </div>
                     <div style="color: var(--deep-green); font-weight: 600; margin-top: 5px;">-10% d'économie !</div>
                 </div>
-                
+
                 <div class="promo-code">
                     <strong style="display: block; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 10px;">Pack Deluxe</strong>
                     <code>VITALITE15</code>
@@ -1205,7 +1296,7 @@
 
 <!-- FOOTER -->
 <footer style="background: var(--deep-green); color: white; padding: 80px 60px 40px;">
-    <div class="container">
+    <div style="max-width: 1400px; margin: 0 auto;">
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 50px; margin-bottom: 50px;">
             <div>
                 <h3 style="font-family: 'Playfair Display', serif; color: var(--primary-gold); margin-bottom: 20px;">Contact</h3>
@@ -1230,512 +1321,57 @@
         </div>
     </div>
 </footer>
-    </footer>
 
-<div id="floating-cta" class="floating-cta" style="display: none;">
-    <div class="floating-cta-content">
-        <div class="floating-cta-close" onclick="closeFloatingCTA()">✕</div>
-        
-        <!-- OFFRE QUI CHANGE -->
-        <div class="floating-cta-body">
-            <div class="floating-cta-icon">🔥</div>
-            <div class="floating-cta-text">
-                <div class="offer-badge" id="offerBadge">OFFRE PREMIUM</div>
-                <strong id="offerTitle">-10% sur le Pack Premium</strong>
-                <div class="code-box" id="codeBox">
-                    Code: <span class="code-highlight" id="codeText">VITALITE10</span>
-                </div>
-                <div class="price-info" id="priceInfo">717€ au lieu de 797€</div>
-            </div>
-            <a href="#pricing" class="floating-cta-btn" onclick="trackCTAClick()">
-                Je profite !
-            </a>
-        </div>
-        
-        <!-- COMPTE À REBOURS -->
-        <div class="countdown-bar">
-            <div class="countdown-icon">⏰</div>
-            <div class="countdown-text">
-                <span style="font-weight: 700;">Expire le 15 mars</span> • 
-                <span id="countdown">Chargement...</span>
-            </div>
-        </div>
-        
-        <!-- INDICATEUR D'OFFRE -->
-        <div class="offer-dots">
-            <span class="dot active" id="dot1"></span>
-            <span class="dot" id="dot2"></span>
-        </div>
+<!-- BARRE PREUVE SOCIALE FLOTTANTE -->
+<div class="social-proof-bar" id="socialProofBar">
+    <div class="icon">🎉</div>
+    <div class="content">
+        <div class="number" id="socialNumber">12 personnes</div>
+        <div class="text">viennent de rejoindre Vitalité+ cette semaine !</div>
     </div>
+    <button class="close-btn" onclick="closeSocialProof()" aria-label="Fermer">×</button>
 </div>
 
-<style>
-/* === CTA FLOTTANT ULTRA-PREMIUM === */
-.floating-cta {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10000;
-    animation: slideInUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    max-width: 420px;
-}
-
-@keyframes slideInUp {
-    from {
-        transform: translateY(150px) scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-}
-
-.floating-cta-content {
-    background: linear-gradient(135deg, #C9A96E 0%, #b39358 100%);
-    border-radius: 24px;
-    box-shadow: 
-        0 20px 80px rgba(201, 169, 110, 0.5),
-        0 0 0 4px rgba(255, 255, 255, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    position: relative;
-    overflow: hidden;
-    animation: pulse-glow 3s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-    0%, 100% {
-        box-shadow: 
-            0 20px 80px rgba(201, 169, 110, 0.5),
-            0 0 0 4px rgba(255, 255, 255, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.3);
-    }
-    50% {
-        box-shadow: 
-            0 20px 100px rgba(201, 169, 110, 0.7),
-            0 0 0 4px rgba(255, 255, 255, 0.5),
-            inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    }
-}
-
-/* Effet de shine qui traverse */
-.floating-cta-content::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.2) 50%,
-        transparent 70%
-    );
-    animation: shine 4s infinite;
-}
-
-@keyframes shine {
-    0% {
-        transform: translateX(-100%) translateY(-100%) rotate(45deg);
-    }
-    100% {
-        transform: translateX(100%) translateY(100%) rotate(45deg);
-    }
-}
-
-.floating-cta-close {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, #2B2B2B, #1a1a1a);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 700;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    border: 3px solid white;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-    z-index: 10;
-}
-
-.floating-cta-close:hover {
-    background: linear-gradient(135deg, #D4816B, #c0715a);
-    transform: rotate(90deg) scale(1.1);
-}
-
-.floating-cta-body {
-    padding: 25px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: relative;
-    z-index: 2;
-}
-
-.floating-cta-icon {
-    font-size: 50px;
-    animation: bounce 2s ease-in-out infinite;
-    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0) scale(1);
-    }
-    50% {
-        transform: translateY(-12px) scale(1.1);
-    }
-}
-
-.floating-cta-text {
-    flex: 1;
-    color: #2B2B2B;
-}
-
-.offer-badge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.9);
-    color: #2C5F4F;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 11px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.floating-cta-text strong {
-    display: block;
-    font-size: 18px;
-    font-weight: 800;
-    margin-bottom: 8px;
-    line-height: 1.2;
-}
-
-.code-box {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 8px 12px;
-    border-radius: 8px;
-    display: inline-block;
-    margin-bottom: 6px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    font-size: 13px;
-    font-weight: 600;
-    color: #2B2B2B;
-}
-
-.code-highlight {
-    font-family: 'Courier New', monospace;
-    font-weight: 900;
-    font-size: 16px;
-    color: #2C5F4F;
-    letter-spacing: 1px;
-}
-
-.price-info {
-    font-size: 15px;
-    font-weight: 700;
-    color: #1a3d32;
-}
-
-.floating-cta-btn {
-    background: linear-gradient(135deg, #2C5F4F, #1a3d32);
-    color: white;
-    padding: 14px 26px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 15px;
-    white-space: nowrap;
-    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.floating-cta-btn:hover {
-    background: linear-gradient(135deg, #1a3d32, #0f2620);
-    transform: scale(1.08) translateY(-2px);
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-}
-
-/* COMPTE À REBOURS */
-.countdown-bar {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-top: 2px solid rgba(255, 255, 255, 0.2);
-    position: relative;
-    z-index: 2;
-}
-
-.countdown-icon {
-    font-size: 20px;
-    animation: tick 1s infinite;
-}
-
-@keyframes tick {
-    0%, 100% { transform: rotate(-10deg); }
-    50% { transform: rotate(10deg); }
-}
-
-.countdown-text {
-    flex: 1;
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-}
-
-/* INDICATEURS D'OFFRE */
-.offer-dots {
-    position: absolute;
-    bottom: 8px;
-    right: 15px;
-    display: flex;
-    gap: 6px;
-    z-index: 3;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 50%;
-    transition: all 0.3s;
-}
-
-.dot.active {
-    background: white;
-    width: 20px;
-    border-radius: 4px;
-}
-
-/* ANIMATION DE CHANGEMENT D'OFFRE */
-@keyframes fadeSwitch {
-    0%, 100% { opacity: 1; transform: translateY(0); }
-    50% { opacity: 0; transform: translateY(-10px); }
-}
-
-.switching .floating-cta-text strong,
-.switching .code-box,
-.switching .price-info,
-.switching .offer-badge {
-    animation: fadeSwitch 0.6s ease-in-out;
-}
-
-/* MOBILE RESPONSIVE */
-@media (max-width: 768px) {
-    .floating-cta {
-        bottom: 10px;
-        right: 10px;
-        left: 10px;
-        max-width: none;
-    }
-    
-    .floating-cta-body {
-        padding: 20px;
-        flex-direction: column;
-        text-align: center;
-        gap: 12px;
-    }
-    
-    .floating-cta-icon {
-        font-size: 40px;
-    }
-    
-    .floating-cta-text {
-        text-align: center;
-        width: 100%;
-    }
-    
-    .floating-cta-text strong {
-        font-size: 16px;
-    }
-    
-    .floating-cta-btn {
-        width: 100%;
-        padding: 16px 20px;
-    }
-    
-    .countdown-bar {
-        padding: 10px 15px;
-    }
-    
-    .countdown-text {
-        font-size: 12px;
-    }
-    
-    .offer-dots {
-        bottom: 5px;
-        right: 10px;
-    }
-}
-
-/* CACHE LE CTA */
-.floating-cta.hidden {
-    animation: slideOutDown 0.4s ease-in forwards;
-}
-
-@keyframes slideOutDown {
-    to {
-        transform: translateY(150px) scale(0.8);
-        opacity: 0;
-    }
-}
-</style>
-
 <script>
-// === CONFIGURATION ===
-const offers = [
-    {
-        badge: "OFFRE PREMIUM",
-        title: "-10% sur le Pack Premium",
-        code: "VITALITE10",
-        price: "717€ au lieu de 797€"
-    },
-    {
-        badge: "OFFRE DELUXE",
-        title: "-15% sur le Pack Deluxe",
-        code: "VITALITE15",
-        price: "847€ au lieu de 997€"
+    function updateSocialProof() {
+        const numbers = [8, 12, 15, 11, 14, 9, 13];
+        let currentIndex = 0;
+
+        setInterval(function() {
+            currentIndex = (currentIndex + 1) % numbers.length;
+            var numberEl = document.getElementById('socialNumber');
+            if (numberEl) {
+                numberEl.textContent = numbers[currentIndex] + ' personnes';
+            }
+        }, 15000);
     }
-];
 
-let currentOffer = 0;
-
-// === ALTERNANCE DES OFFRES ===
-function switchOffer() {
-    const content = document.querySelector('.floating-cta-content');
-    content.classList.add('switching');
-    
-    setTimeout(() => {
-        currentOffer = (currentOffer + 1) % 2;
-        const offer = offers[currentOffer];
-        
-        document.getElementById('offerBadge').textContent = offer.badge;
-        document.getElementById('offerTitle').textContent = offer.title;
-        document.getElementById('codeText').textContent = offer.code;
-        document.getElementById('priceInfo').textContent = offer.price;
-        
-        // Mettre à jour les dots
-        document.getElementById('dot1').classList.toggle('active', currentOffer === 0);
-        document.getElementById('dot2').classList.toggle('active', currentOffer === 1);
-        
-        content.classList.remove('switching');
-    }, 300);
-}
-
-// Changer d'offre toutes les 6 secondes
-setInterval(switchOffer, 6000);
-
-// === COMPTE À REBOURS CORRIGÉ ===
-function updateCountdown() {
-    // DATE CORRIGÉE : 15 mars 2026
-    const endDate = new Date('2026-03-15T23:59:59');
-    const now = new Date();
-    const diff = endDate - now;
-    
-    if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        let countdownText = '';
-        if (days > 0) {
-            countdownText = `${days}j ${hours}h ${minutes}min restantes`;
-        } else if (hours > 0) {
-            countdownText = `${hours}h ${minutes}min ${seconds}s restantes`;
-        } else if (minutes > 0) {
-            countdownText = `${minutes}min ${seconds}s restantes`;
-        } else {
-            countdownText = `${seconds}s restantes`;
-        }
-        
-        document.getElementById('countdown').textContent = countdownText;
-    } else {
-        document.getElementById('countdown').textContent = 'Offre expirée';
-    }
-}
-
-// Mettre à jour le compte à rebours chaque seconde pour plus de précision
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-// === AFFICHAGE DU CTA ===
-setTimeout(function() {
-    const cta = document.getElementById('floating-cta');
-    cta.style.display = 'block';
-}, 3000);
-
-// === FERMETURE DU CTA ===
-function closeFloatingCTA() {
-    const cta = document.getElementById('floating-cta');
-    cta.classList.add('hidden');
-    sessionStorage.setItem('ctaClosed', 'true');
-    
-    setTimeout(() => {
-        cta.style.display = 'none';
-    }, 400);
-}
-
-// Ne pas réafficher si déjà fermé
-if (sessionStorage.getItem('ctaClosed') === 'true') {
-    document.getElementById('floating-cta').style.display = 'none';
-}
-
-// === TRACKING ===
-function trackCTAClick() {
-    console.log('CTA Flottant cliqué - Offre:', offers[currentOffer].code);
-    // Ajoute ton code de tracking ici (Google Analytics, Facebook Pixel, etc.)
-}
-
-// === RÉAFFICHAGE AU SCROLL VERS LE HAUT ===
-let lastScrollTop = 0;
-let scrollTimeout;
-
-window.addEventListener('scroll', function() {
-    clearTimeout(scrollTimeout);
-    
-    scrollTimeout = setTimeout(() => {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        // Si scroll vers le haut de plus de 200px
-        if (scrollTop < lastScrollTop - 200) {
-            if (sessionStorage.getItem('ctaClosed') !== 'true') {
-                const cta = document.getElementById('floating-cta');
-                cta.classList.remove('hidden');
-                cta.style.display = 'block';
+    function closeSocialProof() {
+        var bar = document.getElementById('socialProofBar');
+        if (bar) {
+            bar.classList.add('hidden');
+            try {
+                localStorage.setItem('socialProofClosed', 'true');
+            } catch(e) {
+                // localStorage non disponible (navigation privée, iframe, etc.)
             }
         }
-        
-        lastScrollTop = scrollTop;
-    }, 100);
-});
+    }
 
-// === CLICK SUR LES DOTS POUR CHANGER D'OFFRE ===
-document.addEventListener('DOMContentLoaded', function() {
-    const dots = document.querySelectorAll('.dot');
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', function() {
-            if (index !== currentOffer) {
-                switchOffer();
+    window.addEventListener('DOMContentLoaded', function() {
+        try {
+            var wasClosed = localStorage.getItem('socialProofClosed');
+            if (wasClosed === 'true') {
+                var bar = document.getElementById('socialProofBar');
+                if (bar) bar.classList.add('hidden');
+            } else {
+                updateSocialProof();
             }
-        });
-        dot.style.cursor = 'pointer';
+        } catch(e) {
+            // localStorage non disponible : on affiche la barre par défaut
+            updateSocialProof();
+        }
     });
-});
 </script>
 
 </body>
