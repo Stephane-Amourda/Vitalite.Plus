@@ -1322,56 +1322,108 @@
     </div>
 </footer>
 
-<!-- BARRE PREUVE SOCIALE FLOTTANTE -->
-<div class="social-proof-bar" id="socialProofBar">
-    <div class="icon">🎉</div>
-    <div class="content">
-        <div class="number" id="socialNumber">12 personnes</div>
-        <div class="text">viennent de rejoindre Vitalité+ cette semaine !</div>
+<style>
+.vitality-cta {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  width: 300px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: ctaSlide 0.5s ease-out 1.5s forwards;
+  font-family: 'Montserrat', sans-serif;
+}
+@keyframes ctaSlide { to { opacity: 1; transform: translateY(0); } }
+.vitality-cta.hidden { display: none; }
+.cta-notif {
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.cta-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600; color: white; flex-shrink: 0;
+}
+.cta-notif-text { font-size: 13px; color: #2B2B2B; line-height: 1.4; margin: 0; }
+.cta-notif-time { font-size: 11px; color: #888; margin: 0; }
+.cta-dot { width: 8px; height: 8px; border-radius: 50%; background: #C9A96E; flex-shrink: 0; }
+.cta-temoignage { padding: 12px 14px; }
+.cta-temoignage p { margin: 0 0 4px; font-size: 13px; color: #2B2B2B; font-style: italic; line-height: 1.5; transition: opacity 0.3s; }
+.cta-temoignage span { font-size: 12px; color: #888; transition: opacity 0.3s; }
+.cta-btn { display: block; margin: 0 14px 12px; padding: 10px; background: #2C5F4F; color: white; border-radius: 10px; font-size: 13px; font-weight: 600; text-align: center; text-decoration: none; }
+.cta-close { position: absolute; top: 8px; right: 10px; background: none; border: none; font-size: 18px; color: #888; cursor: pointer; line-height: 1; padding: 4px; }
+@media (max-width: 768px) {
+  .vitality-cta { bottom: 10px; right: 10px; left: 10px; width: auto; }
+}
+</style>
+
+<div class="vitality-cta" id="vitalityCta">
+  <button class="cta-close" onclick="closeVitalityCta()" aria-label="Fermer">x</button>
+  <div class="cta-notif">
+    <div class="cta-avatar" id="ctaAvatar" style="background:#2C5F4F;">S</div>
+    <div style="flex:1;min-width:0;">
+      <p class="cta-notif-text" id="ctaNotifText">Sophie vient de rejoindre Vitalite+</p>
+      <p class="cta-notif-time">a l'instant</p>
     </div>
-    <button class="close-btn" onclick="closeSocialProof()" aria-label="Fermer">×</button>
+    <div class="cta-dot"></div>
+  </div>
+  <div class="cta-temoignage">
+    <p id="ctaTemoignageText">"Des la premiere semaine, j'ai retrouve un sommeil reparateur."</p>
+    <span id="ctaTemoignageAuteur">- Catherine, 47 ans</span>
+  </div>
+  <a href="#pricing" class="cta-btn">Je veux retrouver mon energie</a>
 </div>
 
 <script>
-    function updateSocialProof() {
-        const numbers = [8, 12, 15, 11, 14, 9, 13];
-        let currentIndex = 0;
-
-        setInterval(function() {
-            currentIndex = (currentIndex + 1) % numbers.length;
-            var numberEl = document.getElementById('socialNumber');
-            if (numberEl) {
-                numberEl.textContent = numbers[currentIndex] + ' personnes';
-            }
-        }, 15000);
-    }
-
-    function closeSocialProof() {
-        var bar = document.getElementById('socialProofBar');
-        if (bar) {
-            bar.classList.add('hidden');
-            try {
-                localStorage.setItem('socialProofClosed', 'true');
-            } catch(e) {
-                // localStorage non disponible (navigation privée, iframe, etc.)
-            }
-        }
-    }
-
-    window.addEventListener('DOMContentLoaded', function() {
-        try {
-            var wasClosed = localStorage.getItem('socialProofClosed');
-            if (wasClosed === 'true') {
-                var bar = document.getElementById('socialProofBar');
-                if (bar) bar.classList.add('hidden');
-            } else {
-                updateSocialProof();
-            }
-        } catch(e) {
-            // localStorage non disponible : on affiche la barre par défaut
-            updateSocialProof();
-        }
-    });
+var ctaNotifs = [
+  {i:"S",t:"Bérengère vient de rejoindre Vitalite+",c:"#2C5F4F"},
+  {i:"M",t:"Marie vient de s'inscrire au programme",c:"#C9A96E"},
+  {i:"O",t:"Mohamed a pris sa place aujourd'hui",c:"#D4816B"},
+  {i:"C",t:"Sanjay a rejoint Vitalite+ cette nuit",c:"#8BA888"},
+  {i:"N",t:"Nathalie vient de demarrer le parcours",c:"#2C5F4F"}
+];
+var ctaTemos = [
+  {t:'"Des la premiere semaine, sommeil reparateur."',a:'- Catherine, 47 ans'},
+  {t:'"Moins de stress, energie plus stable."',a:'- Jacques, 52 ans'},
+  {t:'"Des outils concrets, faciles au quotidien."',a:'- Sophie, 34 ans'},
+  {t:'"Solutions efficaces des les premiers jours."',a:'- Audrey, 49 ans'},
+  {t:'"Une transformation durable, pas a pas."',a:'- Nathalie, 65 ans'}
+];
+var ctaNI=0, ctaTI=0;
+function closeVitalityCta(){
+  var el=document.getElementById('vitalityCta');
+  if(el)el.classList.add('hidden');
+  try{localStorage.setItem('ctaClosed','1');}catch(e){}
+}
+function ctaUpdateNotif(){
+  ctaNI=(ctaNI+1)%ctaNotifs.length;
+  var n=ctaNotifs[ctaNI];
+  var a=document.getElementById('ctaAvatar');
+  var t=document.getElementById('ctaNotifText');
+  if(a){a.textContent=n.i;a.style.background=n.c;}
+  if(t)t.textContent=n.t;
+}
+function ctaUpdateTemo(){
+  ctaTI=(ctaTI+1)%ctaTemos.length;
+  var te=ctaTemos[ctaTI];
+  var tp=document.getElementById('ctaTemoignageText');
+  var ta=document.getElementById('ctaTemoignageAuteur');
+  if(tp){tp.style.opacity=0;setTimeout(function(){tp.textContent=te.t;tp.style.opacity=1;},300);}
+  if(ta){ta.style.opacity=0;setTimeout(function(){ta.textContent=te.a;ta.style.opacity=1;},300);}
+}
+window.addEventListener('DOMContentLoaded',function(){
+  try{if(localStorage.getItem('ctaClosed')==='1'){var el=document.getElementById('vitalityCta');if(el)el.classList.add('hidden');return;}}catch(e){}
+  setInterval(ctaUpdateNotif,4000);
+  setInterval(ctaUpdateTemo,6000);
+});
 </script>
 
 </body>
