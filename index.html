@@ -1425,6 +1425,59 @@ window.addEventListener('DOMContentLoaded',function(){
   setInterval(ctaUpdateTemo,6000);
 });
 </script>
+<!-- POPUP CHECK-UP VITALITE -->
+<style>
+.vp-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;animation:vpFade 0.4s ease-out 0.1s forwards}
+@keyframes vpFade{to{opacity:1}}
+.vp-overlay.hidden{display:none}
+.vp-box{background:#2C5F4F;border-radius:20px;max-width:480px;width:100%;padding:40px 36px 32px;position:relative;border:1px solid rgba(201,169,110,0.3);transform:translateY(24px);animation:vpSlide 0.4s ease-out 0.15s forwards}
+@keyframes vpSlide{to{transform:translateY(0)}}
+.vp-close{position:absolute;top:14px;right:16px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:22px;cursor:pointer;line-height:1;padding:4px 8px}
+.vp-badge{display:inline-block;background:rgba(201,169,110,0.2);color:#C9A96E;border:1px solid rgba(201,169,110,0.4);border-radius:50px;font-size:11px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;margin-bottom:18px}
+.vp-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:white;line-height:1.25;margin:0 0 14px}
+.vp-title span{color:#C9A96E;font-style:italic}
+.vp-desc{font-size:14px;color:rgba(255,255,255,0.8);line-height:1.7;margin:0 0 24px}
+.vp-list{list-style:none;padding:0;margin:0 0 28px}
+.vp-list li{font-size:13px;color:rgba(255,255,255,0.85);padding:6px 0;display:flex;align-items:flex-start;gap:10px}
+.vp-list li::before{content:'';width:16px;height:16px;border-radius:50%;background:rgba(201,169,110,0.25);border:1px solid #C9A96E;flex-shrink:0;margin-top:1px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6l3 3 5-5' stroke='%23C9A96E' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+.vp-btn{display:block;width:100%;padding:15px;background:linear-gradient(135deg,#C9A96E,#b39358);color:#2B2B2B;font-weight:600;font-size:15px;text-align:center;text-decoration:none;border-radius:50px;box-sizing:border-box}
+.vp-skip{display:block;text-align:center;margin-top:14px;font-size:12px;color:rgba(255,255,255,0.4);cursor:pointer;background:none;border:none;width:100%}
+@media(max-width:520px){.vp-box{padding:32px 22px 26px}.vp-title{font-size:22px}}
+</style>
 
+<div class="vp-overlay hidden" id="vpOverlay">
+  <div class="vp-box">
+    <button class="vp-close" onclick="closeVP()" aria-label="Fermer">x</button>
+    <div class="vp-badge">Gratuit &amp; Immediat</div>
+    <h2 class="vp-title">Decouvrez votre<br><span>Profil Vitalite</span></h2>
+    <p class="vp-desc">En 2 minutes, identifiez les vraies causes de votre fatigue avec notre Check-up offert.</p>
+    <ul class="vp-list">
+      <li>Identifiez votre profil parmi 3 types de fatigue</li>
+      <li>Recevez des conseils personnalises immediats</li>
+      <li>Comprenez d'ou vient votre manque d'energie</li>
+    </ul>
+    <a href="https://stephaneamourda-naturopathe.systeme.io/f36cef39" class="vp-btn" target="_blank">Je fais mon Check-up Vitalite gratuit</a>
+    <button class="vp-skip" onclick="closeVP()">Non merci, je prefere rester fatigue(e)</button>
+  </div>
+</div>
+
+<script>
+function closeVP(){
+  var el=document.getElementById('vpOverlay');
+  if(el)el.classList.add('hidden');
+  try{localStorage.setItem('vpClosed','1');}catch(e){}
+}
+window.addEventListener('DOMContentLoaded',function(){
+  try{if(localStorage.getItem('vpClosed')==='1')return;}catch(e){}
+  setTimeout(function(){
+    var el=document.getElementById('vpOverlay');
+    if(el)el.classList.remove('hidden');
+  },5000);
+});
+document.getElementById('vpOverlay').addEventListener('click',function(e){
+  if(e.target===this)closeVP();
+});
+</script>
+<!-- FIN POPUP CHECK-UP VITALITE -->
 </body>
 </html>
