@@ -1,1 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Vitalité — Découvrez votre profil énergétique</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #f8f6f1; font-family: 'Georgia', serif; color: #1a3a4a; }
+  .wrap { max-width: 660px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  .header { text-align: center; margin-bottom: 2rem; padding-top: 1rem; }
+  .header h1 { font-size: 26px; font-weight: 700; margin-bottom: 0.5rem; }
+  .header p { font-size: 15px; color: #666; }
+  .prog-wrap { background: #e0ddd6; border-radius: 20px; height: 6px; margin-bottom: 6px; }
+  .prog-bar { background: #1D9E75; height: 6px; border-radius: 20px; transition: width 0.4s ease; }
+  .prog-label { text-align: right; font-size: 12px; color: #999; margin-bottom: 1.5rem; font-family: sans-serif; }
+  .q-block { display: none; }
+  .q-block.active { display: block; }
+  .categorie { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: #1D9E75; font-family: sans-serif; font-weight: 700; margin-bottom: 0.6rem; }
+  .q-block h2 { font-size: 20px; color: #1a3a4a; margin-bottom: 1.5rem; line-height: 1.5; font-weight: 600; }
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .opt { background: #fff; border: 1.5px solid #e0ddd6; border-radius: 12px; padding: 16px 20px; font-size: 16px; color: #1a3a4a; cursor: pointer; text-align: left; font-family: 'Georgia', serif; transition: all 0.2s; width: 100%; }
+  .opt:hover { border-color: #1D9E75; background: #f0faf6; }
+  .opt.selected { border-color: #1D9E75; background: #e1f5ee; color: #0F6E56; font-weight: 600; }
+  .nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; }
+  .btn-next { background: #1D9E75; color: #fff; border: none; border-radius: 10px; padding: 14px 36px; font-size: 15px; cursor: pointer; font-family: sans-serif; font-weight: 600; transition: background 0.2s; }
+  .btn-next:hover { background: #0F6E56; }
+  .btn-next:disabled { background: #ccc; cursor: not-allowed; }
+  .btn-prev { background: transparent; color: #aaa; border: none; font-size: 14px; cursor: pointer; font-family: sans-serif; padding: 14px 0; }
+  .btn-prev:hover { color: #666; }
+  .r-block { display: none; }
+  .r-block.active { display: block; }
+  .badge { display: inline-block; padding: 5px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; font-family: sans-serif; margin-bottom: 1rem; }
+  .r-titre { font-size: 24px; font-weight: 700; margin-bottom: 0.75rem; }
+  .r-accroche { font-size: 16px; color: #555; margin-bottom: 1.5rem; line-height: 1.7; font-style: italic; border-left: 3px solid #1D9E75; padding-left: 1rem; }
+  .r-texte { font-size: 15px; color: #333; line-height: 1.85; margin-bottom: 1rem; }
+  .levier { border-left: 3px solid #1D9E75; padding: 14px 18px; background: #f0faf6; border-radius: 0 10px 10px 0; margin: 1.5rem 0; font-size: 14px; color: #0F6E56; line-height: 1.75; font-family: sans-serif; }
+  .levier.amber { border-color: #BA7517; background: #fdf6ec; color: #633806; }
+  .levier.coral { border-color: #993C1D; background: #fdf0ec; color: #712B13; }
+  .sep { border: none; border-top: 1px solid #e0ddd6; margin: 1.5rem 0; }
+  .cta { display: block; width: 100%; background: #1D9E75; color: #fff; text-align: center; padding: 18px; border-radius: 12px; font-size: 17px; font-weight: 700; text-decoration: none; margin: 1.5rem 0 0.5rem; font-family: sans-serif; transition: background 0.2s; }
+  .cta:hover { background: #0F6E56; color: #fff; }
+  .cta.rouge { background: #993C1D; }
+  .cta.rouge:hover { background: #712B13; }
+  .garantie { text-align: center; font-size: 12px; color: #aaa; font-family: sans-serif; margin-top: 0.5rem; }
+  .cta2 { text-align: center; font-size: 13px; color: #999; font-family: sans-serif; margin-top: 1rem; }
+  .cta2 a { color: #1D9E75; text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
 
+  <div class="header">
+    <h1>Découvrez votre profil énergétique</h1>
+    <p>16 questions · 5 minutes · Résultat immédiat</p>
+  </div>
+
+  <div class="prog-wrap"><div class="prog-bar" id="pb" style="width:6%"></div></div>
+  <div class="prog-label" id="pl">Question 1 sur 16</div>
+
+  <div id="questions">
+
+    <div class="q-block active" data-q="1">
+      <div class="categorie">Sommeil &amp; récupération</div>
+      <h2>Je me réveille fatigué(e), même après une nuit complète.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="2">
+      <div class="categorie">Sommeil &amp; récupération</div>
+      <h2>Mon sommeil est perturbé (réveils nocturnes, insomnie).</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="3">
+      <div class="categorie">Sommeil &amp; récupération</div>
+      <h2>J'ai besoin de café ou d'excitants pour "tenir".</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="4">
+      <div class="categorie">Digestion &amp; alimentation</div>
+      <h2>Je ressens des ballonnements ou inconforts digestifs.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="5">
+      <div class="categorie">Digestion &amp; alimentation</div>
+      <h2>J'ai un "coup de fatigue" après les repas.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="6">
+      <div class="categorie">Digestion &amp; alimentation</div>
+      <h2>Je mange vite, en étant distrait(e), sans savourer.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="7">
+      <div class="categorie">Émotions &amp; mental</div>
+      <h2>Je me sens stressé(e), tendu(e) ou débordé(e).</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="8">
+      <div class="categorie">Émotions &amp; mental</div>
+      <h2>Je rumine ou doute régulièrement de mes capacités.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="9">
+      <div class="categorie">Émotions &amp; mental</div>
+      <h2>J'ai du mal à ralentir ou à prendre du temps pour moi.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="10">
+      <div class="categorie">Mouvement &amp; énergie physique</div>
+      <h2>Je manque de motivation pour bouger ou faire de l'exercice.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="11">
+      <div class="categorie">Mouvement &amp; énergie physique</div>
+      <h2>Je ressens des tensions ou raideurs dans le corps.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="12">
+      <div class="categorie">Mouvement &amp; énergie physique</div>
+      <h2>Je passe de longues heures assis(e) sans interruption.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="13">
+      <div class="categorie">Hygiène de vie &amp; équilibre global</div>
+      <h2>Je bois moins de 1,5 L d'eau par jour.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="14">
+      <div class="categorie">Hygiène de vie &amp; équilibre global</div>
+      <h2>Je reste trop longtemps devant les écrans le soir.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="15">
+      <div class="categorie">Hygiène de vie &amp; équilibre global</div>
+      <h2>J'ai du mal à fixer des limites dans mon rythme de vie (travail, obligations…).</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="q-block" data-q="16">
+      <div class="categorie">La racine profonde</div>
+      <h2>J'ai l'impression que mon corps porte quelque chose de lourd — un vécu, un passé, un monde auquel je m'adapte difficilement.</h2>
+      <div class="options">
+        <button class="opt" data-val="0">Rarement</button>
+        <button class="opt" data-val="1">Parfois</button>
+        <button class="opt" data-val="2">Souvent</button>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="btn-prev" id="bprev" onclick="qPrev()" style="visibility:hidden">← Précédent</button>
+      <button class="btn-next" id="bnext" onclick="qNext()" disabled>Suivant →</button>
+    </div>
+
+  </div>
+
+  <div id="resultats" style="display:none">
+
+    <div class="r-block" id="r-batterie">
+      <span class="badge" style="background:#E6F1FB;color:#0C447C;">0 – 10 points</span>
+      <div class="r-titre">La Batterie Pleine… mais Mal Gérée</div>
+      <div class="r-accroche">"Vous avez encore des ressources. Mais votre corps tourne en surrégime sans jamais vraiment récupérer."</div>
+      <hr class="sep">
+      <p class="r-texte">Vous faites attention, vous essayez de bien dormir, vous gérez… et pourtant, en fin de journée, vous êtes vidé(e).</p>
+      <p class="r-texte">Ce n'est pas un manque de volonté. C'est que votre système nerveux est en <strong>surchauffe permanente</strong> — il consomme votre énergie en arrière-plan, silencieusement.</p>
+      <p class="r-texte">Si vous ne changez rien, cette batterie va finir par se vider pour de bon. Le bon moment pour agir, c'est maintenant — quand il reste encore quelque chose à préserver.</p>
+      <div class="levier"><strong>Votre premier levier :</strong> Ce soir, coupez les écrans 30 minutes avant de dormir. Votre système nerveux a besoin d'un signal clair pour passer en mode récupération.</div>
+      <a href="https://stephane-amourda.github.io/Vitalite.Plus/" class="cta">Je veux un cadre complet pour retrouver mon énergie →</a>
+      <div class="garantie">Garantie sérénité 14 jours · Sans engagement</div>
+      <div class="cta2">Tu préfères en parler d'abord ? <a href="https://calendly.com/sam33test1/30min" target="_blank">Réserve un appel découverte gratuit de 30 min.</a></div>
+    </div>
+
+    <div class="r-block" id="r-reservoir">
+      <span class="badge" style="background:#FAEEDA;color:#633806;">11 – 22 points</span>
+      <div class="r-titre">Le Réservoir Percé</div>
+      <div class="r-accroche">"Votre énergie circule… mais elle fuit. Vous remplissez, vous remplissez — et ça reste toujours insuffisant."</div>
+      <hr class="sep">
+      <p class="r-texte">Vous avez sûrement déjà essayé des choses. Mieux dormir. Manger différemment. Faire du sport. Et à chaque fois, ça marche un peu… puis ça repart.</p>
+      <p class="r-texte">C'est parce que vous colmatez des fuites une par une, sans jamais traiter <strong>ce qui les crée toutes</strong>. Votre corps perd de l'énergie par plusieurs endroits à la fois.</p>
+      <p class="r-texte">Ce qu'il vous faut, c'est une méthode qui s'attaque aux 5 piliers dans le bon ordre. Pas un conseil de plus. Un cadre.</p>
+      <div class="levier amber"><strong>Votre premier levier :</strong> Demain matin, buvez 200ml d'eau tiède au réveil avant tout café. Votre énergie fuit aussi par déshydratation chronique — c'est le geste le plus simple pour commencer à reboucher les fuites.</div>
+      <a href="https://stephane-amourda.github.io/Vitalite.Plus/" class="cta">Je veux arrêter de colmater et vraiment recharger →</a>
+      <div class="garantie">Garantie sérénité 14 jours · Sans engagement</div>
+      <div class="cta2">Tu préfères en parler d'abord ? <a href="https://calendly.com/sam33test1/30min" target="_blank">Réserve un appel découverte gratuit de 30 min.</a></div>
+    </div>
+
+    <div class="r-block" id="r-feu">
+      <span class="badge" style="background:#FAECE7;color:#712B13;">23 points et plus</span>
+      <div class="r-titre">Le Feu Intérieur Faible</div>
+      <div class="r-accroche">"Votre vitalité est en alerte profonde. Ce n'est plus de la fatigue passagère — c'est votre corps qui demande un vrai changement."</div>
+      <hr class="sep">
+      <p class="r-texte">Vous vous êtes peut-être dit que c'était normal. Que tout le monde était fatigué. Que vous étiez "comme ça".</p>
+      <p class="r-texte">Ce que vous portez — le vécu, le stress accumulé, les adaptations constantes à un monde qui va trop vite — tout ça a fini par éteindre votre feu intérieur. <strong>Ce n'est pas une fatalité.</strong></p>
+      <p class="r-texte">Mais ça ne se règle pas avec un conseil de plus. Il vous faut une reconstruction progressive, pilier par pilier, qui part de la vraie racine.</p>
+      <div class="levier coral"><strong>Votre premier levier :</strong> Ce soir, mangez un repas chaud avec des légumes racines — carotte, patate douce, courge. Votre feu digestif a besoin de chaleur pour recommencer à produire de l'énergie.</div>
+      <a href="https://stephane-amourda.github.io/Vitalite.Plus/" class="cta rouge">Je veux rallumer mon feu intérieur, maintenant →</a>
+      <div class="garantie">Garantie sérénité 14 jours · Sans engagement</div>
+      <div class="cta2">Tu préfères en parler d'abord ? <a href="https://calendly.com/sam33test1/30min" target="_blank">Réserve un appel découverte gratuit de 30 min.</a></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var cur=1,tot=16,rep={};
+function updProg(){
+  document.getElementById('pb').style.width=Math.round((cur/tot)*100)+'%';
+  document.getElementById('pl').textContent='Question '+cur+' sur '+tot;
+}
+document.querySelectorAll('.opt').forEach(function(b){
+  b.addEventListener('click',function(){
+    var bl=this.closest('.q-block');
+    bl.querySelectorAll('.opt').forEach(function(x){x.classList.remove('selected');});
+    this.classList.add('selected');
+    rep[cur]=parseInt(this.getAttribute('data-val'));
+    document.getElementById('bnext').disabled=false;
+  });
+});
+function qNext(){
+  if(rep[cur]===undefined)return;
+  if(cur<tot){
+    document.querySelector('[data-q="'+cur+'"]').classList.remove('active');
+    cur++;
+    document.querySelector('[data-q="'+cur+'"]').classList.add('active');
+    document.getElementById('bnext').disabled=rep[cur]===undefined;
+    document.getElementById('bprev').style.visibility='visible';
+    document.getElementById('bnext').textContent=cur===tot?'Voir mon profil →':'Suivant →';
+    updProg();
+    window.scrollTo(0,0);
+  } else {
+    var s=0;
+    for(var i=1;i<=tot;i++){s+=(rep[i]||0);}
+    document.getElementById('questions').style.display='none';
+    document.getElementById('resultats').style.display='block';
+    document.getElementById('pb').style.width='100%';
+    document.getElementById('pl').textContent='Votre résultat est prêt';
+    if(s<=10){document.getElementById('r-batterie').classList.add('active');}
+    else if(s<=22){document.getElementById('r-reservoir').classList.add('active');}
+    else{document.getElementById('r-feu').classList.add('active');}
+    window.scrollTo(0,0);
+  }
+}
+function qPrev(){
+  if(cur>1){
+    document.querySelector('[data-q="'+cur+'"]').classList.remove('active');
+    cur--;
+    document.querySelector('[data-q="'+cur+'"]').classList.add('active');
+    document.getElementById('bnext').disabled=false;
+    document.getElementById('bnext').textContent=cur===tot?'Voir mon profil →':'Suivant →';
+    if(cur===1)document.getElementById('bprev').style.visibility='hidden';
+    updProg();
+    window.scrollTo(0,0);
+  }
+}
+</script>
+</body>
+</html>
