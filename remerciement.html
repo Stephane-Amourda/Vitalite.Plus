@@ -1,1 +1,778 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue dans Vitalité+ | Stéphane Amourda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A96E;
+            --gold-light: #e8c980;
+            --gold-dark: #a8844a;
+            --green: #2C5F4F;
+            --green-dark: #1a3d32;
+            --cream: #FAF7F2;
+            --charcoal: #2B2B2B;
+            --sage: #8BA888;
+            --white: #FFFFFF;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--green-dark);
+            color: var(--white);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== PARTICLES ===== */
+        #particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0;
+            animation: rise linear infinite;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        /* ===== HERO REMERCIEMENT ===== */
+        .hero-merci {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 40px;
+            background: radial-gradient(ellipse at 30% 20%, rgba(201,169,110,0.12) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 80%, rgba(44,95,79,0.4) 0%, transparent 60%),
+                        linear-gradient(160deg, #1a3d32 0%, #0f2820 50%, #1a3d32 100%);
+        }
+
+        .hero-merci::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A96E' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* BADGE WELCOME */
+        .welcome-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(201,169,110,0.15);
+            border: 1px solid rgba(201,169,110,0.4);
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease both;
+        }
+
+        .welcome-badge-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.6; }
+        }
+
+        /* ICÔNE CÉLÉBRATION */
+        .celebration-icon {
+            font-size: clamp(4rem, 10vw, 7rem);
+            display: block;
+            margin-bottom: 30px;
+            animation: bounceIn 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.3s both;
+            filter: drop-shadow(0 0 30px rgba(201,169,110,0.5));
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+            60% { transform: scale(1.15) rotate(5deg); }
+            80% { transform: scale(0.95) rotate(-2deg); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+
+        /* TITRE PRINCIPAL */
+        .merci-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.9rem, 7vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+            word-break: normal;
+            overflow-wrap: normal;
+            hyphens: none;
+        }
+
+        .merci-title .gold {
+            color: var(--gold);
+            font-style: italic;
+        }
+
+        .merci-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            font-style: italic;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 50px;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease 0.55s both;
+        }
+
+        /* LIGNE OR */
+        .gold-divider {
+            width: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 0 auto 50px;
+            animation: expandWidth 1s ease 0.7s both;
+        }
+
+        @keyframes expandWidth {
+            from { width: 0; opacity: 0; }
+            to { width: 80px; opacity: 1; }
+        }
+
+        /* MESSAGE PERSONNEL */
+        .personal-message {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(201,169,110,0.2);
+            border-radius: 20px;
+            padding: clamp(30px, 5vw, 50px);
+            margin-bottom: 50px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease 0.7s both;
+        }
+
+        .personal-message::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 10rem;
+            color: var(--gold);
+            opacity: 0.06;
+            line-height: 1;
+        }
+
+        .personal-message p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            line-height: 1.9;
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+
+        .personal-message p:last-child { margin-bottom: 0; }
+
+        .personal-message strong {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .signature {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(201,169,110,0.15);
+        }
+
+        .signature-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .signature-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .signature-title {
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ===== SECTION ÉTAPES ===== */
+        .section-steps {
+            position: relative;
+            z-index: 1;
+            padding: clamp(60px, 8vw, 100px) clamp(20px, 5vw, 60px);
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        .section-steps-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .steps-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--sage);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .steps-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            color: var(--green);
+            text-align: center;
+            margin-bottom: 60px;
+            line-height: 1.2;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 20px;
+            padding: clamp(24px, 4vw, 40px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.07);
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(44,95,79,0.15);
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold), var(--sage));
+        }
+
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            flex-shrink: 0;
+            min-width: 50px;
+        }
+
+        .step-content {}
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 10px;
+        }
+
+        .step-desc {
+            font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+            line-height: 1.75;
+            color: #666;
+        }
+
+        .step-desc strong { color: var(--charcoal); }
+
+        .step-badge {
+            display: inline-block;
+            background: rgba(44,95,79,0.08);
+            color: var(--green);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== SECTION CTA PRINCIPAL ===== */
+        .section-cta {
+            position: relative;
+            z-index: 1;
+            padding: clamp(60px, 8vw, 100px) clamp(20px, 5vw, 60px);
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .section-cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 50% 50%, rgba(201,169,110,0.08) 0%, transparent 60%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .section-cta-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-emoji { font-size: 3rem; display: block; margin-bottom: 20px; }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .cta-subtitle {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .btn-acces {
+            display: inline-block;
+            padding: clamp(18px, 3vw, 22px) clamp(40px, 6vw, 70px);
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--charcoal);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 40px rgba(201,169,110,0.4);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-acces:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 50px rgba(201,169,110,0.6);
+        }
+
+        .btn-note {
+            display: block;
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ===== SECTION RAPPEL GARANTIE ===== */
+        .section-garantie {
+            position: relative;
+            z-index: 1;
+            padding: clamp(40px, 6vw, 70px) clamp(20px, 5vw, 60px);
+            background: var(--cream);
+        }
+
+        .garantie-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: clamp(30px, 5vw, 50px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .garantie-icon { font-size: 3rem; flex-shrink: 0; }
+
+        .garantie-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        .garantie-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #666;
+        }
+
+        .garantie-text strong { color: var(--charcoal); }
+
+        /* ===== SECTION CONTACT ===== */
+        .section-contact {
+            position: relative;
+            z-index: 1;
+            padding: clamp(40px, 6vw, 70px) clamp(20px, 5vw, 60px);
+            background: var(--green-dark);
+            text-align: center;
+        }
+
+        .contact-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .contact-text {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.75;
+            margin-bottom: 30px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: 1px solid rgba(201,169,110,0.3);
+            border-radius: 50px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: rgba(201,169,110,0.1);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            position: relative;
+            z-index: 1;
+            background: #0a1f16;
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.2);
+        }
+
+        /* ===== ANIMATIONS GÉNÉRALES ===== */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 640px) {
+            .steps-grid { grid-template-columns: 1fr; }
+            .garantie-inner { flex-direction: row; }
+        }
+
+        @media (max-width: 639px) {
+            .garantie-inner { flex-direction: column; text-align: center; }
+            .contact-links { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- PARTICULES OR -->
+<div id="particles"></div>
+
+<!-- ===== HERO REMERCIEMENT ===== -->
+<section class="hero-merci">
+    <div class="hero-content">
+
+        <div class="welcome-badge">
+            <div class="welcome-badge-dot"></div>
+            Bienvenue dans Vitalité+
+        </div>
+
+        <span class="celebration-icon">🌿</span>
+
+        <h1 class="merci-title">
+            Votre transformation<br>
+            <span class="gold">commence maintenant.</span>
+        </h1>
+
+        <p class="merci-subtitle">
+            Vous venez de poser le geste le plus important.<br>
+            Celui de choisir votre énergie.
+        </p>
+
+        <div class="gold-divider"></div>
+
+        <div class="personal-message">
+            <p>
+                Merci de me faire confiance pour ce chemin.<br><br>
+                Ce que vous venez de décider n'est pas anodin. Vous avez dit <strong>oui à vous-même</strong> — à une version de vous qui se réveille reposée, traverse ses journées avec élan, et retrouve le goût de la vie.
+            </p>
+            <p>
+                Dans quelques instants, vous allez recevoir vos <strong>identifiants de connexion par email</strong>. Vérifiez vos spams si vous ne voyez rien dans les 5 minutes.
+            </p>
+            <p>
+                Le Module 1 vous attend. Prenez le temps de vous installer confortablement — <strong>votre renaissance énergétique démarre maintenant.</strong>
+            </p>
+            <div class="signature">
+                <img src="https://d1yei2z3i6k35z.cloudfront.net/14434660/697a75252e5ce_Gemini_Generated_Image_moioudmoioudmoio.png" alt="Stéphane Amourda" class="signature-avatar">
+                <div>
+                    <div class="signature-name">Stéphane Amourda</div>
+                    <div class="signature-title">Naturopathe Certifié · Vitalité+</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ===== VOS PROCHAINES ÉTAPES ===== -->
+<section class="section-steps">
+    <div class="section-steps-inner">
+        <p class="steps-tag">À faire maintenant</p>
+        <h2 class="steps-title">Vos 3 premières étapes</h2>
+
+        <div class="steps-grid">
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Vérifiez votre boîte mail</div>
+                    <p class="step-desc">Un email avec vos <strong>identifiants d'accès</strong> vient d'être envoyé à l'adresse que vous avez renseignée. Si vous ne le trouvez pas dans 5 minutes, vérifiez vos <strong>spams ou indésirables</strong>.</p>
+                    <span class="step-badge">⏱ Maintenant</span>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Connectez-vous à votre espace membre</div>
+                    <p class="step-desc">Cliquez sur le lien dans votre email pour accéder à la plateforme. <strong>Créez votre mot de passe</strong>, prenez 2 minutes pour vous familiariser avec l'interface. Votre programme vous attend.</p>
+                    <span class="step-badge">📱 Accessible sur mobile et ordinateur</span>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Démarrez le Module 1 dès aujourd'hui</div>
+                    <p class="step-desc">Ne remettez pas à demain. <strong>Le Module 1 — Les Fondations Vitalité</strong> — est conçu pour être découvert en 20 minutes. Ce premier pas change tout. Il marque le début réel de votre transformation.</p>
+                    <span class="step-badge">🌿 Votre énergie commence ici</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ACCÈS ===== -->
+<section class="section-cta">
+    <div class="section-cta-inner">
+        <span class="cta-emoji">🚀</span>
+        <h2 class="cta-title">Prêt(e) à démarrer ?</h2>
+        <p class="cta-subtitle">Votre espace membre Vitalité+ est prêt. Le Module 1 vous attend — comptez 20 minutes pour ce premier pas qui change tout.</p>
+        <a href="https://stephaneamourda-naturopathe.systeme.io/login" target="_blank" class="btn-acces">▶ Accéder à mon programme Vitalité+</a>
+        <span class="btn-note">Identifiants reçus par email · Accès immédiat</span>
+    </div>
+</section>
+
+<!-- ===== RAPPEL GARANTIE ===== -->
+<section class="section-garantie">
+    <div class="garantie-inner">
+        <div class="garantie-icon">🔒</div>
+        <div>
+            <div class="garantie-title">Votre garantie Sérénité 14 jours</div>
+            <p class="garantie-text">Vous avez <strong>14 jours complets</strong> pour explorer le programme. Si vous estimez qu'il ne vous correspond pas, un simple message suffit. <strong>Remboursement intégral, sans conditions, sans questions.</strong> Vous n'avez rien à perdre.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section-contact">
+    <div class="contact-inner">
+        <h2 class="contact-title">Une question ? Je suis là.</h2>
+        <p class="contact-text">Pour toute question sur votre accès, votre programme ou votre parcours, contactez-moi directement. Je réponds personnellement.</p>
+        <div class="contact-links">
+            <a href="mailto:contact@stephaneamourda.com" class="contact-link">
+                ✉️ contact@stephaneamourda.com
+            </a>
+            <a href="tel:+33685801426" class="contact-link">
+                📞 06 85 80 14 26
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Stéphane Amourda · Naturopathe Certifié · Châtenay-Malabry (92)</p>
+</footer>
+
+<script>
+    // Particules dorées flottantes
+    (function() {
+        var container = document.getElementById('particles');
+        var count = 35;
+        for (var i = 0; i < count; i++) {
+            (function(i) {
+                var p = document.createElement('div');
+                p.className = 'particle';
+                var size = Math.random() * 5 + 2;
+                p.style.cssText = [
+                    'width:' + size + 'px',
+                    'height:' + size + 'px',
+                    'left:' + Math.random() * 100 + '%',
+                    'animation-duration:' + (Math.random() * 12 + 8) + 's',
+                    'animation-delay:' + (Math.random() * 8) + 's',
+                    'opacity:0',
+                    'background:' + (Math.random() > 0.5 ? '#C9A96E' : '#8BA888')
+                ].join(';');
+                container.appendChild(p);
+            })(i);
+        }
+    })();
+
+    // Confettis au chargement
+    (function() {
+        var colors = ['#C9A96E', '#8BA888', '#FAF7F2', '#e8c980', '#2C5F4F'];
+        var confettiCount = 80;
+        var container = document.body;
+
+        setTimeout(function() {
+            for (var i = 0; i < confettiCount; i++) {
+                (function(i) {
+                    var c = document.createElement('div');
+                    var size = Math.random() * 8 + 4;
+                    var color = colors[Math.floor(Math.random() * colors.length)];
+                    c.style.cssText = [
+                        'position:fixed',
+                        'width:' + size + 'px',
+                        'height:' + size + 'px',
+                        'background:' + color,
+                        'border-radius:' + (Math.random() > 0.5 ? '50%' : '2px'),
+                        'left:' + Math.random() * 100 + 'vw',
+                        'top:-10px',
+                        'z-index:9999',
+                        'pointer-events:none',
+                        'opacity:' + (Math.random() * 0.7 + 0.3),
+                        'transform:rotate(' + Math.random() * 360 + 'deg)',
+                        'transition:none'
+                    ].join(';');
+                    container.appendChild(c);
+
+                    var delay = Math.random() * 2000;
+                    var duration = Math.random() * 2000 + 2000;
+                    var targetX = (Math.random() - 0.5) * 300;
+                    var targetY = window.innerHeight + 100;
+
+                    setTimeout(function() {
+                        c.style.transition = 'transform ' + duration + 'ms ease-in, top ' + duration + 'ms ease-in, opacity ' + duration + 'ms ease-in';
+                        c.style.top = targetY + 'px';
+                        c.style.transform = 'rotate(' + (Math.random() * 720) + 'deg) translateX(' + targetX + 'px)';
+                        c.style.opacity = '0';
+                        setTimeout(function() { if(c.parentNode) c.parentNode.removeChild(c); }, duration + 100);
+                    }, delay);
+                })(i);
+            }
+        }, 300);
+    })();
+</script>
+
+</body>
+</html>
