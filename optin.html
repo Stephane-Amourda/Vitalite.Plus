@@ -705,7 +705,7 @@
                 <p class="form-card-subtitle">Renseignez vos coordonnées pour accéder au bilan et recevoir vos résultats.</p>
 
                 <!-- FORMULAIRE — à remplacer par le code embed Systeme.io si nécessaire -->
-                <form class="optin-form" action="https://stephaneamourda-naturopathe.systeme.io/f36cef39" method="POST" id="optinForm">
+                <div class="optin-form">
                     <div class="form-field">
                         <label class="form-label" for="firstName">Prénom</label>
                         <input class="form-input" type="text" id="firstName" name="first_name" placeholder="Votre prénom" required autocomplete="given-name">
@@ -714,11 +714,11 @@
                         <label class="form-label" for="email">Email</label>
                         <input class="form-input" type="email" id="email" name="email" placeholder="votre@email.com" required autocomplete="email">
                     </div>
-                    <button type="submit" class="btn-submit">
+                    <button type="button" class="btn-submit" onclick="goToOptin()">
                         🌿 Accéder à mon Bilan Vitalité gratuit →
                     </button>
                     <p class="form-rgpd">Vos informations sont 100% confidentielles. Votre email ne sera jamais partagé ni vendu.</p>
-                </form>
+                </div>
 
                 <!-- MINI TÉMOIGNAGE -->
                 <div class="form-temoignage">
@@ -803,36 +803,42 @@
         }
     })();
 
-    // Formulaire — soumet à Systeme.io en arrière-plan puis redirige vers le quiz
-    document.getElementById('optinForm').addEventListener('submit', function(e) {
+    function submitToSysteme(e) {
         e.preventDefault();
-        var firstName = document.getElementById('firstName').value.trim();
+        var prenom = document.getElementById('firstName').value.trim();
         var email = document.getElementById('email').value.trim();
-        if (!firstName || !email) return;
+        if (!prenom || !email) return;
 
-        var btn = this.querySelector('.btn-submit');
-        btn.textContent = 'Chargement de votre bilan...';
+        var btn = document.querySelector('.btn-submit');
+        btn.textContent = '⏳ Chargement de votre bilan...';
         btn.disabled = true;
 
-        // Soumet à Systeme.io en arrière-plan
-        var formData = new FormData();
-        formData.append('first_name', firstName);
-        formData.append('email', email);
+        // Remplir le formulaire caché Systeme.io
+        document.getElementById('s_prenom').value = prenom;
+        document.getElementById('s_email').value = email;
 
+        // Soumettre à Systeme.io en arrière-plan
+        var formData = new FormData(document.getElementById('systemeForm'));
         fetch('https://stephaneamourda-naturopathe.systeme.io/f36cef39', {
             method: 'POST',
             body: formData,
             mode: 'no-cors'
-        }).catch(function(){}).finally(function() {
+        }).catch(function(){}).finally(function(){
             window.location.href = 'https://stephane-amourda.github.io/Vitalite.Plus/quiz.html';
         });
 
-        // Sécurité : redirige dans tous les cas après 2s
-        setTimeout(function() {
+        // Sécurité : redirige dans tous les cas après 3s
+        setTimeout(function(){
             window.location.href = 'https://stephane-amourda.github.io/Vitalite.Plus/quiz.html';
-        }, 2000);
-    });
+        }, 3000);
+    }
 </script>
 
+    <!-- Formulaire caché Systeme.io -->
+    <form id="systemeForm" action="https://stephaneamourda-naturopathe.systeme.io/f36cef39" method="POST" style="display:none;position:absolute;left:-9999px;">
+        <input type="text" name="field-9c8f54e0" id="s_prenom">
+        <input type="text" name="field-4f28d8a1" id="s_nom" value="—">
+        <input type="email" name="field-3b46e81e" id="s_email">
+    </form>
 </body>
 </html>
