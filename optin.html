@@ -32,7 +32,7 @@
             font-family: 'Montserrat', sans-serif;
             background: var(--green-deep);
             color: var(--white);
-            min-height: 300px;
+            min-height: 100vh;
             overflow-x: hidden;
         }
 
@@ -87,7 +87,7 @@
         .page-wrapper {
             position: relative;
             z-index: 1;
-            min-height: 300px;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
@@ -705,7 +705,7 @@
                 <p class="form-card-subtitle">Renseignez vos coordonnées pour accéder au bilan et recevoir vos résultats.</p>
 
                 <!-- FORMULAIRE — à remplacer par le code embed Systeme.io si nécessaire -->
-                <div class="optin-form">
+                <form class="optin-form" action="https://stephaneamourda-naturopathe.systeme.io/f36cef39" method="POST" id="optinForm">
                     <div class="form-field">
                         <label class="form-label" for="firstName">Prénom</label>
                         <input class="form-input" type="text" id="firstName" name="first_name" placeholder="Votre prénom" required autocomplete="given-name">
@@ -714,11 +714,11 @@
                         <label class="form-label" for="email">Email</label>
                         <input class="form-input" type="email" id="email" name="email" placeholder="votre@email.com" required autocomplete="email">
                     </div>
-                    <button type="button" class="btn-submit" onclick="goToOptin()">
+                    <button type="submit" class="btn-submit">
                         🌿 Accéder à mon Bilan Vitalité gratuit →
                     </button>
                     <p class="form-rgpd">Vos informations sont 100% confidentielles. Votre email ne sera jamais partagé ni vendu.</p>
-                </div>
+                </form>
 
                 <!-- MINI TÉMOIGNAGE -->
                 <div class="form-temoignage">
@@ -803,14 +803,35 @@
         }
     })();
 
-    // Bouton — redirige vers Systeme.io avec prénom en paramètre
-    function goToOptin() {
+    // Formulaire — soumet à Systeme.io en arrière-plan puis redirige vers le quiz
+    document.getElementById('optinForm').addEventListener('submit', function(e) {
+        e.preventDefault();
         var firstName = document.getElementById('firstName').value.trim();
         var email = document.getElementById('email').value.trim();
-        if (!firstName) { document.getElementById('firstName').focus(); return; }
-        if (!email) { document.getElementById('email').focus(); return; }
-        window.location.href = 'https://stephaneamourda-naturopathe.systeme.io/f36cef39';
-    }
+        if (!firstName || !email) return;
+
+        var btn = this.querySelector('.btn-submit');
+        btn.textContent = 'Chargement de votre bilan...';
+        btn.disabled = true;
+
+        // Soumet à Systeme.io en arrière-plan
+        var formData = new FormData();
+        formData.append('first_name', firstName);
+        formData.append('email', email);
+
+        fetch('https://stephaneamourda-naturopathe.systeme.io/f36cef39', {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors'
+        }).catch(function(){}).finally(function() {
+            window.location.href = 'https://stephane-amourda.github.io/Vitalite.Plus/quiz.html';
+        });
+
+        // Sécurité : redirige dans tous les cas après 2s
+        setTimeout(function() {
+            window.location.href = 'https://stephane-amourda.github.io/Vitalite.Plus/quiz.html';
+        }, 2000);
+    });
 </script>
 
 </body>
