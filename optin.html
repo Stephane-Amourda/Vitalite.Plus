@@ -806,25 +806,45 @@
     function submitToSysteme(e) {
         e.preventDefault();
         var prenom = document.getElementById('firstName').value.trim();
+        var nom = document.getElementById('lastName').value.trim();
         var email = document.getElementById('email').value.trim();
         if (!prenom) { document.getElementById('firstName').focus(); return; }
+        if (!nom) { document.getElementById('lastName').focus(); return; }
         if (!email) { document.getElementById('email').focus(); return; }
 
         var btn = document.querySelector('.btn-submit');
         btn.textContent = '⏳ Chargement de votre bilan...';
         btn.disabled = true;
 
-        // Redirection directe vers Systeme.io qui capture le lead
-        // et redirige ensuite vers le quiz
-        window.location.href = 'https://stephaneamourda-naturopathe.systeme.io/f36cef39';
+        // Créer et soumettre un formulaire natif vers Systeme.io
+        var f = document.createElement('form');
+        f.method = 'POST';
+        f.action = 'https://stephaneamourda-naturopathe.systeme.io/f36cef39';
+
+        var fields = {
+            'field-afbd52fe': prenom,
+            'field-f99788c5': nom,
+            'field-9da173a2': email
+        };
+
+        Object.keys(fields).forEach(function(name) {
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = name;
+            input.value = fields[name];
+            f.appendChild(input);
+        });
+
+        document.body.appendChild(f);
+        f.submit();
     }
 </script>
 
     <!-- Formulaire caché Systeme.io -->
     <form id="systemeForm" action="https://stephaneamourda-naturopathe.systeme.io/f36cef39" method="POST" style="display:none;position:absolute;left:-9999px;">
-        <input type="text" name="field-9c8f54e0" id="s_prenom">
-        <input type="text" name="field-4f28d8a1" id="s_nom" value="—">
-        <input type="email" name="field-3b46e81e" id="s_email">
+        <input type="text" name="field-afbd52fe" id="s_prenom">
+        <input type="text" name="field-f99788c5" id="s_nom" value="—">
+        <input type="email" name="field-9da173a2" id="s_email">
     </form>
 </body>
 </html>
