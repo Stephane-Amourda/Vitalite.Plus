@@ -807,30 +807,16 @@
         e.preventDefault();
         var prenom = document.getElementById('firstName').value.trim();
         var email = document.getElementById('email').value.trim();
-        if (!prenom || !email) return;
+        if (!prenom) { document.getElementById('firstName').focus(); return; }
+        if (!email) { document.getElementById('email').focus(); return; }
 
         var btn = document.querySelector('.btn-submit');
         btn.textContent = '⏳ Chargement de votre bilan...';
         btn.disabled = true;
 
-        // Remplir le formulaire caché Systeme.io
-        document.getElementById('s_prenom').value = prenom;
-        document.getElementById('s_email').value = email;
-
-        // Soumettre à Systeme.io en arrière-plan
-        var formData = new FormData(document.getElementById('systemeForm'));
-        fetch('https://stephaneamourda-naturopathe.systeme.io/f36cef39', {
-            method: 'POST',
-            body: formData,
-            mode: 'no-cors'
-        }).catch(function(){}).finally(function(){
-            window.location.href = 'https://stephane-amourda.github.io/Vitalite.Plus/quiz.html';
-        });
-
-        // Sécurité : redirige dans tous les cas après 3s
-        setTimeout(function(){
-            window.location.href = 'https://stephane-amourda.github.io/Vitalite.Plus/quiz.html';
-        }, 3000);
+        // Redirection directe vers Systeme.io qui capture le lead
+        // et redirige ensuite vers le quiz
+        window.location.href = 'https://stephaneamourda-naturopathe.systeme.io/f36cef39';
     }
 </script>
 
