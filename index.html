@@ -43,7 +43,7 @@
         .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 4vw, 3.8rem); color: var(--deep-green); text-align: center; margin-bottom: 60px; font-weight: 700; }
         .card { background: white; padding: 40px; border-radius: 25px; box-shadow: 0 15px 50px rgba(0,0,0,0.08); margin-bottom: 30px; }
 
-        /* ===== PRICING REFONDU ===== */
+        /* ===== PRICING ===== */
         .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 40px; margin-top: 60px; }
         .pricing-card { background: white; border-radius: 30px; padding: 50px 40px; box-shadow: 0 25px 80px rgba(0,0,0,0.1); transition: all 0.4s; color: var(--charcoal); position: relative; overflow: hidden; }
         .pricing-card:hover { transform: translateY(-8px); box-shadow: 0 35px 100px rgba(201,169,110,0.25); }
@@ -55,8 +55,6 @@
         .pricing-card-title { font-family: 'Playfair Display', serif; font-size: 1.9rem; color: var(--deep-green); margin-bottom: 8px; font-weight: 700; }
         .pricing-card-subtitle { font-size: 0.95rem; color: #888; margin-bottom: 24px; line-height: 1.5; }
         .pricing-price-main { font-family: 'Playfair Display', serif; font-size: 3.8rem; font-weight: 900; color: var(--deep-green); line-height: 1; }
-        .pricing-price-old { font-size: 1.3rem; color: #bbb; text-decoration: line-through; margin-left: 8px; font-weight: 400; }
-        .pricing-price-economy { display: inline-block; background: rgba(44,95,79,0.1); color: var(--deep-green); padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-top: 8px; }
         .pricing-price-total { font-size: 0.85rem; color: #aaa; margin-top: 4px; }
         .pricing-divider { border: none; border-top: 1px solid rgba(0,0,0,0.07); margin: 24px 0; }
         .pricing-features { list-style: none; padding: 0; margin: 0 0 32px; }
@@ -68,7 +66,6 @@
         .btn-confort { display: block; width: 100%; padding: 18px; background: transparent; color: var(--deep-green); font-weight: 600; font-size: 1rem; text-decoration: none; border-radius: 50px; text-align: center; border: 2px solid var(--sage); transition: all 0.3s; margin-bottom: 12px; }
         .btn-confort:hover { background: rgba(139,168,136,0.1); transform: translateY(-2px); }
         .pricing-note { font-size: 0.8rem; color: #aaa; text-align: center; line-height: 1.5; }
-        .pricing-note.privilege-note { color: var(--deep-green); font-weight: 600; font-size: 0.85rem; }
         .pack-switcher { display: flex; justify-content: center; gap: 0; margin-bottom: 50px; background: rgba(255,255,255,0.1); border-radius: 50px; padding: 6px; max-width: 500px; margin-left: auto; margin-right: auto; }
         .pack-tab { flex: 1; padding: 14px 24px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; cursor: pointer; transition: all 0.3s; text-align: center; color: rgba(255,255,255,0.6); border: none; background: transparent; }
         .pack-tab.active { background: white; color: var(--deep-green); box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
@@ -390,13 +387,13 @@
     </div>
 </section>
 
-<!-- PRICING ===== VERSION REFONDÉE ===== -->
+<!-- PRICING ===== SANS PROMO ===== -->
 <section class="section" id="pricing" style="background: linear-gradient(135deg, #1a3d32, var(--deep-green)); color: white;">
     <div class="container">
         <h2 class="section-title" style="color: white;">Choisissez Votre Offre Maintenant</h2>
         <p style="text-align:center; color:rgba(255,255,255,0.75); font-size:1.1rem; margin-bottom:50px; margin-top:-30px;">Choisissez d'abord votre pack, puis votre mode de paiement</p>
 
-        <!-- SWITCHER PREMIUM / DELUXE -->
+        <!-- SWITCHER -->
         <div class="pack-switcher">
             <button class="pack-tab active" onclick="showPack('premium', this)">Programme Premium</button>
             <button class="pack-tab" onclick="showPack('deluxe', this)">Programme Deluxe</button>
@@ -405,16 +402,15 @@
         <!-- PACK PREMIUM -->
         <div id="pack-premium">
             <div class="pricing-grid">
+                <!-- Paiement unique -->
                 <div class="pricing-card privilege">
                     <div class="badge-privilege">⭐ Offre Privilège — Recommandée</div>
                     <div class="pricing-card-title">Pack Premium</div>
-                    <div class="pricing-card-subtitle">Paiement unique — Économie maximale</div>
+                    <div class="pricing-card-subtitle">Paiement unique — Accès immédiat</div>
                     <hr class="pricing-divider">
-                    <div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;">
-                        <span class="pricing-price-main">717€</span>
-                        <span class="pricing-price-old">797€</span>
+                    <div style="display:flex; align-items:baseline; gap:8px;">
+                        <span class="pricing-price-main">797€</span>
                     </div>
-                    <div style="margin-top:10px;"><span class="pricing-price-economy">🎉 -10% avec code VITALITE10</span></div>
                     <hr class="pricing-divider">
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> Accès aux 9 modules au fil des semaines</li>
@@ -424,9 +420,9 @@
                         <li><span class="check">✅</span> Échange illimité par mail ou téléphone</li>
                         <li><span class="check">✅</span> Accès à vie + mises à jour futures</li>
                     </ul>
-                    <a href="https://stephaneamourda-naturopathe.systeme.io/f5775d2e" class="btn-privilege">🟢 Je profite de -10% — Paiement unique →</a>
-                    <p class="pricing-note privilege-note">💡 Code à saisir lors du paiement : <strong>VITALITE10</strong></p>
+                    <a href="https://stephaneamourda-naturopathe.systeme.io/f5775d2e" class="btn-privilege">🟢 Paiement unique — Accès immédiat →</a>
                 </div>
+                <!-- 3 fois -->
                 <div class="pricing-card confort">
                     <div class="badge-confort">🔵 Option Confort</div>
                     <div class="pricing-card-title">Pack Premium</div>
@@ -436,7 +432,7 @@
                         <span class="pricing-price-main">3×</span>
                         <span style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--deep-green);">270€</span>
                     </div>
-                    <div class="pricing-price-total">Soit 810€ au total · Aucune réduction applicable</div>
+                    <div class="pricing-price-total">Soit 810€ au total</div>
                     <hr class="pricing-divider">
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> Accès aux 9 modules au fil des semaines</li>
@@ -455,16 +451,15 @@
         <!-- PACK DELUXE -->
         <div id="pack-deluxe" style="display:none;">
             <div class="pricing-grid">
+                <!-- Paiement unique -->
                 <div class="pricing-card privilege">
                     <div class="badge-privilege">⭐ Offre Privilège — Recommandée</div>
                     <div class="pricing-card-title">Pack Deluxe</div>
-                    <div class="pricing-card-subtitle">Paiement unique — Économie maximale</div>
+                    <div class="pricing-card-subtitle">Paiement unique — Accès immédiat</div>
                     <hr class="pricing-divider">
-                    <div style="display:flex; align-items:baseline; gap:8px; flex-wrap:wrap;">
-                        <span class="pricing-price-main">852€</span>
-                        <span class="pricing-price-old">947€</span>
+                    <div style="display:flex; align-items:baseline; gap:8px;">
+                        <span class="pricing-price-main">947€</span>
                     </div>
-                    <div style="margin-top:10px;"><span class="pricing-price-economy">🎉 -10% avec code VITALITE10</span></div>
                     <hr class="pricing-divider">
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> Accès aux 9 modules au fil des semaines</li>
@@ -475,9 +470,9 @@
                         <li><span class="check">✅</span> Accès à vie + mises à jour futures</li>
                         <li><span class="check" style="color:var(--primary-gold);">⭐</span> <strong>3 séances de coaching personnalisées</strong></li>
                     </ul>
-                    <a href="https://stephaneamourda-naturopathe.systeme.io/f5775d2e-63fae9d8" class="btn-privilege">🟢 Je profite de -10% — Paiement unique →</a>
-                    <p class="pricing-note privilege-note">💡 Code à saisir lors du paiement : <strong>VITALITE10</strong></p>
+                    <a href="https://stephaneamourda-naturopathe.systeme.io/f5775d2e-63fae9d8" class="btn-privilege">🟢 Paiement unique — Accès immédiat →</a>
                 </div>
+                <!-- 3 fois -->
                 <div class="pricing-card confort">
                     <div class="badge-confort">🔵 Option Confort</div>
                     <div class="pricing-card-title">Pack Deluxe</div>
@@ -487,7 +482,7 @@
                         <span class="pricing-price-main">3×</span>
                         <span style="font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:900; color:var(--deep-green);">320€</span>
                     </div>
-                    <div class="pricing-price-total">Soit 960€ au total · Aucune réduction applicable</div>
+                    <div class="pricing-price-total">Soit 960€ au total</div>
                     <hr class="pricing-divider">
                     <ul class="pricing-features">
                         <li><span class="check">✅</span> Accès aux 9 modules au fil des semaines</li>
@@ -579,11 +574,10 @@
                 <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 2;">Super naturopathe. A l'écoute des besoins de ses clients. Je suis venue pour préparer ma Pré ménopause et rebooster mon corps qui était fatigué. Stéphane m'a fait un bilan très complet et a apporté des solutions qui se sont révélées très efficaces dès les premiers jours. J'ai pu aussi assister à quelques ateliers afin d'enrichir mes connaissances sur l'alimentation. Je ne peux que vous le recommander !</p>
                 <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Weiss</div>
             </div>
-            <!-- MICHÈLE — ajouté -->
             <div class="card" style="position: relative; border-left: 4px solid var(--primary-gold);">
                 <div style="font-family: 'Playfair Display', serif; font-size: 6rem; color: var(--primary-gold); opacity: 0.2; position: absolute; top: -10px; left: 20px; line-height: 1;">"</div>
                 <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 25px; position: relative; z-index: 2;">Stéphane est une rencontre intéressante. C'est une personne rare, humaine et à l'écoute. Ses méthodes sont efficaces notamment sur la fatigue et le manque de vitalité. Elles allient idées de recettes, programme d'exercices physiques et bonne gestion de sa santé. <strong>Redonne la forme.</strong></p>
-                <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Michèle ⭐⭐⭐⭐⭐ · Il y a 3 semaines</div>
+                <div style="font-family: 'Playfair Display', serif; font-weight: 700; color: var(--deep-green); font-size: 1.3rem; text-align: right;">— Michèle ⭐⭐⭐⭐⭐</div>
             </div>
         </div>
     </div>
@@ -602,7 +596,7 @@
             <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;"><h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">6. Et si je n'ai pas de problème de fatigue chronique ?</h3><p style="line-height: 1.8;">La vitalité ne concerne pas seulement la fatigue extrême. Beaucoup rejoignent ce programme pour : retrouver plus de concentration, améliorer leur sommeil, alléger leur digestion, ou simplement <strong>optimiser leur énergie quotidienne</strong>.</p></div>
             <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;"><h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">7. Pendant combien de temps ai-je accès au programme ?</h3><p style="line-height: 1.8;">Vous bénéficiez d'un <strong>accès illimité</strong>. Vous pouvez avancer à votre rythme, revenir sur les modules, réécouter les audios ou refaire les exercices quand vous en avez besoin.</p></div>
             <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;"><h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">8. Est-ce que ça marche si j'ai un emploi du temps chargé ?</h3><p style="line-height: 1.8;">Oui, car les outils sont <strong>courts, ciblés et flexibles</strong>. Vous pouvez pratiquer le matin, le soir, ou même en déplacement. Le programme s'adapte à vous, pas l'inverse.</p></div>
-            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;"><h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">9. Puis-je payer en plusieurs fois ?</h3><p style="line-height: 1.8;">Oui ! Vous avez le choix directement dans la section tarifs ci-dessus. <strong>L'Offre Privilège</strong> vous donne accès à -10% en paiement unique (code VITALITE10). <strong>L'Option Confort</strong> vous permet de régler en 3 fois sans réduction. Les deux options donnent accès au même programme complet.</p></div>
+            <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;"><h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">9. Puis-je payer en plusieurs fois ?</h3><p style="line-height: 1.8;">Oui ! Vous avez le choix directement dans la section tarifs ci-dessus. <strong>L'Offre Privilège</strong> correspond au paiement unique. <strong>L'Option Confort</strong> vous permet de régler en 3 fois. Les deux options donnent accès au même programme complet.</p></div>
             <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;"><h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">10. Et si je ne suis pas satisfait(e) ?</h3><p style="line-height: 1.8;">Vous êtes protégé(e) par une <strong>garantie de remboursement de 14 jours</strong>. Si vous sentez que ce programme n'est pas pour vous, il vous suffit d'envoyer un message. Vous êtes remboursé(e), sans conditions.</p></div>
             <div class="card" style="border-left: 4px solid var(--sage); margin-bottom: 25px;"><h3 style="font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--deep-green); margin-bottom: 15px;">11. Pourquoi investir dans ce programme plutôt que chercher des infos gratuites sur internet ?</h3><p style="line-height: 1.8;">Parce que ce que vous trouvez gratuitement est <strong>éparpillé, contradictoire et non structuré</strong>. Ici, vous recevez un <strong>chemin clair</strong>, testé, qui vous évite des années de recherche et d'essais infructueux. Et surtout, vous gagnez <strong>le plus précieux : du temps, de l'énergie et une stratégie fiable</strong>.</p></div>
         </div>
