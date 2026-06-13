@@ -484,8 +484,12 @@ function inscrireWebinaire() {
     alert('Merci de renseigner une adresse email valide.');
     return;
   }
-  window.location.href = 'https://stephaneamourda-naturopathe.systeme.io/95ee407e';
+  const url = 'https://stephaneamourda-naturopathe.systeme.io/95ee407e'
+    + '?first_name=' + encodeURIComponent(prenom)
+    + '&email=' + encodeURIComponent(email);
+  window.location.href = url;
 }
+
 const WEBI_DATE = "À définir";
 document.getElementById('js-date').textContent = WEBI_DATE;
 </script>
