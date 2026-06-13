@@ -1,1 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C'est noté ! — Webinaire Vitalité+</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --sage: #7A9B6E;
+  --sage-l: #C5D9BC;
+  --sage-p: #EBF2E7;
+  --terre: #B87D55;
+  --dark: #1C1F18;
+  --white: #FFFFFF;
+  --soft: rgba(255,255,255,0.55);
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Decos */
+body::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: var(--sage);
+  opacity: 0.06;
+  top: -150px; left: -150px;
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  background: var(--terre);
+  opacity: 0.05;
+  bottom: -120px; right: -120px;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 560px;
+  width: 100%;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.check-circle {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 1.75rem;
+  border-radius: 50%;
+  background: rgba(122,155,110,0.12);
+  border: 1px solid rgba(122,155,110,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-circle svg {
+  width: 32px;
+  height: 32px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid rgba(122,155,110,0.35);
+  background: rgba(122,155,110,0.1);
+  padding: 5px 14px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sage-l);
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 em {
+  color: var(--sage-l);
+  font-style: italic;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: var(--soft);
+  line-height: 1.75;
+  font-weight: 300;
+  max-width: 440px;
+  margin: 0 auto 2.25rem;
+}
+
+.next-steps {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.next-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sage);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 0.85rem;
+}
+
+.step:last-child { margin-bottom: 0; }
+
+.step-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(122,155,110,0.15);
+  border: 1px solid rgba(122,155,110,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--sage-l);
+  font-weight: 600;
+}
+
+.reassure {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  font-weight: 300;
+}
+
+.signature {
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--sage-l);
+}
+
+.signature span {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+  margin-top: 4px;
+}
+
+@media (max-width: 480px) {
+  .container { padding: 2rem 1.25rem; }
+  .next-steps { padding: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="check-circle">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#C5D9BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 6L9 17l-5-5"/>
+    </svg>
+  </div>
+
+  <div class="badge">
+    <span style="width:6px;height:6px;background:var(--sage);border-radius:50%;"></span>
+    Inscription confirmée
+  </div>
+
+  <h1>C'est noté —<br><em>votre place est réservée</em></h1>
+
+  <p class="subtitle">
+    Vous allez recevoir un email de confirmation avec le lien d'accès au webinaire.
+    Pensez à vérifier vos spams si vous ne le voyez pas tout de suite.
+  </p>
+
+  <div class="next-steps">
+    <p class="next-title">Ce qu'il vous reste à faire</p>
+    <div class="step">
+      <span class="step-num">1</span>
+      <span>Ouvrez l'email de confirmation et ajoutez le rendez-vous à votre agenda</span>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <span>Le jour J, cliquez simplement sur le lien reçu par email pour rejoindre le live</span>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <span>Installez-vous confortablement, prenez de quoi noter — ça va être concret</span>
+    </div>
+  </div>
+
+  <p class="reassure">À très vite pour ce moment dédié à votre énergie.</p>
+
+  <div class="signature">
+    Stéphane Amourda
+    <span>Naturopathe · Fatigue & Vitalité · Châtenay-Malabry</span>
+  </div>
+
+</div>
+
+</body>
+</html>
