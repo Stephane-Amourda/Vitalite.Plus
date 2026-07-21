@@ -304,31 +304,23 @@ a:focus-visible, button:focus-visible{ outline:3px solid var(--terre-light); out
     <div class="checkmark" aria-hidden="true">✓</div>
     <div class="eyebrow">Inscription confirmée</div>
     <h1>C'est noté, <span id="prenom-slot">vous serez là</span> !</h1>
-    <p class="sub">Votre place pour « Retrouver votre énergie (sans vous épuiser) » est réservée. Le lien de connexion vous sera envoyé par e-mail avant le live.</p>
+    <p class="sub">Votre webinaire « Retrouver votre énergie (sans vous épuiser) » est prêt à être visionné, dès maintenant, à votre rythme.</p>
 
     <div class="meta-row sans">
-      <span class="meta-chip">📅 Date : à venir</span>
-      <span class="meta-chip">🕐 Heure : à venir</span>
+      <span class="meta-chip">🎥 Disponible dès maintenant</span>
       <span class="meta-chip">⏱️ 75 minutes</span>
-      <span class="meta-chip">🎥 Replay offert</span>
+      <span class="meta-chip">📅 Sans créneau à choisir</span>
     </div>
   </div>
 </header>
 
-<!-- ================= CALENDAR ================= -->
+<!-- ================= WATCH NOW ================= -->
 <section style="background:var(--cream); padding-top:44px;">
   <div class="wrap">
     <div class="calendar-card">
-      <h3>📌 Bloquez la date dans votre agenda</h3>
-      <p class="note">Dès que la date sera fixée, vous pourrez l'ajouter directement à votre calendrier en un clic.</p>
-      <div id="calendar-pending" class="pending-date">
-        La date exacte sera confirmée très prochainement — vous la recevrez par e-mail, et cette page se mettra à jour automatiquement avec vos boutons d'ajout au calendrier.
-      </div>
-      <div id="calendar-buttons" class="cal-buttons" style="display:none;">
-        <a class="cal-btn" id="cal-google" target="_blank" rel="noopener">📅 Google Calendar</a>
-        <a class="cal-btn" id="cal-outlook" target="_blank" rel="noopener">📅 Outlook</a>
-        <a class="cal-btn" id="cal-ics" download="webinaire-coaching-presentiel.ics">📅 Apple / .ics</a>
-      </div>
+      <h3>🎥 Votre webinaire est prêt</h3>
+      <p class="note">Pas de créneau à choisir — regardez-le dès maintenant, à votre rythme.</p>
+      <a class="cta-btn" id="watch-now-btn" href="salle-webinaire.html" style="display:block; text-align:center; text-decoration:none; background:var(--terre); color:var(--white); font-family:'Calibri',Arial,sans-serif; font-weight:bold; padding:16px 20px; border-radius:10px; font-size:16px;">Je regarde le webinaire maintenant →</a>
     </div>
   </div>
 </section>
@@ -423,20 +415,13 @@ a:focus-visible, button:focus-visible{ outline:3px solid var(--terre-light); out
 /* ============================================================
    CONFIGURATION — à adapter avant mise en ligne
    ============================================================
-   1. Dès que la date et l'heure du webinaire sont fixées,
-      renseigne WEBINAR_DATE_ISO ci-dessous au format
-      "AAAA-MM-JJTHH:MM:00" (heure de Paris), par exemple :
-      "2026-09-15T13:00:00"
-      Les boutons d'ajout au calendrier apparaîtront alors
-      automatiquement et remplaceront le message "à venir".
-   2. Renseigne aussi WEBINAR_LINK une fois ta page d'inscription
-      en ligne, pour les boutons de partage.
+   1. Renseigne WEBINAR_LINK une fois ta page d'inscription en
+      ligne, pour les boutons de partage.
+   2. Le lien "Je regarde le webinaire maintenant" pointe vers
+      salle-webinaire.html — vérifie qu'il est placé dans le même
+      dossier que ce fichier, ou ajuste son chemin ci-dessous.
 ============================================================ */
 const CONFIG = {
-  WEBINAR_DATE_ISO: "",              // ex: "2026-09-15T13:00:00"
-  WEBINAR_DURATION_MIN: 75,
-  WEBINAR_TITLE: "Retrouver votre énergie (sans vous épuiser) — Webinaire Coaching Présentiel",
-  WEBINAR_DESCRIPTION: "Webinaire gratuit avec Stéphane Amourda, naturopathe CENATHO.",
   REGISTRATION_LINK: "" // ex: "https://stephaneamourda-naturopathe.fr/webinaire"
 };
 
@@ -446,35 +431,10 @@ const CONFIG = {
   const prenom = params.get("prenom") || params.get("prénom");
   if(prenom){
     document.getElementById("prenom-slot").textContent = prenom.trim() + ", vous serez là";
+    // Transmet le prénom à la salle de webinaire
+    const btn = document.getElementById("watch-now-btn");
+    if(btn) btn.href = "salle-webinaire.html?prenom=" + encodeURIComponent(prenom.trim());
   }
-})();
-
-// --- Boutons calendrier (activés uniquement si la date est connue) ---
-(function setupCalendar(){
-  if(!CONFIG.WEBINAR_DATE_ISO) return; // reste en mode "à venir"
-
-  const start = new Date(CONFIG.WEBINAR_DATE_ISO);
-  const end = new Date(start.getTime() + CONFIG.WEBINAR_DURATION_MIN * 60000);
-
-  const fmt = (d) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-  const startStr = fmt(start);
-  const endStr = fmt(end);
-  const title = encodeURIComponent(CONFIG.WEBINAR_TITLE);
-  const desc = encodeURIComponent(CONFIG.WEBINAR_DESCRIPTION);
-
-  document.getElementById("cal-google").href =
-    `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startStr}/${endStr}&details=${desc}`;
-
-  document.getElementById("cal-outlook").href =
-    `https://outlook.live.com/calendar/0/deeplink/compose?subject=${title}&startdt=${start.toISOString()}&enddt=${end.toISOString()}&body=${desc}`;
-
-  const icsContent =
-    `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:${CONFIG.WEBINAR_TITLE}\nDESCRIPTION:${CONFIG.WEBINAR_DESCRIPTION}\nDTSTART:${startStr}\nDTEND:${endStr}\nEND:VEVENT\nEND:VCALENDAR`;
-  const icsBlob = new Blob([icsContent], { type: "text/calendar" });
-  document.getElementById("cal-ics").href = URL.createObjectURL(icsBlob);
-
-  document.getElementById("calendar-pending").style.display = "none";
-  document.getElementById("calendar-buttons").style.display = "flex";
 })();
 
 // --- Boutons de partage ---
