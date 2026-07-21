@@ -120,6 +120,56 @@ header .eyebrow{
   margin:14px 0 0;
 }
 
+/* ---------- LOCK SCREEN (compte à rebours) ---------- */
+.lock-screen{
+  background:linear-gradient(160deg, var(--sage-dark), var(--sage));
+  border-radius:14px;
+  padding:44px 30px;
+  text-align:center;
+  box-shadow:var(--shadow);
+}
+.lock-icon{ font-size:34px; margin-bottom:12px; }
+.lock-screen h2{
+  font-family:'Cambria',Georgia,serif;
+  font-size:22px;
+  margin:0 0 10px;
+  color:var(--white);
+}
+.lock-sub{
+  font-family:'Calibri',Arial,sans-serif;
+  font-size:13.5px;
+  color:var(--cream-2);
+  max-width:440px;
+  margin:0 auto 22px;
+}
+.countdown-row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+}
+.countdown-unit{
+  background:rgba(255,255,255,0.14);
+  border:1px solid rgba(255,255,255,0.3);
+  border-radius:10px;
+  padding:12px 16px;
+  min-width:66px;
+  text-align:center;
+}
+.countdown-unit .num{
+  font-family:'Cambria',Georgia,serif;
+  font-size:26px;
+  font-weight:bold;
+  color:var(--white);
+  display:block;
+}
+.countdown-unit .label{
+  font-family:'Calibri',Arial,sans-serif;
+  font-size:10.5px;
+  color:var(--cream-2);
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+
 /* ---------- CTA BOX (revealed by JS) ---------- */
 .cta-box{
   margin-top:22px;
@@ -258,6 +308,19 @@ footer{
 
 <section class="video-section">
   <div class="wrap">
+    <div id="lock-screen" class="lock-screen" style="display:none;">
+      <div class="lock-icon">🔒</div>
+      <h2>Votre prochaine session</h2>
+      <p class="lock-sub">Votre session commence bientôt. Gardez cette page ouverte — elle se déverrouille automatiquement à l'heure prévue.</p>
+      <div class="countdown-row" id="lock-countdown-row">
+        <div class="countdown-unit"><span class="num" id="lk-days">–</span><span class="label">Jours</span></div>
+        <div class="countdown-unit"><span class="num" id="lk-hours">–</span><span class="label">Heures</span></div>
+        <div class="countdown-unit"><span class="num" id="lk-min">–</span><span class="label">Min</span></div>
+        <div class="countdown-unit"><span class="num" id="lk-sec">–</span><span class="label">Sec</span></div>
+      </div>
+    </div>
+
+    <div id="video-wrap">
     <div class="player-shell" id="player-shell">
       <div class="player-placeholder" id="player-placeholder">
         <div class="icon">🎥</div>
@@ -278,6 +341,7 @@ footer{
       <span class="tag">☀️ Offre d'été</span>
       <h3>Rejoindre Vitalité+ maintenant</h3>
       <p>Le lien vers l'offre spéciale évoquée dans la vidéo est juste au-dessus, dans le bouton de réservation — ou contactez directement Stéphane pour vos questions sur le programme.</p>
+    </div>
     </div>
   </div>
 </section>
@@ -316,17 +380,82 @@ footer{
       ~76 minutes ⇒ 4560).
    Ces deux temps sont des estimations basées sur le script —
    ajuste-les après avoir chronométré ton enregistrement réel.
+   5. Le créneau récurrent (jour/heure) est défini dans merci.html
+      (CONFIG.WEBINAR_WEEKDAY / HOUR / MINUTE) — cette page lit le
+      paramètre "target" transmis par le lien pour rester cohérente.
+      Si "target" est absent de l'URL (visite directe), cette page
+      recalcule elle-même le prochain mercredi 20h30.
 ============================================================ */
 const CONFIG = {
   VIDEO_ID: "",                    // ex: "dQw4w9WgXcQ"
   CALENDLY_LINK: "https://calendly.com/stephaneamourda-33/30min",
   CTA_REVEAL_SECONDS: 3660,        // ~61 min — début de l'offre
-  OFFER_REVEAL_SECONDS: 4560       // ~76 min — clôture
+  OFFER_REVEAL_SECONDS: 4560,      // ~76 min — clôture
+  WEBINAR_WEEKDAY: 3,              // 0=dimanche ... 3=mercredi
+  WEBINAR_HOUR: 20,
+  WEBINAR_MINUTE: 30,
+  WEBINAR_DURATION_MIN: 75
 };
 
 document.getElementById("cta-link").href = CONFIG.CALENDLY_LINK;
 
-(function setupPlayer(){
+function getWebinarTarget(){
+  const now = new Date();
+  const target = new Date(now);
+  target.setHours(CONFIG.WEBINAR_HOUR, CONFIG.WEBINAR_MINUTE, 0, 0);
+  const diffDays = (target.getDay() - CONFIG.WEBINAR_WEEKDAY + 7) % 7;
+  target.setDate(target.getDate() - diffDays);
+  if(target > now){ target.setDate(target.getDate() - 7); }
+  const sessionEnd = new Date(target.getTime() + CONFIG.WEBINAR_DURATION_MIN * 60000);
+  if(now <= sessionEnd){ return target; }
+  return new Date(target.getTime() + 7 * 24 * 3600000);
+}
+
+function resolveTarget(){
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get("target");
+  if(fromUrl){
+    const d = new Date(fromUrl);
+    if(!isNaN(d)) return d;
+  }
+  return getWebinarTarget();
+}
+
+const webinarTarget = resolveTarget();
+
+function startPlayer(){
+  document.getElementById("lock-screen").style.display = "none";
+  document.getElementById("video-wrap").style.display = "block";
+  setupPlayer();
+}
+
+if(webinarTarget > new Date()){
+  document.getElementById("lock-screen").style.display = "block";
+  document.getElementById("video-wrap").style.display = "none";
+
+  const tick = () => {
+    const now = new Date();
+    let diff = webinarTarget - now;
+    if(diff <= 0){ startPlayer(); return; }
+    const days = Math.floor(diff / (24*3600000));
+    diff -= days * 24*3600000;
+    const hours = Math.floor(diff / 3600000);
+    diff -= hours * 3600000;
+    const mins = Math.floor(diff / 60000);
+    diff -= mins * 60000;
+    const secs = Math.floor(diff / 1000);
+    document.getElementById("lk-days").textContent = days;
+    document.getElementById("lk-hours").textContent = String(hours).padStart(2,"0");
+    document.getElementById("lk-min").textContent = String(mins).padStart(2,"0");
+    document.getElementById("lk-sec").textContent = String(secs).padStart(2,"0");
+  };
+  tick();
+  setInterval(tick, 1000);
+} else {
+  startPlayer();
+}
+
+function setupPlayer(){
   if(!CONFIG.VIDEO_ID) return; // reste sur le placeholder
 
   const shell = document.getElementById("player-shell");
@@ -368,9 +497,8 @@ document.getElementById("cta-link").href = CONFIG.CALENDLY_LINK;
       }
     }
   };
-})();
+}
 </script>
 
 </body>
 </html>
-
