@@ -172,6 +172,43 @@ p{ margin:0 0 16px; }
   text-align:center;
 }
 .pending-date strong{ color:var(--terre-dark); }
+.countdown-row{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin:6px 0 18px;
+}
+.countdown-unit{
+  background:var(--cream);
+  border-radius:10px;
+  padding:10px 14px;
+  min-width:64px;
+  text-align:center;
+}
+.countdown-unit .num{
+  font-family:'Cambria',Georgia,serif;
+  font-size:24px;
+  font-weight:bold;
+  color:var(--terre-dark);
+  display:block;
+}
+.countdown-unit .label{
+  font-family:'Calibri',Arial,sans-serif;
+  font-size:10.5px;
+  color:var(--ink-soft);
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+.session-ready{
+  background:var(--sage);
+  color:var(--white);
+  border-radius:10px;
+  padding:16px 18px;
+  text-align:center;
+  font-family:'Calibri',Arial,sans-serif;
+  font-weight:bold;
+  font-size:15px;
+}
 
 /* ---------- STEPS ---------- */
 .steps{ background:var(--cream); }
@@ -304,23 +341,42 @@ a:focus-visible, button:focus-visible{ outline:3px solid var(--terre-light); out
     <div class="checkmark" aria-hidden="true">✓</div>
     <div class="eyebrow">Inscription confirmée</div>
     <h1>C'est noté, <span id="prenom-slot">vous serez là</span> !</h1>
-    <p class="sub">Votre webinaire « Retrouver votre énergie (sans vous épuiser) » est prêt à être visionné, dès maintenant, à votre rythme.</p>
+    <p class="sub">Votre session pour « Retrouver votre énergie (sans vous épuiser) » a été réservée. Le compte à rebours ci-dessous vous indique l'heure exacte.</p>
 
     <div class="meta-row sans">
-      <span class="meta-chip">🎥 Disponible dès maintenant</span>
+      <span class="meta-chip" id="chip-date">📅 Date à confirmer</span>
+      <span class="meta-chip" id="chip-time">🕐 Heure à confirmer</span>
       <span class="meta-chip">⏱️ 75 minutes</span>
-      <span class="meta-chip">📅 Sans créneau à choisir</span>
     </div>
   </div>
 </header>
 
-<!-- ================= WATCH NOW ================= -->
+<!-- ================= NEXT SESSION ================= -->
 <section style="background:var(--cream); padding-top:44px;">
   <div class="wrap">
     <div class="calendar-card">
-      <h3>🎥 Votre webinaire est prêt</h3>
-      <p class="note">Pas de créneau à choisir — regardez-le dès maintenant, à votre rythme.</p>
-      <a class="cta-btn" id="watch-now-btn" href="salle-webinaire.html" style="display:block; text-align:center; text-decoration:none; background:var(--terre); color:var(--white); font-family:'Calibri',Arial,sans-serif; font-weight:bold; padding:16px 20px; border-radius:10px; font-size:16px;">Je regarde le webinaire maintenant →</a>
+      <h3 id="session-title">📅 Votre session réservée</h3>
+      <p class="note" id="session-note">Voici le compte à rebours jusqu'à votre session.</p>
+
+      <div id="countdown-wrap">
+        <div class="countdown-row" id="countdown-row">
+          <div class="countdown-unit"><span class="num" id="cd-days">–</span><span class="label">Jours</span></div>
+          <div class="countdown-unit"><span class="num" id="cd-hours">–</span><span class="label">Heures</span></div>
+          <div class="countdown-unit"><span class="num" id="cd-min">–</span><span class="label">Min</span></div>
+          <div class="countdown-unit"><span class="num" id="cd-sec">–</span><span class="label">Sec</span></div>
+        </div>
+        <div class="cal-buttons" id="calendar-buttons">
+          <a class="cal-btn" id="cal-google" target="_blank" rel="noopener">📅 Google Calendar</a>
+          <a class="cal-btn" id="cal-outlook" target="_blank" rel="noopener">📅 Outlook</a>
+          <a class="cal-btn" id="cal-ics" download="webinaire.ics">📅 Apple / .ics</a>
+        </div>
+      </div>
+
+      <div id="session-ready-wrap" style="display:none;">
+        <div class="session-ready">🎥 Votre session de cette semaine est disponible dès maintenant</div>
+      </div>
+
+      <a class="cta-btn" id="watch-now-btn" href="salle-webinaire.html" style="display:block; text-align:center; text-decoration:none; background:var(--terre); color:var(--white); font-family:'Calibri',Arial,sans-serif; font-weight:bold; padding:16px 20px; border-radius:10px; font-size:16px; margin-top:16px;">Accéder à la salle du webinaire →</a>
     </div>
   </div>
 </section>
@@ -415,26 +471,119 @@ a:focus-visible, button:focus-visible{ outline:3px solid var(--terre-light); out
 /* ============================================================
    CONFIGURATION — à adapter avant mise en ligne
    ============================================================
-   1. Renseigne WEBINAR_LINK une fois ta page d'inscription en
-      ligne, pour les boutons de partage.
-   2. Le lien "Je regarde le webinaire maintenant" pointe vers
-      salle-webinaire.html — vérifie qu'il est placé dans le même
-      dossier que ce fichier, ou ajuste son chemin ci-dessous.
+   1. Le webinaire a lieu chaque semaine, au jour et à l'heure
+      définis ci-dessous (WEBINAR_WEEKDAY / WEBINAR_HOUR /
+      WEBINAR_MINUTE). Par défaut : mercredi (3) à 20h30, heure
+      locale du visiteur — l'audience étant basée en France,
+      cette simplification convient pour la quasi-totalité des
+      cas ; ignore les fuseaux horaires pour les rares exceptions.
+   2. Renseigne REGISTRATION_LINK une fois ta page d'inscription
+      en ligne, pour les boutons de partage.
+   3. Le lien vers salle-webinaire.html transmet automatiquement
+      le prénom et l'horaire cible calculé (paramètre "target"),
+      pour que le compte à rebours reste cohérent sur les deux
+      pages sans dépendre d'une base de données.
 ============================================================ */
 const CONFIG = {
+  WEBINAR_WEEKDAY: 3,   // 0=dimanche, 1=lundi, 2=mardi, 3=mercredi...
+  WEBINAR_HOUR: 20,
+  WEBINAR_MINUTE: 30,
+  WEBINAR_DURATION_MIN: 75,
   REGISTRATION_LINK: "" // ex: "https://stephaneamourda-naturopathe.fr/webinaire"
 };
 
+// --- Calcule la prochaine session : soit "maintenant" si la session
+//     de cette semaine est en cours/vient de passer dans les
+//     WEBINAR_DURATION_MIN dernières minutes, soit le prochain
+//     jour/heure cible à venir. ---
+function getWebinarTarget(){
+  const now = new Date();
+  const target = new Date(now);
+  target.setHours(CONFIG.WEBINAR_HOUR, CONFIG.WEBINAR_MINUTE, 0, 0);
+  const diffDays = (target.getDay() - CONFIG.WEBINAR_WEEKDAY + 7) % 7;
+  target.setDate(target.getDate() - diffDays);
+  if(target > now){ target.setDate(target.getDate() - 7); }
+  // "target" est maintenant la dernière occurrence <= now.
+  const sessionEnd = new Date(target.getTime() + CONFIG.WEBINAR_DURATION_MIN * 60000);
+  if(now <= sessionEnd){
+    return target; // session de cette semaine encore "ouverte"
+  }
+  const next = new Date(target.getTime() + 7 * 24 * 3600000);
+  return next;
+}
+
+const webinarTarget = getWebinarTarget();
+const isReadyNow = webinarTarget <= new Date();
+
+// --- Affiche la date/heure exactes de la session (sans révéler la récurrence) ---
+(function fillDateChips(){
+  const dateStr = webinarTarget.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+  const timeStr = webinarTarget.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+  document.getElementById("chip-date").textContent = "📅 " + dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+  document.getElementById("chip-time").textContent = "🕐 " + timeStr;
+})();
+
 // --- Pré-remplissage du prénom depuis l'URL (ex: ?prenom=Claire) ---
+let prenomValue = "";
 (function fillPrenom(){
   const params = new URLSearchParams(window.location.search);
   const prenom = params.get("prenom") || params.get("prénom");
   if(prenom){
-    document.getElementById("prenom-slot").textContent = prenom.trim() + ", vous serez là";
-    // Transmet le prénom à la salle de webinaire
-    const btn = document.getElementById("watch-now-btn");
-    if(btn) btn.href = "salle-webinaire.html?prenom=" + encodeURIComponent(prenom.trim());
+    prenomValue = prenom.trim();
+    document.getElementById("prenom-slot").textContent = prenomValue + ", vous serez là";
   }
+})();
+
+// --- Lien vers la salle de webinaire, avec prénom + horaire cible ---
+(function setupWatchLink(){
+  const btn = document.getElementById("watch-now-btn");
+  const params = new URLSearchParams();
+  if(prenomValue) params.set("prenom", prenomValue);
+  params.set("target", webinarTarget.toISOString());
+  btn.href = "salle-webinaire.html?" + params.toString();
+})();
+
+// --- Affiche soit le compte à rebours, soit le message "disponible" ---
+(function setupCountdownOrReady(){
+  if(isReadyNow){
+    document.getElementById("countdown-wrap").style.display = "none";
+    document.getElementById("session-ready-wrap").style.display = "block";
+    document.getElementById("session-note").textContent = "La session de cette semaine est disponible.";
+    return;
+  }
+
+  function tick(){
+    const now = new Date();
+    let diff = webinarTarget - now;
+    if(diff <= 0){ window.location.reload(); return; }
+    const days = Math.floor(diff / (24*3600000));
+    diff -= days * 24*3600000;
+    const hours = Math.floor(diff / 3600000);
+    diff -= hours * 3600000;
+    const mins = Math.floor(diff / 60000);
+    diff -= mins * 60000;
+    const secs = Math.floor(diff / 1000);
+    document.getElementById("cd-days").textContent = days;
+    document.getElementById("cd-hours").textContent = String(hours).padStart(2,"0");
+    document.getElementById("cd-min").textContent = String(mins).padStart(2,"0");
+    document.getElementById("cd-sec").textContent = String(secs).padStart(2,"0");
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // Boutons calendrier pour la date cible
+  const start = webinarTarget;
+  const end = new Date(start.getTime() + CONFIG.WEBINAR_DURATION_MIN * 60000);
+  const fmt = (d) => d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  const title = encodeURIComponent("Retrouver votre énergie (sans vous épuiser) — Webinaire");
+  const desc = encodeURIComponent("Webinaire gratuit avec Stéphane Amourda, naturopathe CENATHO.");
+
+  document.getElementById("cal-google").href =
+    `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${fmt(start)}/${fmt(end)}&details=${desc}`;
+  document.getElementById("cal-outlook").href =
+    `https://outlook.live.com/calendar/0/deeplink/compose?subject=${title}&startdt=${start.toISOString()}&enddt=${end.toISOString()}&body=${desc}`;
+  const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nSUMMARY:Retrouver votre énergie (sans vous épuiser)\nDESCRIPTION:${desc}\nDTSTART:${fmt(start)}\nDTEND:${fmt(end)}\nEND:VEVENT\nEND:VCALENDAR`;
+  document.getElementById("cal-ics").href = URL.createObjectURL(new Blob([icsContent], { type: "text/calendar" }));
 })();
 
 // --- Boutons de partage ---
