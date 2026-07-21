@@ -512,15 +512,33 @@ function getWebinarTarget(){
   return next;
 }
 
-const webinarTarget = getWebinarTarget();
+function resolveTarget(){
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get("target");
+  if(fromUrl){
+    const d = new Date(fromUrl);
+    if(!isNaN(d)) return d;
+  }
+  return getWebinarTarget();
+}
+
+const webinarTarget = resolveTarget();
 const isReadyNow = webinarTarget <= new Date();
+
+const JOURS_FR = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+function formatDateFR(d){
+  const jour = JOURS_FR[d.getDay()];
+  return jour.charAt(0).toUpperCase() + jour.slice(1) + " " + d.getDate() + " " + MOIS_FR[d.getMonth()];
+}
+function formatTimeFR(d){
+  return String(d.getHours()).padStart(2,"0") + "h" + String(d.getMinutes()).padStart(2,"0");
+}
 
 // --- Affiche la date/heure exactes de la session (sans révéler la récurrence) ---
 (function fillDateChips(){
-  const dateStr = webinarTarget.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
-  const timeStr = webinarTarget.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-  document.getElementById("chip-date").textContent = "📅 " + dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-  document.getElementById("chip-time").textContent = "🕐 " + timeStr;
+  document.getElementById("chip-date").textContent = "📅 " + formatDateFR(webinarTarget);
+  document.getElementById("chip-time").textContent = "🕐 " + formatTimeFR(webinarTarget);
 })();
 
 // --- Pré-remplissage du prénom depuis l'URL (ex: ?prenom=Claire) ---
