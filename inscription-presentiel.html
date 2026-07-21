@@ -365,7 +365,7 @@ a:focus-visible, button:focus-visible, input:focus-visible{
     <h1>Retrouver votre <span class="accent">énergie</span><br>(sans vous épuiser)</h1>
     <p class="sub">Les vraies causes biologiques de votre fatigue chronique après 40 ans — et pourquoi certains conseils qu'on vous répète depuis toujours l'aggravent, sans que personne ne vous l'explique.</p>
     <div class="meta-row sans">
-      <span class="meta-chip">📅 Session personnalisée</span>
+      <span class="meta-chip" id="chip-date">📅 Calcul de votre session…</span>
       <span class="meta-chip">⏱️ 75 minutes</span>
       <span class="meta-chip">🎥 Confirmation immédiate</span>
       <span class="meta-chip">💶 100% gratuit</span>
@@ -534,8 +534,44 @@ a:focus-visible, button:focus-visible, input:focus-visible{
 const CONFIG = {
   SYSTEME_IO_FORM_ACTION: "", // ex: "https://xxxx.systeme.io/api/forms/xxxxx/submit"
   FIELD_NAMES: { firstName: "prenom", email: "email" },
-  MERCI_PAGE: "merci.html"
+  MERCI_PAGE: "merci.html",
+  WEBINAR_WEEKDAY: 3,   // 0=dimanche, 1=lundi, 2=mardi, 3=mercredi...
+  WEBINAR_HOUR: 20,
+  WEBINAR_MINUTE: 30,
+  WEBINAR_DURATION_MIN: 75
 };
+
+// --- Calcule la même session que merci.html / salle-webinaire.html,
+//     pour afficher la date exacte dès la page d'inscription. ---
+function getWebinarTarget(){
+  const now = new Date();
+  const target = new Date(now);
+  target.setHours(CONFIG.WEBINAR_HOUR, CONFIG.WEBINAR_MINUTE, 0, 0);
+  const diffDays = (target.getDay() - CONFIG.WEBINAR_WEEKDAY + 7) % 7;
+  target.setDate(target.getDate() - diffDays);
+  if(target > now){ target.setDate(target.getDate() - 7); }
+  const sessionEnd = new Date(target.getTime() + CONFIG.WEBINAR_DURATION_MIN * 60000);
+  if(now <= sessionEnd){ return target; }
+  return new Date(target.getTime() + 7 * 24 * 3600000);
+}
+
+const webinarTarget = getWebinarTarget();
+
+const JOURS_FR = ["dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi"];
+const MOIS_FR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+function formatDateFR(d){
+  const jour = JOURS_FR[d.getDay()];
+  return jour.charAt(0).toUpperCase() + jour.slice(1) + " " + d.getDate() + " " + MOIS_FR[d.getMonth()];
+}
+function formatTimeFR(d){
+  return String(d.getHours()).padStart(2,"0") + "h" + String(d.getMinutes()).padStart(2,"0");
+}
+
+(function fillDateChip(){
+  const chip = document.getElementById("chip-date");
+  if(!chip) return;
+  chip.textContent = "📅 " + formatDateFR(webinarTarget) + " à " + formatTimeFR(webinarTarget);
+})();
 
 function getUTMParams(){
   const params = new URLSearchParams(window.location.search);
@@ -581,7 +617,7 @@ function handleOptinSubmit(formEl){
       ...getUTMParams()
     };
 
-    const merciUrl = CONFIG.MERCI_PAGE + "?prenom=" + encodeURIComponent(prenom);
+    const merciUrl = CONFIG.MERCI_PAGE + "?prenom=" + encodeURIComponent(prenom) + "&target=" + encodeURIComponent(webinarTarget.toISOString());
 
     if(!CONFIG.SYSTEME_IO_FORM_ACTION){
       console.log("Mode test — données du formulaire :", data);
