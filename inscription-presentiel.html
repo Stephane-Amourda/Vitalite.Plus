@@ -365,16 +365,15 @@ a:focus-visible, button:focus-visible, input:focus-visible{
     <h1>Retrouver votre <span class="accent">énergie</span><br>(sans vous épuiser)</h1>
     <p class="sub">Les vraies causes biologiques de votre fatigue chronique après 40 ans — et pourquoi certains conseils qu'on vous répète depuis toujours l'aggravent, sans que personne ne vous l'explique.</p>
     <div class="meta-row sans">
-      <span class="meta-chip">📅 Date : à venir</span>
-      <span class="meta-chip">🕐 Heure : à venir</span>
+      <span class="meta-chip">🎥 Disponible immédiatement</span>
       <span class="meta-chip">⏱️ 75 minutes</span>
-      <span class="meta-chip">🎥 Replay offert</span>
+      <span class="meta-chip">📅 Sans créneau à choisir</span>
       <span class="meta-chip">💶 100% gratuit</span>
     </div>
 
     <div class="optin-card" id="optin-hero">
       <h3>Je réserve ma place</h3>
-      <p class="note sans">Places limitées — vous recevrez le lien de connexion par e-mail.</p>
+      <p class="note sans">Vous recevrez le lien pour regarder le webinaire par e-mail, dès votre inscription.</p>
       <form novalidate>
         <div class="field">
           <label for="prenom-hero">Prénom</label>
@@ -476,7 +475,7 @@ a:focus-visible, button:focus-visible, input:focus-visible{
     <p class="lede">Réservez votre place gratuite — et venez comprendre ce que votre corps essaie de vous dire depuis longtemps.</p>
     <div class="optin-card" id="optin-final">
       <h3>Je réserve ma place</h3>
-      <p class="note sans">Places limitées — vous recevrez le lien de connexion par e-mail.</p>
+      <p class="note sans">Vous recevrez le lien pour regarder le webinaire par e-mail, dès votre inscription.</p>
       <form novalidate>
         <div class="field">
           <label for="prenom-final">Prénom</label>
@@ -511,24 +510,31 @@ a:focus-visible, button:focus-visible, input:focus-visible{
 /* ============================================================
    CONFIGURATION — à adapter avant mise en ligne
    ============================================================
-   1. Crée ton tunnel d'inscription dans Systeme.io.
-   2. Dans la page d'opt-in Systeme.io, récupère l'URL du
-      formulaire (Réglages du tunnel > Intégration, ou l'URL
-      de la page d'opt-in elle-même si tu pré-remplis l'étape
-      suivante par paramètres d'URL — c'est cette 2e méthode
-      qui est utilisée ici, comme sur ton tunnel précédent
-      (ID 7293789) avec pré-remplissage JS des champs.
-   3. Colle l'URL ci-dessous dans SYSTEME_IO_URL.
-   4. Vérifie les noms de paramètres attendus par ta page
-      Systeme.io (généralement "prenom" et "email") et ajuste
-      FIELD_NAMES si besoin.
-   Tant que SYSTEME_IO_URL est vide, le formulaire fonctionne
-   en mode test : il affiche une confirmation sur la page et
-   log les données dans la console, sans rien envoyer.
+   Comme tu n'as pas le plan "Webinar" de Systeme.io, il n'y a
+   plus de créneau à choisir : Systeme.io ne sert plus qu'à
+   capturer le contact (disponible sur tous les plans, y compris
+   gratuit), et cette page redirige ensuite directement vers ta
+   propre page merci.html, qui elle-même mène à la salle de
+   webinaire à la demande (salle-webinaire.html).
+
+   1. Dans Systeme.io, crée un simple formulaire de capture
+      (Site web > Formulaires, ou une "Page de capture" de
+      tunnel — pas besoin du tunnel "Webinaire").
+   2. Récupère l'URL d'action de ce formulaire (Réglages du
+      formulaire > Intégration / Code HTML) et colle-la dans
+      SYSTEME_IO_FORM_ACTION ci-dessous.
+   3. Vérifie les noms de champs attendus par Systeme.io
+      (généralement "email" et un champ prénom personnalisé) et
+      ajuste FIELD_NAMES si besoin.
+   Tant que SYSTEME_IO_FORM_ACTION est vide, le formulaire
+   fonctionne en mode test : il simule l'envoi et redirige tout
+   de même vers merci.html, pour que tu puisses tester le
+   parcours complet avant de connecter Systeme.io.
 ============================================================ */
 const CONFIG = {
-  SYSTEME_IO_URL: "", // ex: "https://xxxx.systeme.io/inscription-webinaire"
-  FIELD_NAMES: { firstName: "prenom", email: "email" }
+  SYSTEME_IO_FORM_ACTION: "", // ex: "https://xxxx.systeme.io/api/forms/xxxxx/submit"
+  FIELD_NAMES: { firstName: "prenom", email: "email" },
+  MERCI_PAGE: "merci.html"
 };
 
 function getUTMParams(){
@@ -568,24 +574,35 @@ function handleOptinSubmit(formEl){
     }
     if(!valid) return;
 
+    const prenom = prenomInput.value.trim();
     const data = {
-      [CONFIG.FIELD_NAMES.firstName]: prenomInput.value.trim(),
+      [CONFIG.FIELD_NAMES.firstName]: prenom,
       [CONFIG.FIELD_NAMES.email]: emailInput.value.trim(),
       ...getUTMParams()
     };
 
-    if(!CONFIG.SYSTEME_IO_URL){
+    const merciUrl = CONFIG.MERCI_PAGE + "?prenom=" + encodeURIComponent(prenom);
+
+    if(!CONFIG.SYSTEME_IO_FORM_ACTION){
       console.log("Mode test — données du formulaire :", data);
-      statusEl.textContent = "Mode test : inscription simulée avec succès. Configure CONFIG.SYSTEME_IO_URL dans le code pour activer l'envoi réel vers Systeme.io.";
+      statusEl.textContent = "Mode test : inscription simulée. Redirection...";
       statusEl.className = "form-status sans show testmode";
+      setTimeout(() => { window.location.href = merciUrl; }, 900);
       return;
     }
 
-    const url = new URL(CONFIG.SYSTEME_IO_URL);
-    Object.entries(data).forEach(([key, value]) => url.searchParams.set(key, value));
+    // Envoi en arrière-plan vers Systeme.io (n'attend pas la réponse,
+    // pour ne pas bloquer la redirection si l'API est lente).
+    fetch(CONFIG.SYSTEME_IO_FORM_ACTION, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(data).toString()
+    }).catch(() => {});
+
     statusEl.textContent = "Merci ! Redirection en cours...";
     statusEl.className = "form-status sans show success";
-    window.location.href = url.toString();
+    setTimeout(() => { window.location.href = merciUrl; }, 500);
   });
 }
 
