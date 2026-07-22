@@ -374,21 +374,8 @@ a:focus-visible, button:focus-visible, input:focus-visible{
     <div class="optin-card" id="optin-hero">
       <h3>Je réserve ma place</h3>
       <p class="note sans">Vous recevrez le lien pour regarder le webinaire par e-mail, dès votre inscription.</p>
-      <form novalidate>
-        <div class="field">
-          <label for="prenom-hero">Prénom</label>
-          <input type="text" id="prenom-hero" name="prenom" autocomplete="given-name" placeholder="Votre prénom">
-          <div class="error sans">Merci d'indiquer votre prénom.</div>
-        </div>
-        <div class="field">
-          <label for="email-hero">E-mail</label>
-          <input type="email" id="email-hero" name="email" autocomplete="email" placeholder="vous@exemple.com">
-          <div class="error sans">Merci d'indiquer une adresse e-mail valide.</div>
-        </div>
-        <button type="submit" class="cta-btn">Je réserve ma place au webinaire →</button>
-        <p class="privacy-note">Vos informations restent confidentielles. Désinscription en un clic à tout moment.</p>
-        <div class="form-status sans"></div>
-      </form>
+      <a href="#" class="cta-btn systeme-show-popup-24826062" style="display:block; text-align:center; text-decoration:none;">Je réserve ma place au webinaire →</a>
+      <p class="privacy-note">Vos informations restent confidentielles. Désinscription en un clic à tout moment.</p>
     </div>
   </div>
 </header>
@@ -476,21 +463,8 @@ a:focus-visible, button:focus-visible, input:focus-visible{
     <div class="optin-card" id="optin-final">
       <h3>Je réserve ma place</h3>
       <p class="note sans">Vous recevrez le lien pour regarder le webinaire par e-mail, dès votre inscription.</p>
-      <form novalidate>
-        <div class="field">
-          <label for="prenom-final">Prénom</label>
-          <input type="text" id="prenom-final" name="prenom" autocomplete="given-name" placeholder="Votre prénom">
-          <div class="error sans">Merci d'indiquer votre prénom.</div>
-        </div>
-        <div class="field">
-          <label for="email-final">E-mail</label>
-          <input type="email" id="email-final" name="email" autocomplete="email" placeholder="vous@exemple.com">
-          <div class="error sans">Merci d'indiquer une adresse e-mail valide.</div>
-        </div>
-        <button type="submit" class="cta-btn">Je réserve ma place au webinaire →</button>
-        <p class="privacy-note">Vos informations restent confidentielles. Désinscription en un clic à tout moment.</p>
-        <div class="form-status sans"></div>
-      </form>
+      <a href="#" class="cta-btn systeme-show-popup-24826062" style="display:block; text-align:center; text-decoration:none;">Je réserve ma place au webinaire →</a>
+      <p class="privacy-note">Vos informations restent confidentielles. Désinscription en un clic à tout moment.</p>
     </div>
   </div>
 </section>
@@ -508,32 +482,23 @@ a:focus-visible, button:focus-visible, input:focus-visible{
 
 <script>
 /* ============================================================
-   CONFIGURATION — à adapter avant mise en ligne
+   CONFIGURATION — Popup Systeme.io
    ============================================================
-   Comme tu n'as pas le plan "Webinar" de Systeme.io, il n'y a
-   plus de créneau à choisir : Systeme.io ne sert plus qu'à
-   capturer le contact (disponible sur tous les plans, y compris
-   gratuit), et cette page redirige ensuite directement vers ta
-   propre page merci.html, qui elle-même mène à la salle de
-   webinaire à la demande (salle-webinaire.html).
+   La capture prénom/email se fait maintenant directement dans
+   la popup Systeme.io (déclenchée par les boutons "Je réserve
+   ma place", via la classe systeme-show-popup-24826062 —
+   voir le script juste avant </body>).
 
-   1. Dans Systeme.io, crée un simple formulaire de capture
-      (Site web > Formulaires, ou une "Page de capture" de
-      tunnel — pas besoin du tunnel "Webinaire").
-   2. Récupère l'URL d'action de ce formulaire (Réglages du
-      formulaire > Intégration / Code HTML) et colle-la dans
-      SYSTEME_IO_FORM_ACTION ci-dessous.
-   3. Vérifie les noms de champs attendus par Systeme.io
-      (généralement "email" et un champ prénom personnalisé) et
-      ajuste FIELD_NAMES si besoin.
-   Tant que SYSTEME_IO_FORM_ACTION est vide, le formulaire
-   fonctionne en mode test : il simule l'envoi et redirige tout
-   de même vers merci.html, pour que tu puisses tester le
-   parcours complet avant de connecter Systeme.io.
+   Après une inscription réussie dans la popup, Systeme.io
+   envoie un message au navigateur (postMessage) que le code
+   ci-dessous écoute pour rediriger automatiquement vers
+   merci.html. Si jamais Systeme.io ne renvoie pas ce message
+   (selon les versions), la personne reste sur cette page avec
+   la popup fermée — pense à vérifier ce comportement une fois
+   en ligne, et prévoir si besoin un lien de secours vers
+   merci.html dans l'email de confirmation envoyé par Systeme.io.
 ============================================================ */
 const CONFIG = {
-  SYSTEME_IO_FORM_ACTION: "", // ex: "https://xxxx.systeme.io/api/forms/xxxxx/submit"
-  FIELD_NAMES: { firstName: "prenom", email: "email" },
   MERCI_PAGE: "merci.html",
   WEBINAR_WEEKDAY: 3,   // 0=dimanche, 1=lundi, 2=mardi, 3=mercredi...
   WEBINAR_HOUR: 20,
@@ -573,77 +538,18 @@ function formatTimeFR(d){
   chip.textContent = "📅 " + formatDateFR(webinarTarget) + " à " + formatTimeFR(webinarTarget);
 })();
 
-function getUTMParams(){
-  const params = new URLSearchParams(window.location.search);
-  const utmKeys = ["utm_source","utm_medium","utm_campaign","utm_content","utm_term"];
-  const out = {};
-  utmKeys.forEach(k => { if(params.has(k)) out[k] = params.get(k); });
-  return out;
-}
-
-function isValidEmail(value){
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
-function handleOptinSubmit(formEl){
-  formEl.addEventListener("submit", function(e){
-    e.preventDefault();
-
-    const prenomInput = formEl.querySelector('input[name="prenom"]');
-    const emailInput = formEl.querySelector('input[name="email"]');
-    const prenomField = prenomInput.closest(".field");
-    const emailField = emailInput.closest(".field");
-    const statusEl = formEl.querySelector(".form-status");
-
-    let valid = true;
-    if(!prenomInput.value.trim()){
-      prenomField.classList.add("invalid");
-      valid = false;
-    } else {
-      prenomField.classList.remove("invalid");
-    }
-    if(!isValidEmail(emailInput.value.trim())){
-      emailField.classList.add("invalid");
-      valid = false;
-    } else {
-      emailField.classList.remove("invalid");
-    }
-    if(!valid) return;
-
-    const prenom = prenomInput.value.trim();
-    const data = {
-      [CONFIG.FIELD_NAMES.firstName]: prenom,
-      [CONFIG.FIELD_NAMES.email]: emailInput.value.trim(),
-      ...getUTMParams()
-    };
-
-    const merciUrl = CONFIG.MERCI_PAGE + "?prenom=" + encodeURIComponent(prenom) + "&target=" + encodeURIComponent(webinarTarget.toISOString());
-
-    if(!CONFIG.SYSTEME_IO_FORM_ACTION){
-      console.log("Mode test — données du formulaire :", data);
-      statusEl.textContent = "Mode test : inscription simulée. Redirection...";
-      statusEl.className = "form-status sans show testmode";
-      setTimeout(() => { window.location.href = merciUrl; }, 900);
-      return;
-    }
-
-    // Envoi en arrière-plan vers Systeme.io (n'attend pas la réponse,
-    // pour ne pas bloquer la redirection si l'API est lente).
-    fetch(CONFIG.SYSTEME_IO_FORM_ACTION, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(data).toString()
-    }).catch(() => {});
-
-    statusEl.textContent = "Merci ! Redirection en cours...";
-    statusEl.className = "form-status sans show success";
-    setTimeout(() => { window.location.href = merciUrl; }, 500);
-  });
-}
-
-document.querySelectorAll(".optin-card form").forEach(handleOptinSubmit);
+// --- Redirige vers merci.html après une inscription réussie dans la popup ---
+window.addEventListener("message", function(event){
+  const key = (event.data && (event.data.type || event.data.sender)) || "";
+  if(key === "funnel_step_24826062_form_submit_success"){
+    const merciUrl = CONFIG.MERCI_PAGE + "?target=" + encodeURIComponent(webinarTarget.toISOString());
+    setTimeout(() => { window.location.href = merciUrl; }, 1200);
+  }
+});
 </script>
+
+<!-- Popup Systeme.io — capture prénom/email, déclenchée par les boutons "Je réserve ma place" -->
+<script id="form-script-tag-24826062" src="https://stephaneamourda-naturopathe.systeme.io/public/remote/page/4285157665f3ec22369e161623d90480769cc534.js"></script>
 
 </body>
 </html>
