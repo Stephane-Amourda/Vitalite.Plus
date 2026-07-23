@@ -376,7 +376,7 @@ a:focus-visible, button:focus-visible{ outline:3px solid var(--terre-light); out
         <div class="session-ready">🎥 Votre session de cette semaine est disponible dès maintenant</div>
       </div>
 
-      <a class="cta-btn" id="watch-now-btn" href="salle-présentiel.html" style="display:block; text-align:center; text-decoration:none; background:var(--terre); color:var(--white); font-family:'Calibri',Arial,sans-serif; font-weight:bold; padding:16px 20px; border-radius:10px; font-size:16px; margin-top:16px;">Accéder à la salle du webinaire →</a>
+      <a class="cta-btn" id="watch-now-btn" href="salle-presentiel.html" style="display:block; text-align:center; text-decoration:none; background:var(--terre); color:var(--white); font-family:'Calibri',Arial,sans-serif; font-weight:bold; padding:16px 20px; border-radius:10px; font-size:16px; margin-top:16px;">Accéder à la salle du webinaire →</a>
     </div>
   </div>
 </section>
@@ -558,7 +558,7 @@ let prenomValue = "";
   const params = new URLSearchParams();
   if(prenomValue) params.set("prenom", prenomValue);
   params.set("target", webinarTarget.toISOString());
-  btn.href = "salle-présentiel.html?" + params.toString();
+  btn.href = "salle-presentiel.html?" + params.toString();
 })();
 
 // --- Affiche soit le compte à rebours, soit le message "disponible" ---
