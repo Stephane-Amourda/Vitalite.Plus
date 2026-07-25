@@ -366,7 +366,7 @@ a:focus-visible, button:focus-visible, input:focus-visible{
     <p class="sub">Les vraies causes biologiques de votre fatigue chronique après 40 ans — et pourquoi certains conseils qu'on vous répète depuis toujours l'aggravent, sans que personne ne vous l'explique.</p>
     <div class="meta-row sans">
       <span class="meta-chip" id="chip-date">📅 Calcul de votre session…</span>
-      <span class="meta-chip">⏱️ 75 minutes</span>
+      <span class="meta-chip">⏱️ 60 minutes</span>
       <span class="meta-chip">🎥 Confirmation immédiate</span>
       <span class="meta-chip">💶 100% gratuit</span>
     </div>
@@ -397,7 +397,7 @@ a:focus-visible, button:focus-visible, input:focus-visible{
 <!-- ================= DISCOVER ================= -->
 <section class="discover">
   <div class="wrap">
-    <h2>Ce que vous allez découvrir en 75 minutes</h2>
+    <h2>Ce que vous allez découvrir en 60 minutes</h2>
     <p class="lede">Pas des opinions. De la physiologie — les mécanismes biologiques précis derrière votre fatigue.</p>
     <div class="reveal-grid">
       <div class="reveal-card">
@@ -503,7 +503,7 @@ const CONFIG = {
   WEBINAR_WEEKDAY: 3,   // 0=dimanche, 1=lundi, 2=mardi, 3=mercredi...
   WEBINAR_HOUR: 20,
   WEBINAR_MINUTE: 30,
-  WEBINAR_DURATION_MIN: 75
+  WEBINAR_DURATION_MIN: 60
 };
 
 // --- Calcule la même session que merci.html / salle-webinaire.html,
@@ -538,14 +538,9 @@ function formatTimeFR(d){
   chip.textContent = "📅 " + formatDateFR(webinarTarget) + " à " + formatTimeFR(webinarTarget);
 })();
 
-// --- Redirige vers merci.html après une inscription réussie dans la popup ---
-window.addEventListener("message", function(event){
-  const key = (event.data && (event.data.type || event.data.sender)) || "";
-  if(key === "funnel_step_24826062_form_submit_success"){
-    const merciUrl = CONFIG.MERCI_PAGE + "?target=" + encodeURIComponent(webinarTarget.toISOString());
-    setTimeout(() => { window.location.href = merciUrl; }, 1200);
-  }
-});
+// La redirection vers merci.html après inscription est gérée nativement
+// par Systeme.io (réglage "Rediriger les visiteurs après l'inscription"
+// → "Vers une URL personnalisée" dans l'étape du formulaire popup).
 </script>
 
 <!-- Popup Systeme.io — capture prénom/email, déclenchée par les boutons "Je réserve ma place" -->
