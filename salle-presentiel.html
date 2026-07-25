@@ -373,13 +373,15 @@ footer{
       "vidéo bientôt disponible" reste affiché à la place.
    2. CALENDLY_LINK : ton lien de réservation d'appel découverte.
    3. CTA_REVEAL_SECONDS : à combien de secondes dans la vidéo le
-      bouton de réservation doit apparaître (correspond au début
-      de la Phase 5 — l'offre — dans le script, ~61 minutes ⇒ 3660).
+      bouton de réservation doit apparaître (Slide 17 — annonce du
+      prix, à 54:17 dans l'enregistrement réel ⇒ 3257).
    4. OFFER_REVEAL_SECONDS : à combien de secondes le rappel
-      d'offre doit apparaître (début de la Phase 6 — clôture,
-      ~76 minutes ⇒ 4560).
-   Ces deux temps sont des estimations basées sur le script —
-   ajuste-les après avoir chronométré ton enregistrement réel.
+      d'offre doit apparaître (Slide 20 — clôture, à 58:41 dans
+      l'enregistrement réel ⇒ 3521).
+   Ces deux temps sont chronométrés sur l'enregistrement réel du
+   25/07 (vidéo YouTube eNj1BL6QGCs) — à réajuster uniquement si
+   tu remontes/coupes le montage final et que ces moments se
+   déplacent dans le temps.
    5. Le créneau récurrent (jour/heure) est défini dans merci.html
       (CONFIG.WEBINAR_WEEKDAY / HOUR / MINUTE) — cette page lit le
       paramètre "target" transmis par le lien pour rester cohérente.
@@ -387,14 +389,14 @@ footer{
       recalcule elle-même le prochain mercredi 20h30.
 ============================================================ */
 const CONFIG = {
-  VIDEO_ID: "",                    // ex: "dQw4w9WgXcQ"
+  VIDEO_ID: "eNj1BL6QGCs",
   CALENDLY_LINK: "https://calendly.com/stephaneamourda-33/30min",
-  CTA_REVEAL_SECONDS: 3660,        // ~61 min — début de l'offre
-  OFFER_REVEAL_SECONDS: 4560,      // ~76 min — clôture
+  CTA_REVEAL_SECONDS: 3257,        // 54:17 — Slide 17, annonce du prix
+  OFFER_REVEAL_SECONDS: 3521,      // 58:41 — Slide 20, clôture
   WEBINAR_WEEKDAY: 3,              // 0=dimanche ... 3=mercredi
   WEBINAR_HOUR: 20,
   WEBINAR_MINUTE: 30,
-  WEBINAR_DURATION_MIN: 75
+  WEBINAR_DURATION_MIN: 60
 };
 
 document.getElementById("cta-link").href = CONFIG.CALENDLY_LINK;
