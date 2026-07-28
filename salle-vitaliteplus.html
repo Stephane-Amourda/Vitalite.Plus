@@ -224,6 +224,75 @@ header .eyebrow{
 }
 .cta-btn:hover{ transform:scale(1.02); }
 
+.pack-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:6px;
+}
+.pack-card{
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:12px;
+  padding:18px;
+}
+.pack-name{
+  font-family:'Cambria',Georgia,serif;
+  font-size:16px;
+  font-weight:bold;
+  color:var(--white);
+  margin-bottom:12px;
+}
+.pack-btn{
+  display:block;
+  width:100%;
+  text-align:center;
+  box-sizing:border-box;
+  padding:12px 14px;
+  font-size:13.5px;
+  margin-bottom:6px;
+}
+.pack-btn.secondary{
+  margin-top:10px;
+}
+.promo-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-content:center;
+  margin-bottom:4px;
+}
+.promo-label{
+  font-family:'Calibri',Arial,sans-serif;
+  font-size:11.5px;
+  color:var(--cream-2);
+}
+.promo-code{
+  font-family:'Calibri',Arial,sans-serif;
+  font-size:12px;
+  font-weight:bold;
+  background:rgba(255,255,255,0.18);
+  border:1px dashed rgba(255,255,255,0.5);
+  color:var(--white);
+  border-radius:6px;
+  padding:4px 9px;
+  cursor:pointer;
+  transition:background .15s ease;
+}
+.promo-code:hover{ background:rgba(255,255,255,0.3); }
+.promo-code.copied{ background:var(--sage); border-color:var(--sage); }
+.promo-note{
+  font-family:'Calibri',Arial,sans-serif;
+  font-size:12px;
+  color:var(--cream-2);
+  text-align:center;
+  margin:14px 0 0;
+}
+
+@media (max-width:640px){
+  .pack-grid{ grid-template-columns:1fr; }
+}
+
 .offer-box{
   margin-top:22px;
   background:var(--white);
@@ -333,11 +402,38 @@ footer{
     <div class="cta-box" id="cta-box">
       <span class="tag">☀️ Offre d'été</span>
       <h3>Rejoindre Vitalité+ maintenant</h3>
-      <p>Le tarif d'été évoqué dans la vidéo reste valable jusqu'au 31 août.</p>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;">
-        <a class="cta-btn" id="cta-link-premium" href="#" target="_blank" rel="noopener">Pack Premium — 717 € →</a>
-        <a class="cta-btn" id="cta-link-deluxe" href="#" target="_blank" rel="noopener" style="background:var(--sage-dark);">Pack Deluxe — 852 € →</a>
+      <p>Le tarif d'été évoqué dans la vidéo reste valable jusqu'au 31 août. Choisissez votre formule et votre mode de paiement ci-dessous.</p>
+
+      <div class="pack-grid">
+        <div class="pack-card">
+          <div class="pack-name">Pack Premium</div>
+          <a class="cta-btn pack-btn" id="cta-link-premium-full" href="#" target="_blank" rel="noopener">Paiement comptant →</a>
+          <div class="promo-row">
+            <span class="promo-label">Code promo :</span>
+            <button type="button" class="promo-code" id="promo-premium-full" data-code="VITALITEPREMIUM">VITALITEPREMIUM 📋</button>
+          </div>
+          <a class="cta-btn pack-btn secondary" id="cta-link-premium-3x" href="#" target="_blank" rel="noopener">Paiement 3x sans frais →</a>
+          <div class="promo-row">
+            <span class="promo-label">Code promo :</span>
+            <button type="button" class="promo-code" id="promo-premium-3x" data-code="WEBIPREMIUM">WEBIPREMIUM 📋</button>
+          </div>
+        </div>
+
+        <div class="pack-card">
+          <div class="pack-name">Pack Deluxe</div>
+          <a class="cta-btn pack-btn" id="cta-link-deluxe-full" href="#" target="_blank" rel="noopener" style="background:var(--sage-dark);">Paiement comptant →</a>
+          <div class="promo-row">
+            <span class="promo-label">Code promo :</span>
+            <button type="button" class="promo-code" id="promo-deluxe-full" data-code="VITALITEDELUXE">VITALITEDELUXE 📋</button>
+          </div>
+          <a class="cta-btn pack-btn secondary" id="cta-link-deluxe-3x" href="#" target="_blank" rel="noopener" style="background:var(--sage-dark);">Paiement 3x sans frais →</a>
+          <div class="promo-row">
+            <span class="promo-label">Code promo :</span>
+            <button type="button" class="promo-code" id="promo-deluxe-3x" data-code="WEBIDELUXE">WEBIDELUXE 📋</button>
+          </div>
+        </div>
       </div>
+      <p class="promo-note">💡 Cliquez sur un code pour le copier — il vous sera demandé sur la page de paiement.</p>
     </div>
 
     <div class="offer-box" id="offer-box">
@@ -375,9 +471,10 @@ footer{
       présentiel — c'est un enregistrement séparé, avec une offre
       différente en fin de script). Tant que ce champ est vide,
       un message "vidéo bientôt disponible" reste affiché à la place.
-   2. CHECKOUT_PREMIUM_URL / CHECKOUT_DELUXE_URL : tes liens de
-      paiement Systeme.io pour le Pack Premium (717€) et le Pack
-      Deluxe (852€). À me transmettre une fois créés.
+   2. Les 4 liens de paiement (Premium/Deluxe × comptant/3x) sont
+      déjà renseignés ci-dessous. Les codes promo associés sont
+      affichés sur la page et copiables en un clic — la personne
+      doit les saisir elle-même sur la page de paiement Systeme.io.
    3. CALENDLY_LINK : ton lien de réservation d'appel découverte
       (le même que pour le coaching présentiel).
    4. CTA_REVEAL_SECONDS / OFFER_REVEAL_SECONDS : provisoirement
@@ -391,8 +488,10 @@ footer{
 ============================================================ */
 const CONFIG = {
   VIDEO_ID: "",                     // ex: "dQw4w9WgXcQ" — vidéo Vitalité+ à venir
-  CHECKOUT_PREMIUM_URL: "",         // ex: "https://xxxx.systeme.io/pack-premium"
-  CHECKOUT_DELUXE_URL: "",          // ex: "https://xxxx.systeme.io/pack-deluxe"
+  CHECKOUT_PREMIUM_FULL_URL: "https://stephaneamourda-naturopathe.systeme.io/f5775d2e",
+  CHECKOUT_PREMIUM_3X_URL: "https://stephaneamourda-naturopathe.systeme.io/f5775d2e-5ed92d00",
+  CHECKOUT_DELUXE_FULL_URL: "https://stephaneamourda-naturopathe.systeme.io/f5775d2e-63fae9d8",
+  CHECKOUT_DELUXE_3X_URL: "https://stephaneamourda-naturopathe.systeme.io/f5775d2e-63fae9d8-d31907ca",
   CALENDLY_LINK: "https://calendly.com/stephaneamourda-33/30min",
   CTA_REVEAL_SECONDS: 3660,        // ~61 min — estimation, début de l'offre (Phase 5)
   OFFER_REVEAL_SECONDS: 4560,      // ~76 min — estimation, clôture (Phase 6)
@@ -402,9 +501,27 @@ const CONFIG = {
   WEBINAR_DURATION_MIN: 60
 };
 
-document.getElementById("cta-link-premium").href = CONFIG.CHECKOUT_PREMIUM_URL || "#";
-document.getElementById("cta-link-deluxe").href = CONFIG.CHECKOUT_DELUXE_URL || "#";
+document.getElementById("cta-link-premium-full").href = CONFIG.CHECKOUT_PREMIUM_FULL_URL || "#";
+document.getElementById("cta-link-premium-3x").href = CONFIG.CHECKOUT_PREMIUM_3X_URL || "#";
+document.getElementById("cta-link-deluxe-full").href = CONFIG.CHECKOUT_DELUXE_FULL_URL || "#";
+document.getElementById("cta-link-deluxe-3x").href = CONFIG.CHECKOUT_DELUXE_3X_URL || "#";
 document.getElementById("cta-link-calendly").href = CONFIG.CALENDLY_LINK;
+
+// --- Copie du code promo au clic ---
+document.querySelectorAll(".promo-code").forEach(function(btn){
+  const originalText = btn.textContent;
+  btn.addEventListener("click", function(){
+    const code = btn.getAttribute("data-code");
+    navigator.clipboard.writeText(code).then(function(){
+      btn.textContent = "Copié ✓";
+      btn.classList.add("copied");
+      setTimeout(function(){
+        btn.textContent = originalText;
+        btn.classList.remove("copied");
+      }, 2000);
+    });
+  });
+});
 
 function getWebinarTarget(){
   const now = new Date();
@@ -430,13 +547,24 @@ function resolveTarget(){
 
 const webinarTarget = resolveTarget();
 
+// --- Mode aperçu : ajoute ?preview=1 à l'URL pour voir le rendu final
+//     des blocs CTA/offre sans attendre la session ni la vidéo réelle.
+//     Ne pas utiliser en production — uniquement pour tes propres tests. ---
+const isPreview = new URLSearchParams(window.location.search).get("preview") === "1";
+
 function startPlayer(){
   document.getElementById("lock-screen").style.display = "none";
   document.getElementById("video-wrap").style.display = "block";
   setupPlayer();
+  if(isPreview){
+    document.getElementById("cta-box").classList.add("show");
+    document.getElementById("offer-box").classList.add("show");
+  }
 }
 
-if(webinarTarget > new Date()){
+if(isPreview){
+  startPlayer();
+} else if(webinarTarget > new Date()){
   document.getElementById("lock-screen").style.display = "block";
   document.getElementById("video-wrap").style.display = "none";
 
