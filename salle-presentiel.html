@@ -408,9 +408,11 @@ function getWebinarTarget(){
   const diffDays = (target.getDay() - CONFIG.WEBINAR_WEEKDAY + 7) % 7;
   target.setDate(target.getDate() - diffDays);
   if(target > now){ target.setDate(target.getDate() - 7); }
-  const sessionEnd = new Date(target.getTime() + CONFIG.WEBINAR_DURATION_MIN * 60000);
-  if(now <= sessionEnd){ return target; }
-  return new Date(target.getTime() + 7 * 24 * 3600000);
+  // "target" est la dernière occurrence <= now — on la retourne telle
+  // quelle : une fois une session commencée, l'accès à la vidéo reste
+  // ouvert (pas de ré-verrouillage vers la semaine suivante), pour ne
+  // jamais bloquer quelqu'un qui voudrait revoir l'offre avant d'acheter.
+  return target;
 }
 
 function resolveTarget(){
