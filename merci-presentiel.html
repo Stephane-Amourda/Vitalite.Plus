@@ -509,7 +509,7 @@ function getWebinarTarget(){
     return target; // session de cette semaine encore "ouverte"
   }
   const next = new Date(target.getTime() + 7 * 24 * 3600000);
-  return next;
+  return next; // sinon, la prochaine occurrence à venir
 }
 
 function resolveTarget(){
