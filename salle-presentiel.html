@@ -411,6 +411,15 @@ const CONFIG = {
 
 document.getElementById("cta-link").href = CONFIG.CALENDLY_LINK;
 
+// --- Suivi de conversion Google Ads : "Réservation appel — Coaching Présentiel" ---
+document.getElementById("cta-link").addEventListener("click", function(){
+  if(typeof gtag === "function"){
+    gtag('event', 'conversion', {
+      'send_to': 'AW-11529482932/j-enCKOD3tocELTl1_kq'
+    });
+  }
+});
+
 function getWebinarTarget(){
   const now = new Date();
   const target = new Date(now);
